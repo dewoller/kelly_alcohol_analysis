@@ -148,12 +148,10 @@ df_in_smoothed %>%
 
 steps_extra = 4000
 
-# the steps along the unix_time scale to generate the new lines
-df_steps =
-  with(df_parm, {
-  tibble( unix_time  = min_ts -(step * steps_extra) + seq( 1:(n + steps_extra * 2))* step,
-          row_n = (1-steps_extra): (n + steps_extra))
-            })
+```
+# generate the steps along the unix_time scale to generate the new lines
+
+```{r}
 
 df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
                 row_n = 1- 1:steps_extra 
@@ -171,15 +169,18 @@ df_in_smoothed %>%
   arrange( row_n ) %>% 
   { . } -> df_steps
 
+```
+# predict in the 3 predicted sections, for all the steps
 
-# add in the 3 predicted lines, for all the steps
+```{r}
+
 df_steps %>%
   mutate( predicted_min = predict( fit_min, .)) %>%
   mutate( predicted_max = predict( fit_max, .)) %>%
   mutate( predicted_end = predict( fit_end, .)) %>%
   { . } -> df_steps
 
-# pull out the size of the triangles
+# pull out the AUC size of the triangles
 
 df_steps %>%
   filter( predicted_min > 0 & row_n >= min_location  ) %>% 
@@ -218,6 +219,13 @@ df_in %>%
   { . } -> area_uc_upper
 
 
+df_rv = tibble(
+               area_min_triangle = area_min_triangle, 
+               area_max_triangle = area_max_triangle, 
+               area_end_triangle = area_end_triangle, 
+               area_uc_full = area_uc_full,
+               area_uc_upper = area_uc_upper
+               )
 
 
 df_in%>%
@@ -247,6 +255,8 @@ rbind( df_min, df_max ) %>%
   geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))
 
 
+df_rv %>%
+  kableExtra::kable()
 
 ```
 
