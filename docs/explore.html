@@ -26,6 +26,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -494,43 +495,19 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongfbaa53d"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> fbaa53d </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree4e2175db8f0472c5e64c583d3b2e26bc5e06dfd9targetblank4e2175da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/4e2175db8f0472c5e64c583d3b2e26bc5e06dfd9" target="_blank">4e2175d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongfbaa53d" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree4e2175db8f0472c5e64c583d3b2e26bc5e06dfd9targetblank4e2175da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    docs/figure/
-
-Untracked files:
-    Untracked:  data/P0033_S1_left_right_combined.xlsx
-    Untracked:  data/P0049_S2,3_combined.xlsx
-    Untracked:  data/P0050_S1,2,3_combined.xlsx
-    Untracked:  data/P0051_S1,2_COMBINED.xlsx
-    Untracked:  data/P0072_S2_3_combined.xlsx
-    Untracked:  data/P0081_MILOdata_modified.xlsx
-    Untracked:  data/P0088_combined.xlsx
-    Untracked:  data/P0093-S2,3_combined.xlsx
-    Untracked:  data/P0099_S2,3_combined.xlsx
-    Untracked:  data/P0103_S1(right+left_,3_combined.xlsx
-    Untracked:  data/P0112_S1,3_combined.xlsx
-    Untracked:  data/P0114_S1,2_combined.xlsx
-    Untracked:  data/P0146_S1-3_combined.xlsx
-    Untracked:  data/P0149_S1-3_combined.xlsx
-    Untracked:  data/P0150_S1-3_combined.xlsx
-    Untracked:  data/P0151_S1-3_combined.xlsx
-    Untracked:  data/P0152_S1-3_combined.xlsx
-    Untracked:  data/P0154_S1-3_combined.xlsx
-    Untracked:  data/P0155_S1-2_combined.xlsx
-    Untracked:  data/P0159_S1-3_combined.xlsx
-    Untracked:  data/~$P0150_S1-3_combined.xlsx
+    Ignored:    analysis/figure/
 
 Unstaged changes:
-    Deleted:    .Rprofile
     Modified:   analysis/explore.Rmd
 
 </code></pre>
@@ -575,7 +552,41 @@ Message
 Rmd
 </td>
 <td>
-fbaa53d
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/4e2175db8f0472c5e64c583d3b2e26bc5e06dfd9/analysis/explore.Rmd" target="_blank">4e2175d</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-14
+</td>
+<td>
+initial
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/51206626832ec60a034871721021c39f5a7784da/docs/explore.html" target="_blank">5120662</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/fbaa53d524258c163f47ef2e02a83ceb4b3a1cf1/analysis/explore.Rmd" target="_blank">fbaa53d</a>
 </td>
 <td>
 Dennis Wollersheim
@@ -634,6 +645,12 @@ Attaching package: &#39;pracma&#39;</code></pre>
 <pre><code>The following object is masked from &#39;package:purrr&#39;:
 
     cross</code></pre>
+<pre class="r"><code>library(kableExtra)</code></pre>
+<pre><code>
+Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+
+    group_rows</code></pre>
 <pre class="r"><code>read_excel(&#39;data/P0150_S1-3_combined.xlsx&#39;, sheet=3) %&gt;%
   clean_names() %&gt;%
   select(-starts_with(&#39;x&#39;)) %&gt;%
@@ -677,7 +694,47 @@ df_in %&gt;%
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1) +
   geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;) </code></pre>
-<p><img src="figure/explore.Rmd/smoothed_data-1.png" width="672" style="display: block; margin: auto;" /> # calculating important points</p>
+<p><img src="figure/explore.Rmd/smoothed_data-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-smoothed_data-1">
+Past versions of smoothed_data-1.png
+</button>
+</p>
+<div id="fig-smoothed_data-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/51206626832ec60a034871721021c39f5a7784da/docs/figure/explore.Rmd/smoothed_data-1.png" target="_blank">5120662</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="calculating-important-points" class="section level1">
+<h1>calculating important points</h1>
 <pre class="r"><code>df_in_smoothed %&gt;%
   mutate( c=chunkify( is_min_pt )) %&gt;%
   filter( c==2 ) %&gt;%
@@ -781,7 +838,8 @@ df_steps %&gt;%
 
 
 df_steps %&gt;%
-  filter( predicted_end &gt; 0 &amp; unix_time &lt;= df_parm$max_ts  ) %&gt;% 
+  filter( predicted_end &gt; 0 ) %&gt;%
+  filter( unix_time &gt;= df_parm$max_ts  ) %&gt;% 
   summarise( area = trapz( unix_time, predicted_end) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_end_triangle
@@ -803,25 +861,18 @@ df_in %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_upper
 
+rectangle_area = min_raw_current * 
+  (df_in[ min_2nd_location, &#39;unix_time&#39;] - df_in[ min_location, &#39;unix_time&#39;] )
+
+
 
 df_rv = tibble(
-               area_min_triangle = area_min_triangle, 
-               area_max_triangle = area_max_triangle, 
-               area_end_triangle = area_end_triangle, 
-               area_uc_full = area_uc_full,
-               area_uc_upper = area_uc_upper
-               )
-
-
-df_in%&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-#  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;) +
-  #  geom_line( aes( unix_time, mean_left ), color=&#39;red&#39;) +
-  geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
-  geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/explore.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+               max_t = area_max_triangle, 
+               min_t = area_min_triangle, 
+               end_t = area_end_triangle, 
+               full_auc = area_uc_full,
+               upper_auc = area_uc_upper - rectangle_area
+               )</code></pre>
 </div>
 <div id="what-points-were-predicted-on" class="section level1">
 <h1>What points were predicted on</h1>
@@ -835,45 +886,65 @@ df_in%&gt;%
   geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
   geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/explore.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/explore.Rmd/plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="predicted-areas" class="section level1">
+<h1>Predicted Areas</h1>
+<p>There are 5 calculated areas. Three are predicted triangular chunks (max, min, and end) and two are measured AUC’s: full and upper</p>
+<ul>
+<li>max - line from max point, through first minimum. Triangel area is from first minimum to xaxis</li>
+<li>min - line from start through first minimum. Triangle area is from first min to xaxis</li>
+<li>end - line from max through end. Triangle area is from end to xaxis.</li>
+<li>full - AUC from first min to end</li>
+<li>upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk</li>
+</ul>
+<p>The numbers you want are:</p>
+<ul>
+<li>full</li>
+<li>full - min (+end?)</li>
+<li>full+ max (+end?)</li>
+<li>full + end</li>
+<li>upper</li>
+</ul>
 <pre class="r"><code>df_rv %&gt;%
-  kableExtra::kable()</code></pre>
-<table>
+   kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
+  kable_styling(full_width = T) </code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:right;">
-area_min_triangle
+max_t
 </th>
 <th style="text-align:right;">
-area_max_triangle
+min_t
 </th>
 <th style="text-align:right;">
-area_end_triangle
+end_t
 </th>
 <th style="text-align:right;">
-area_uc_full
+full_auc
 </th>
-<th style="text-align:right;">
-area_uc_upper
+<th style="text-align:left;">
+upper_auc
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:right;">
-113932.9
+326,995.5
 </td>
 <td style="text-align:right;">
-326995.5
+113,932.9
 </td>
 <td style="text-align:right;">
-10782135
+0
 </td>
 <td style="text-align:right;">
-2190172
+2,190,172
 </td>
-<td style="text-align:right;">
-1582498
+<td style="text-align:left;">
+461394.5
 </td>
 </tr>
 </tbody>
@@ -906,21 +977,22 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] pracma_2.2.5      seismicRoll_1.1.3 forecast_8.11     janitor_1.2.1    
- [5] readxl_1.3.1      forcats_0.5.0     stringr_1.4.0     dplyr_0.8.5      
- [9] purrr_0.3.3       readr_1.3.1       tidyr_1.0.2       tibble_2.1.3     
-[13] ggplot2_3.2.1     tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
+ [1] kableExtra_1.1.0  pracma_2.2.5      seismicRoll_1.1.3 forecast_8.11    
+ [5] janitor_1.2.1     readxl_1.3.1      forcats_0.5.0     stringr_1.4.0    
+ [9] dplyr_0.8.5       purrr_0.3.3       readr_1.3.1       tidyr_1.0.2      
+[13] tibble_2.1.3      ggplot2_3.2.1     tidyverse_1.3.0   zoo_1.8-7        
+[17] nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
- [1] tseries_0.10-47      httr_1.4.1           viridisLite_0.3.0   
- [4] jsonlite_1.6.1       modelr_0.1.6         assertthat_0.2.1    
+ [1] tseries_0.10-47      httr_1.4.1           jsonlite_1.6.1      
+ [4] viridisLite_0.3.0    modelr_0.1.6         assertthat_0.2.1    
  [7] TTR_0.23-6           highr_0.8            cellranger_1.1.0    
 [10] yaml_2.2.1           pillar_1.4.3         backports_1.1.5     
 [13] lattice_0.20-40      glue_1.3.1           quadprog_1.5-8      
-[16] digest_0.6.25        rvest_0.3.5          snakecase_0.11.0    
+[16] digest_0.6.25        snakecase_0.11.0     rvest_0.3.5         
 [19] colorspace_1.4-1     htmltools_0.4.0      timeDate_3043.102   
 [22] pkgconfig_2.0.3      broom_0.5.5          haven_2.2.0         
-[25] webshot_0.5.2        scales_1.1.0         whisker_0.4         
+[25] scales_1.1.0         webshot_0.5.2        whisker_0.4         
 [28] git2r_0.26.1         farver_2.0.1         generics_0.0.2      
 [31] ellipsis_0.3.0       withr_2.1.2          urca_1.3-0          
 [34] nnet_7.3-13          lazyeval_0.2.2       cli_2.0.2           
@@ -928,15 +1000,15 @@ loaded via a namespace (and not attached):
 [40] evaluate_0.14        fs_1.3.2             fansi_0.4.1         
 [43] nlme_3.1-142         xts_0.12-0           xml2_1.2.2          
 [46] tools_3.6.1          hms_0.5.3            lifecycle_0.2.0     
-[49] munsell_0.5.0        reprex_0.3.0         kableExtra_1.1.0    
-[52] compiler_3.6.1       rlang_0.4.5          grid_3.6.1          
-[55] rstudioapi_0.11      labeling_0.3         rmarkdown_2.1       
-[58] gtable_0.3.0         fracdiff_1.5-1       DBI_1.1.0           
-[61] curl_4.3             R6_2.4.1             lubridate_1.7.4     
-[64] knitr_1.28           workflowr_1.4.0.9001 rprojroot_1.3-2     
-[67] stringi_1.4.6        parallel_3.6.1       Rcpp_1.0.3          
-[70] vctrs_0.2.3          dbplyr_1.4.2         tidyselect_1.0.0    
-[73] xfun_0.11            lmtest_0.9-37       </code></pre>
+[49] munsell_0.5.0        reprex_0.3.0         compiler_3.6.1      
+[52] rlang_0.4.5          grid_3.6.1           rstudioapi_0.11     
+[55] labeling_0.3         rmarkdown_2.1        gtable_0.3.0        
+[58] fracdiff_1.5-1       DBI_1.1.0            curl_4.3            
+[61] R6_2.4.1             lubridate_1.7.4      knitr_1.28          
+[64] workflowr_1.4.0.9001 rprojroot_1.3-2      stringi_1.4.6       
+[67] parallel_3.6.1       Rcpp_1.0.3           vctrs_0.2.3         
+[70] dbplyr_1.4.2         tidyselect_1.0.0     xfun_0.11           
+[73] lmtest_0.9-37       </code></pre>
 </div>
 </div>
 

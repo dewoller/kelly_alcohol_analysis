@@ -20,6 +20,7 @@ library(janitor)
 library(forecast)
 library(seismicRoll)
 library(pracma)
+library(kableExtra)
 
 read_excel('data/P0150_S1-3_combined.xlsx', sheet=3) %>%
   clean_names() %>%
@@ -46,7 +47,7 @@ chunkify = function( condition ) {
 
 
 
-```{r}
+```{r initial_smoothing}
 
 smoothing_window_width = 500
 inflection_window_width = 10
@@ -110,7 +111,7 @@ df_in_smoothed %>%
 
 # extract out some subset smoothed chunks for fitting predictors
 
-```{r}
+```{r extract_subsets}
 
 df_in_smoothed %>%
   dplyr::filter( row_n < min_location  ) %>%
@@ -135,7 +136,7 @@ fit_end = lm( raw_current ~ unix_time, data=df_end)
 ```
 # calculate overall graph parameters to use when generating the new lines
 
-```{r}
+```{r calc_parms}
 
 df_in_smoothed %>%
   summarise( min_ts = min(unix_time),
@@ -151,7 +152,7 @@ steps_extra = 4000
 ```
 # generate the steps along the unix_time scale to generate the new lines
 
-```{r}
+```{r calc_steps  }
 
 df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
                 row_n = 1- 1:steps_extra 
@@ -169,10 +170,12 @@ df_in_smoothed %>%
   arrange( row_n ) %>% 
   { . } -> df_steps
 
+
+
 ```
 # predict in the 3 predicted sections, for all the steps
 
-```{r}
+```{r predict}
 
 df_steps %>%
   mutate( predicted_min = predict( fit_min, .)) %>%
@@ -196,7 +199,8 @@ df_steps %>%
 
 
 df_steps %>%
-  filter( predicted_end > 0 & unix_time <= df_parm$max_ts  ) %>% 
+  filter( predicted_end > 0 ) %>%
+  filter( unix_time >= df_parm$max_ts  ) %>% 
   summarise( area = trapz( unix_time, predicted_end) ) %>%
   pluck('area') %>%
   { . } -> area_end_triangle
@@ -218,30 +222,26 @@ df_in %>%
   pluck('area') %>%
   { . } -> area_uc_upper
 
+rectangle_area = min_raw_current * 
+  (df_in[ min_2nd_location, 'unix_time'] - df_in[ min_location, 'unix_time'] )
+
+
 
 df_rv = tibble(
-               area_min_triangle = area_min_triangle, 
-               area_max_triangle = area_max_triangle, 
-               area_end_triangle = area_end_triangle, 
-               area_uc_full = area_uc_full,
-               area_uc_upper = area_uc_upper
+               max_t = area_max_triangle, 
+               min_t = area_min_triangle, 
+               end_t = area_end_triangle, 
+               full_auc = area_uc_full,
+               upper_auc = area_uc_upper - rectangle_area
                )
 
-
-df_in%>%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color='orange') +
-#  geom_line( aes( unix_time, smoothed ), color='green') +
-  #  geom_line( aes( unix_time, mean_left ), color='red') +
-  geom_line( aes( unix_time, predicted_min), data=(df_steps %>% filter( predicted_min > 0 & row_n > 0  ) )) +
-  geom_line( aes( unix_time, predicted_max), data=(df_steps %>% filter( predicted_max > 0 & row_n < max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))
 
 
 ```
 
 # What points were predicted on
-```{r}
+
+```{r plot}
 
 rbind( df_min, df_max ) %>%
   rbind( df_end ) %>%
@@ -254,9 +254,34 @@ rbind( df_min, df_max ) %>%
   geom_line( aes( unix_time, predicted_max), data=(df_steps %>% filter( predicted_max > 0 & row_n < max_location ) )) +
   geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))
 
+```
+
+# Predicted Areas
+
+There are 5 calculated areas.  Three are predicted triangular chunks  (max, min, and end) and two are measured AUC's: full and upper
+
+ - max - line from max point, through first minimum.  Triangel area is from first minimum to xaxis
+ - min - line from start through first minimum.  Triangle area is from first min to xaxis
+ - end - line from max through end.  Triangle area is from end to xaxis.
+ - full - AUC from first min to end 
+ - upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk
+
+
+The numbers you want are:
+
+ - full
+ - full - min  (+end?)
+ - full+ max (+end?)
+ - full + end
+ - upper
+
+```{r table}
+
 
 df_rv %>%
-  kableExtra::kable()
+   kable(format.args = list(big.mark = ",") ) %>%
+  kable_styling(full_width = T) 
+
 
 ```
 
