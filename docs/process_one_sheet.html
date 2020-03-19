@@ -353,7 +353,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="about.html">About</a>
+  <a href="process_all_sheets.html">Results</a>
 </li>
 <li>
   <a href="license.html">License</a>
@@ -386,7 +386,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -395,7 +395,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -407,7 +407,7 @@ div.section {
 <strong>Last updated:</strong> 2020-03-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -423,12 +423,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -495,30 +495,18 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeffe98e029cc534239f0ee9908bafd56c845266betargetblankffe98e0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/ffe98e029cc534239f0ee9908bafd56c845266be" target="_blank">ffe98e0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreebe688d9bb509d7da573039a61e701aed66b6c751targetblankbe688d9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/be688d9bb509d7da573039a61e701aed66b6c751" target="_blank">be688d9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeffe98e029cc534239f0ee9908bafd56c845266betargetblankffe98e0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreebe688d9bb509d7da573039a61e701aed66b6c751targetblankbe688d9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    analysis/figure/
-    Ignored:    data/P/
-    Ignored:    data/output/
-
-Untracked files:
-    Untracked:  analysis/a.Rmd
-    Untracked:  analysis/child/
-    Untracked:  figure/
-
-Unstaged changes:
-    Modified:   analysis/process_all_sheets.Rmd
-    Modified:   analysis/process_one_sheet.Rmd
-    Deleted:    data/README.md
-    Deleted:    explore/explore.Rmd
+    Ignored:    data/
+    Ignored:    explore/
 
 </code></pre>
 <p>
@@ -557,6 +545,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/be688d9bb509d7da573039a61e701aed66b6c751/analysis/process_one_sheet.Rmd" target="_blank">be688d9</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+<td>
+wflow_publish(“analysis/process_all_sheets.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/be688d9bb509d7da573039a61e701aed66b6c751/docs/process_one_sheet.html" target="_blank">be688d9</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+<td>
+wflow_publish(“analysis/process_all_sheets.Rmd”)
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -624,7 +646,7 @@ df_in %&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="smoothed-data" class="section level2">
 <h2>smoothed data</h2>
@@ -633,7 +655,44 @@ df_in %&gt;%
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1) +
   geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;)</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/be688d9bb509d7da573039a61e701aed66b6c751/docs/figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" target="_blank">be688d9</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="smoothed-data-with-additional-cleaning" class="section level2">
 <h2>smoothed data with additional cleaning</h2>
@@ -643,7 +702,44 @@ df_in %&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/be688d9bb509d7da573039a61e701aed66b6c751/docs/figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" target="_blank">be688d9</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="calculating-important-points" class="section level2">
 <h2>calculating important points</h2>
@@ -837,7 +933,7 @@ df_rv = tibble(
   geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
   geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level2">
 <h2>Predicted Areas for the different parts of the graph</h2>
@@ -944,7 +1040,7 @@ cleaned
 <pre class="r"><code>tibble( base_file=params$base_file, sheet_n=params$sheet_n) %&gt;%
   bind_cols( df_rv ) %&gt;%
   bind_cols( df_auc ) %&gt;%
-  write_csv( output_file )</code></pre>
+  write_csv( output_csv )</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
