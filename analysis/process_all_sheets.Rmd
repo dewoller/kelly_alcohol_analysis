@@ -71,10 +71,14 @@ for(i in 1:nrow(df_sheets)) {
   #knitr::knit( text = src)
   files = c(files, paste0( '<a href="',
                           output_file,
-                          '">FIlE = ',
+                          '"> Row # = ',
+                          i,
+                          '. ### FIlE = ',
                           base_file,
-                          '. SHEET = ',
+                          '. ### SHEET = ',
                           sheet,
+                          '. ### SHEET # = ',
+                          sheet_n,
                           '</a><p/>'
   ))
 }
