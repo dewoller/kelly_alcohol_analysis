@@ -1,17 +1,17 @@
 ---
-title:           first pass
+title:           summary AUC
 author:          Dennis Wollersheim
 date:            12.03.2020
 linkcolor:       cyan
 citecolor:       grey
-output:
-  pdf_document:
-    highlight:   zenburn
+output: 
+    html_document:
+      code_folding: hide
 ---
 
 \tableofcontents
 
-```{r load_data}
+```{r load_data_outer, include=FALSE}
 
 library(zoo)
 library(tidyverse)
@@ -32,35 +32,43 @@ read_excel('data/MILO_read_out_Dennis.xlsx') %>%
                names_pattern='(.*)_(.)' )  %>%
   filter( start > 0) %>% 
   rename(excel_filename = file )%>%
-  tail(12) %>%
-  head(2) %>%
   { . } -> df_sheets
 
+
+
+
 base_dir = 'data/P/'
+output_dir = 'analysis/child/'
+files=c()
 
-
-src = ''
 for(i in 1:nrow(df_sheets)) {
   base_file = df_sheets[ i, ]$excel_filename
-  print(base_file )
+  #print(base_file )
   xls_input_file=paste0( base_dir, base_file, '.xlsx')
   sheet_n = df_sheets[i,]$sheet_n
+  sheet = df_sheets[i,]$sheet
+  output_file = paste0( base_file, '_', sheet_n, '.html')
+
   if (!file.exists(xls_input_file)) print(xls_input_file)
-  rv = knit_expand( 
-    file = 'analysis/child/process_one_sheet.Rmd',
-    xls_input_file = xls_input_file,
-    base_file = base_file,
-    sheet_n = sheet_n,
-    sheet = df_sheets[i,]$sheet,
-    start_timestamp = df_sheets[i,]$start
-  )
-  print( xls_input_file )
-  print( sheet_n )
+
+#  try({
+#  })
   #knitr::knit( text = src)
-  src = paste(src, rv)
+  files = c(files, paste0( '<a href="child/',
+                          output_file,
+                          '">FIlE:',
+                          base_file,
+                          ' SHEET:',
+                          sheet,
+                          '</a><p/>'
+  ))
 }
 
 ```
 
-`r knitr::knit(text = unlist(src))`
+```{r echo=FALSE, results='asis'}
+map(files, cat ) ->a
+
+```
+
 
