@@ -49,7 +49,7 @@ read_excel(params$xls_input_file, sheet=params$sheet_n) %>%
   clean_names() %>%
   select(-starts_with('x')) %>%
   dplyr::rename( raw_current = raw_current_n_a) %>%
-  filter( unix_time > params$start_timestamp  & raw_current > 10 ) %>%
+  filter( unix_time > params$start_timestamp  & raw_current > 10 & raw_current <1000 ) %>%
   mutate( row_n = row_number()) %>%
   { . } -> df_in
 
