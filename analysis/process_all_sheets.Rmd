@@ -1,0 +1,66 @@
+---
+title:           first pass
+author:          Dennis Wollersheim
+date:            12.03.2020
+linkcolor:       cyan
+citecolor:       grey
+output:
+  pdf_document:
+    highlight:   zenburn
+---
+
+\tableofcontents
+
+```{r load_data}
+
+library(zoo)
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(forecast)
+library(seismicRoll)
+library(pracma)
+library(kableExtra)
+library(knitr)
+
+options(error=stop)
+read_excel('data/MILO_read_out_Dennis.xlsx') %>%
+  clean_names() %>%
+  rename_all( str_replace, 'time_','') %>%
+  pivot_longer(-file, 
+               names_to=c('.value','sheet_n'),
+               names_pattern='(.*)_(.)' )  %>%
+  filter( start > 0) %>% 
+  rename(excel_filename = file )%>%
+  tail(11) %>%
+  head(1) %>%
+  { . } -> df_sheets
+
+base_dir = 'data/P/'
+
+
+src = ''
+for(i in 1:nrow(df_sheets)) {
+  base_file = df_sheets[ i, ]$excel_filename
+  print(base_file )
+  xls_input_file=paste0( base_dir, base_file, '.xlsx')
+  sheet_n = df_sheets[i,]$sheet_n
+  if (!file.exists(xls_input_file)) print(xls_input_file)
+  rv = knit_expand( 
+    file = 'analysis/child/process_one_sheet.Rmd',
+    xls_input_file = xls_input_file,
+    base_file = base_file,
+    sheet_n = sheet_n,
+    sheet = df_sheets[i,]$sheet,
+    start_timestamp = df_sheets[i,]$start
+  )
+  print( xls_input_file )
+  print( sheet_n )
+  #knitr::knit( text = src)
+  src = paste(src, rv)
+}
+
+```
+
+`r knitr::knit(text = unlist(src))`
+
