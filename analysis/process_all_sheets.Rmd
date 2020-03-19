@@ -32,8 +32,8 @@ read_excel('data/MILO_read_out_Dennis.xlsx') %>%
                names_pattern='(.*)_(.)' )  %>%
   filter( start > 0) %>% 
   rename(excel_filename = file )%>%
-  tail(13) %>%
-  head(1) %>%
+  tail(11) %>%
+  head(2) %>%
   { . } -> df_sheets
 
 base_dir = 'data/P/'
