@@ -52,6 +52,21 @@ for(i in 1:nrow(df_sheets)) {
   if (!file.exists(xls_input_file)) print(xls_input_file)
 
 #  try({
+    rv = rmarkdown::render( 
+      input = 'analysis/process_one_sheet.Rmd', 
+      output_format = "html_document",
+      output_dir=output_dir,
+      output_file = output_file, 
+      knit_root_dir=pwd(),
+      envir=new.env(),
+      params=list(
+        xls_input_file = xls_input_file,
+        base_file = base_file,
+        sheet_n = sheet_n %>% as.numeric(),
+        sheet = df_sheets[i,]$sheet,
+        start_timestamp = df_sheets[i,]$start
+      )
+    )
 #  })
   #knitr::knit( text = src)
   files = c(files, paste0( '<a href="child/',
@@ -66,7 +81,7 @@ for(i in 1:nrow(df_sheets)) {
 
 ```
 
-```{r echo=FALSE, results='asis'}
+```{r output_outer, echo=FALSE, results='asis'}
 map(files, cat ) ->a
 
 ```
