@@ -32,7 +32,7 @@ read_excel('data/MILO_read_out_Dennis.xlsx') %>%
                names_pattern='(.*)_(.)' )  %>%
   filter( start > 0) %>% 
   rename(excel_filename = file )%>%
-  tail(11) %>%
+  tail(12) %>%
   head(2) %>%
   { . } -> df_sheets
 
