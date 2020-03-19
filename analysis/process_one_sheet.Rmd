@@ -1,17 +1,23 @@
 ---
-title:           first pass
+title:           Summary For Single Sheet
 author:          Dennis Wollersheim
 date:            12.03.2020
 linkcolor:       cyan
 citecolor:       grey
 output:
-  pdf_document:
-    highlight:   zenburn
+      html_document:
+        code_folding: hide
+params:
+  xls_input_file: data/P/P0152_S1-3_combined.xlsx
+  sheet: 3
+  sheet_n: 1
+  base_file: P0150_S1-3_combined
+  start_timestamp: 1568161865
 ---
 
-\tableofcontents
 
-```{r load_data, include=FALSE}
+
+```{r initialise,  include=FALSE}
 
 library(zoo)
 library(tidyverse)
@@ -21,17 +27,31 @@ library(forecast)
 library(seismicRoll)
 library(pracma)
 library(kableExtra)
+library(magrittr)
+library(glue)
 
-read_excel('data/P0150_S1-3_combined.xlsx', sheet=3) %>%
+if( !exists( 'params' )) {
+  try({
+    params = tibble(
+    xls_input_file= 'data/P/P0152_S1-3_combined.xlsx',
+    sheet= 'test',
+    sheet_n= 1,
+    base_file= 'test',
+    start_timestamp= 1568161865)
+  }, silent=TRUE )
+}
+
+header = glue::glue( '# FILE: {params$base_file} SHEET: {params$sheet}  SHEET_N: {params$sheet_n}')
+
+output_csv = glue::glue( 'data/output/{ params$base_file }_sheet_{params$sheet}.csv')
+
+read_excel(params$xls_input_file, sheet=params$sheet_n) %>%
   clean_names() %>%
   select(-starts_with('x')) %>%
   dplyr::rename( raw_current = raw_current_n_a) %>%
-  filter( unix_time >   1567123503  & raw_current > 10 ) %>%
+  filter( unix_time > params$start_timestamp  & raw_current > 10 ) %>%
   mutate( row_n = row_number()) %>%
   { . } -> df_in
-
-
-
 
 
 chunkify = function( condition ) {
@@ -46,16 +66,17 @@ chunkify = function( condition ) {
 
 ```
 
-# replace outliers with mean of neigbouring points
+`r header`
 
+## replace outliers with mean of neigbouring points
 
-```{r initial_smoothing}
+```{r }
 
 smoothing_window_width = 500
-inflection_window_width = 10
+inflection_window_width = 50
 df_in %>%
   mutate( row_n = row_number()) %>%
-  mutate(raw_current = ifelse( row_n %in% 
+  mutate(raw_current = ifelse( row_n %in%
     findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
 ,
                               NA, raw_current)) %>%
@@ -64,55 +85,55 @@ df_in %>%
   mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = "right", fill=NA))) %>%
   mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = "left", fill=NA))) %>%
   mutate( is_max_pt =  replace_na( smoothed > mean_left & smoothed > mean_right, FALSE)) %>%
-  mutate( is_min_pt =  replace_na( smoothed < mean_left & smoothed < mean_right, FALSE)) %>% 
+  mutate( is_min_pt =  replace_na( smoothed < mean_left & smoothed < mean_right, FALSE)) %>%
   { . } -> df_in_smoothed
 
 ```
-# raw input data
+## raw input data
 
-```{r graph_raw_data}
+```{r }
 
 df_in%>%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color='orange') +
-  geom_point( color='black', size=.1) 
+  geom_point( color='black', size=.1)
 
 ```
 
-# smoothed data
+## smoothed data
 
-```{r graph_smoothed_data}
+```{r}
 
 df_in_smoothed %>%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color='orange') +
   geom_point( color='black', size=.1) +
-  geom_line( aes( unix_time, smoothed ), color='green') 
+  geom_line( aes( unix_time, smoothed ), color='green')
 
 
 ```
 
-# smoothed data with additional cleaning
+## smoothed data with additional cleaning
 
 TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values.  Currently using the first, no cleaning whatsoever
 
-```{r graph_smoothed_data_tscleaned}
+```{r}
 
 df_in_smoothed %>%
   mutate(raw_current = tsclean( raw_current)) %>%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color='orange') +
-  geom_point( color='black', size=.1) 
+  geom_point( color='black', size=.1)
 
 
 ```
 
-#  calculating important points
- - first min, 
- - first max after first min, 
+##  calculating important points
+ - first min,
+ - first max after first min,
  - location of first min after previous max
 
-```{r calculating_important_points}
+```{r}
 
 df_in_smoothed %>%
   mutate( c=chunkify( is_min_pt )) %>%
@@ -124,26 +145,27 @@ min_location = df_min_location$min_location
 min_raw_current = df_min_location$min_raw_current
 
 df_in_smoothed %>%
+  filter( row_n > min_location ) %>%
   mutate( c = chunkify( is_max_pt )) %>%
   filter( c==2) %>%
   summarise( max_location = floor(mean( row_n))) %>%
-  pluck('max_location') %>% 
+  pluck('max_location') %>%
   { . } -> max_location
 
 df_in_smoothed %>%
-  mutate( is_2nd_min = 
+  mutate( is_2nd_min =
          (row_n > max_location ) &
          (raw_current < min_raw_current ) ) %>%
   pluck('is_2nd_min') %>%
   rle( ) %>%
-  pluck(1,1) %>% 
+  pluck(1,1) %>%
   { . } -> min_2nd_location
 ```
 
 
-# extract out some subset smoothed chunks for fitting prediction lines
+## extract out some subset smoothed chunks for fitting prediction lines
 
-```{r extract_subsets}
+```{r}
 
 df_in_smoothed %>%
   dplyr::filter( row_n < min_location  ) %>%
@@ -165,10 +187,11 @@ df_in_smoothed %>%
 fit_min = lm( raw_current ~ unix_time, data=df_min)
 fit_max = lm( raw_current ~ unix_time, data=df_max)
 fit_end = lm( raw_current ~ unix_time, data=df_end)
-```
-# calculate overall graph parameters to use when generating the new lines
 
-```{r calc_parms}
+```
+## calculate overall graph parameters to use when generating the new lines
+
+```{r}
 
 df_in %>%
   summarise( min_ts = min(unix_time),
@@ -181,33 +204,33 @@ df_in %>%
 
 
 ```
-# generate the steps along the unix_time scale to generate the new lines
+## generate the steps along the unix_time scale to generate the new lines
 
-```{r calc_steps  }
+```{r}
 
 steps_extra = 8000
 
 df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
-                row_n = 1- 1:steps_extra 
+                row_n = 1- 1:steps_extra
 )
 
 df_steps_after = tibble( unix_time = df_parm$max_ts + seq( 1:steps_extra ) * df_parm$step,
-                   row_n = df_parm$n+ 1:steps_extra 
+                   row_n = df_parm$n+ 1:steps_extra
 )
 
 df_in_smoothed %>%
   select( unix_time, row_n) %>%
   rbind( df_steps_before) %>%
   rbind( df_steps_after) %>%
-  arrange( row_n ) %>% 
+  arrange( row_n ) %>%
   { . } -> df_steps
 
 
 
 ```
-# predict in the 3 predicted sections, for all the steps
+## predict the area of the three predicted sections
 
-```{r predict}
+```{r}
 
 df_steps %>%
   mutate( predicted_min = predict( fit_min, .)) %>%
@@ -218,13 +241,13 @@ df_steps %>%
 # pull out the AUC size of the triangles
 
 df_steps %>%
-  filter( predicted_min > 0 & row_n >= min_location  ) %>% 
+  filter( predicted_min > 0 & row_n >= min_location  ) %>%
   summarise( area = trapz( unix_time, predicted_min) ) %>%
   pluck('area') %>%
   { . } -> area_min_triangle
 
 df_steps %>%
-  filter( predicted_max > 0 & row_n <= min_location  ) %>% 
+  filter( predicted_max > 0 & row_n <= min_location  ) %>%
   summarise( area = trapz( unix_time, predicted_max) ) %>%
   pluck('area') %>%
   { . } -> area_max_triangle
@@ -232,36 +255,42 @@ df_steps %>%
 
 df_steps %>%
   filter( predicted_end > 0 ) %>%
-  filter( unix_time >= df_parm$max_ts  ) %>% 
+  filter( unix_time >= df_parm$max_ts  ) %>%
   summarise( area = trapz( unix_time, predicted_end) ) %>%
   pluck('area') %>%
   { . } -> area_end_triangle
 
 
+
+```
+## calculate the AUC for the raw / smoothed data
+
+```{r}
+
 # the real, raw measurements.  TODO: should smooth this a bit
 df_in %>%
-  filter( row_n >= min_location  ) %>% 
+  filter( row_n >= min_location  ) %>%
   summarise( area = trapz( unix_time, raw_current) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_raw
 
-# AUC for smoothed data 
+# AUC for smoothed data
 df_in_smoothed %>%
-  filter( row_n >= min_location  ) %>% 
+  filter( row_n >= min_location  ) %>%
   summarise( area = trapz( unix_time, raw_current) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_smoothed
 
 # AUC for smoothed data loess
 df_in_smoothed %>%
-  filter( row_n >= min_location  ) %>% 
+  filter( row_n >= min_location  ) %>%
   summarise( area = trapz( unix_time, smoothed) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_loess
 
 # AUC for smoothed data cleaned
 df_in_smoothed %>%
-  filter( row_n >= min_location  ) %>% 
+  filter( row_n >= min_location  ) %>%
   mutate( raw_current - tsclean( raw_current)) %>%
   summarise( area = trapz( unix_time, raw_current) ) %>%
   pluck('area') %>%
@@ -270,15 +299,19 @@ df_in_smoothed %>%
 # the upper bit of the real raw measurement
 df_in %>%
   mutate( row_n = row_number()) %>%
-  filter( row_n >= min_location  & row_n <= min_2nd_location ) %>% 
+  filter( row_n >= min_location  & row_n <= min_2nd_location ) %>%
   summarise( area = trapz( unix_time, raw_current) ) %>%
   pluck('area') %>%
   { . } -> area_uc_upper
 
-rectangle_area = min_raw_current * 
-  (df_in[ min_2nd_location, 'unix_time'] - df_in[ min_location, 'unix_time'] )
+library(magrittr)
+df_in[ min_2nd_location, 'unix_time'] %>%
+  subtract( df_in[ min_location, 'unix_time'] ) %>%
+  multiply_by(  min_raw_current  ) %>%
+  unlist() %>%
+  { . } -> rectangle_area
 
-df_auc = tibble( 
+df_auc = tibble(
                 raw = area_uc_full_raw,
                 smoothed = area_uc_full_smoothed,
                 loess = area_uc_full_loess,
@@ -288,9 +321,9 @@ df_auc = tibble(
 
 
 df_rv = tibble(
-               max_t = area_max_triangle, 
-               min_t = area_min_triangle, 
-               end_t = area_end_triangle, 
+               max_t = area_max_triangle,
+               min_t = area_min_triangle,
+               end_t = area_end_triangle,
                full_auc = area_uc_full_raw,
                upper_auc = area_uc_upper - rectangle_area
                )
@@ -299,9 +332,9 @@ df_rv = tibble(
 
 ```
 
-# What points were predicted on
+## What points were predicted on
 
-```{r plot}
+```{r}
 
 rbind( df_min, df_max ) %>%
   rbind( df_end ) %>%
@@ -316,14 +349,14 @@ rbind( df_min, df_max ) %>%
 
 ```
 
-# Predicted Areas for the different parts of the graph
+## Predicted Areas for the different parts of the graph
 
 There are 5 calculated areas.  Three are predicted triangular chunks  (max, min, and end) and two are measured AUC's: full and upper
 
  - max - line from max point, through first minimum.  Triangel area is from first minimum to xaxis
  - min - line from start through first minimum.  Triangle area is from first min to xaxis
  - end - line from max through end.  Triangle area is from end to xaxis.
- - full - AUC from first min to end 
+ - full - AUC from first min to end
  - upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk
 
 
@@ -335,27 +368,30 @@ The numbers you want are:
  - full + end
  - upper
 
-```{r table_area}
+```{r}
 
 
 df_rv %>%
   kable(format.args = list(big.mark = ",") ) %>%
-  kable_styling(full_width = T) 
+  kable_styling(full_width = T)
 
 
 ```
 
-# Comparision of AUC for the different smoothing methods
+## Comparision of AUC for the different smoothing methods
 
 The numbers you want are:
 
-```{r table_auc}
-
+```{r}
 
 df_auc %>%
-   kable(format.args = list(big.mark = ",") ) %>%
-  kable_styling(full_width = T) 
+  kable(format.args = list(big.mark = ",") ) %>%
+  kable_styling(full_width = T)
 
+tibble( base_file=params$base_file, sheet_n=params$sheet_n) %>%
+  bind_cols( df_rv ) %>%
+  bind_cols( df_auc ) %>%
+  write_csv( output_csv )
 
 ```
 

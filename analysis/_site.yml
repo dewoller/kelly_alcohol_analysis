@@ -5,8 +5,8 @@ navbar:
   left:
   - text: Home
     href: index.html
-  - text: About
-    href: about.html
+  - text: Results
+    href: process_all_sheets.html
   - text: License
     href: license.html
 output:

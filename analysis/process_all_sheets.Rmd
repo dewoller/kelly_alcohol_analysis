@@ -38,7 +38,7 @@ read_excel('data/MILO_read_out_Dennis.xlsx') %>%
 
 
 base_dir = 'data/P/'
-output_dir = 'analysis/child/'
+output_dir = 'docs/'
 files=c()
 
 for(i in 1:nrow(df_sheets)) {
@@ -69,11 +69,11 @@ for(i in 1:nrow(df_sheets)) {
     )
 #  })
   #knitr::knit( text = src)
-  files = c(files, paste0( '<a href="child/',
+  files = c(files, paste0( '<a href="',
                           output_file,
-                          '">FIlE:',
+                          '">FIlE = ',
                           base_file,
-                          ' SHEET:',
+                          '. SHEET = ',
                           sheet,
                           '</a><p/>'
   ))
@@ -82,8 +82,41 @@ for(i in 1:nrow(df_sheets)) {
 ```
 
 ```{r output_outer, echo=FALSE, results='asis'}
+csv_file_out = 'results_summary.csv'
 map(files, cat ) ->a
 
+cat(paste0( '<p/><p/><p/><p/><a href=', csv_file_out,'>results_summary.csv</a>'))
+
+col_types = cols(
+                 base_file = col_character(),
+                 sheet_n = col_double(),
+                 max_t = col_double(),
+                 min_t = col_double(),
+                 end_t = col_double(),
+                 full_auc = col_double(),
+                 upper_auc = col_double(),
+                 raw = col_double(),
+                 smoothed = col_double(),
+                 loess = col_double(),
+                 cleaned = col_double()
+)
+#
+
+list.files(path='data/output/', pattern='.*csv', full.names=TRUE) %>%
+  map( read_csv, col_types=col_types ) %>% 
+  bind_rows() %>%
+  { . } -> df_csv
+
+df_csv %>% write_csv(paste0('docs/',csv_file_out))
+
 ```
+
+```{r write_csv, echo=FALSE}
+
+df_csv %>% 
+  kableExtra::kable()
+
+```
+
 
 

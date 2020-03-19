@@ -385,7 +385,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -394,7 +394,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -406,7 +406,7 @@ div.section {
 <strong>Last updated:</strong> 2020-03-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -422,12 +422,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -494,28 +494,30 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef65bbdf18c9c2e16a985ea57f5f193ebf50317batargetblankf65bbdfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/f65bbdf18c9c2e16a985ea57f5f193ebf50317ba" target="_blank">f65bbdf</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree91c05d545ec61603dc5e52252cdd1be95a79274btargetblank91c05d5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/91c05d545ec61603dc5e52252cdd1be95a79274b" target="_blank">91c05d5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef65bbdf18c9c2e16a985ea57f5f193ebf50317batargetblankf65bbdfa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree91c05d545ec61603dc5e52252cdd1be95a79274btargetblank91c05d5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    analysis/figure/
     Ignored:    data/P/
     Ignored:    data/output/
 
 Untracked files:
-    Untracked:  analysis/a.Rmd
-    Untracked:  analysis/child/
     Untracked:  analysis/try.Rmd
+    Untracked:  docresults_summary.csv
+    Untracked:  docs/results_summary.csv
     Untracked:  figure/
 
 Unstaged changes:
     Modified:   analysis/_site.yml
     Modified:   analysis/index.Rmd
+    Modified:   analysis/process_all_sheets.Rmd
     Modified:   analysis/process_one_sheet.Rmd
     Deleted:    data/README.md
     Deleted:    explore/explore.Rmd
@@ -557,6 +559,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/91c05d545ec61603dc5e52252cdd1be95a79274b/docs/process_all_sheets.html" target="_blank">91c05d5</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -769,50 +788,866 @@ wflow_publish(“analysis/process_all_sheets.Rmd”)
 </div>
 </div>
 
-<a href="child/P0049_S2,3_combined_1.html"><a href="FIlE:P0049_S2,3_combined" class="uri">FIlE:P0049_S2,3_combined</a> SHEET:P0049_S2_left</a>
+<a href="P0049_S2,3_combined_1.html">FIlE = P0049_S2,3_combined. SHEET = P0049_S2_left</a>
 <p/>
-<a href="child/P0050_S1,2,3_combined_2.html"><a href="FIlE:P0050_S1,2,3_combined" class="uri">FIlE:P0050_S1,2,3_combined</a> SHEET:Aug-22-P0050_S2_left</a>
+<a href="P0050_S1,2,3_combined_2.html">FIlE = P0050_S1,2,3_combined. SHEET = Aug-22-P0050_S2_left</a>
 <p/>
-<a href="child/P0050_S1,2,3_combined_3.html"><a href="FIlE:P0050_S1,2,3_combined" class="uri">FIlE:P0050_S1,2,3_combined</a> SHEET:P0050-S3-Aug-23_right</a>
+<a href="P0050_S1,2,3_combined_3.html">FIlE = P0050_S1,2,3_combined. SHEET = P0050-S3-Aug-23_right</a>
 <p/>
-<a href="child/P0051_S1,2_COMBINED_1.html"><a href="FIlE:P0051_S1,2_COMBINED" class="uri">FIlE:P0051_S1,2_COMBINED</a> SHEET:P0051_Aug_26_S1_right</a>
+<a href="P0051_S1,2_COMBINED_1.html">FIlE = P0051_S1,2_COMBINED. SHEET = P0051_Aug_26_S1_right</a>
 <p/>
-<a href="child/P0051_S1,2_COMBINED_2.html"><a href="FIlE:P0051_S1,2_COMBINED" class="uri">FIlE:P0051_S1,2_COMBINED</a> SHEET:P0051_Aug_29_S2_left</a>
+<a href="P0051_S1,2_COMBINED_2.html">FIlE = P0051_S1,2_COMBINED. SHEET = P0051_Aug_29_S2_left</a>
 <p/>
-<a href="child/P0072_S2_3_combined_2.html"><a href="FIlE:P0072_S2_3_combined" class="uri">FIlE:P0072_S2_3_combined</a> SHEET:Aug-27-P0072_S3_left_snacks</a>
+<a href="P0072_S2_3_combined_2.html">FIlE = P0072_S2_3_combined. SHEET = Aug-27-P0072_S3_left_snacks</a>
 <p/>
-<a href="child/P0081_MILOdata_modified_3.html"><a href="FIlE:P0081_MILOdata_modified" class="uri">FIlE:P0081_MILOdata_modified</a> SHEET:third session P0081_meal_l</a>
+<a href="P0081_MILOdata_modified_3.html">FIlE = P0081_MILOdata_modified. SHEET = third session P0081_meal_l</a>
 <p/>
-<a href="child/P0088_combined_1.html"><a href="FIlE:P0088_combined" class="uri">FIlE:P0088_combined</a> SHEET:P0088_S1_meal</a>
+<a href="P0088_combined_1.html">FIlE = P0088_combined. SHEET = P0088_S1_meal</a>
 <p/>
-<a href="child/P0088_combined_2.html"><a href="FIlE:P0088_combined" class="uri">FIlE:P0088_combined</a> SHEET:P0088_S2_snacks</a>
+<a href="P0088_combined_2.html">FIlE = P0088_combined. SHEET = P0088_S2_snacks</a>
 <p/>
-<a href="child/P0093-S2,3_combined_2.html"><a href="FIlE:P0093-S2,3_combined" class="uri">FIlE:P0093-S2,3_combined</a> SHEET:P0093_26_Aug_S3_left</a>
+<a href="P0093-S2,3_combined_2.html">FIlE = P0093-S2,3_combined. SHEET = P0093_26_Aug_S3_left</a>
 <p/>
-<a href="child/P0099_S2,3_combined_2.html"><a href="FIlE:P0099_S2,3_combined" class="uri">FIlE:P0099_S2,3_combined</a> SHEET:26_Aug_P0099_S3</a>
+<a href="P0099_S2,3_combined_2.html">FIlE = P0099_S2,3_combined. SHEET = 26_Aug_P0099_S3</a>
 <p/>
-<a href="child/P0103_S1(right+left_,3_combined_1.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Aug_21_S1_left</a>
+<a href="P0103_S1(right+left_,3_combined_1.html">FIlE = P0103_S1(right+left_,3_combined. SHEET = P0103_Aug_21_S1_left</a>
 <p/>
-<a href="child/P0103_S1(right+left_,3_combined_2.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Aug_21_S1_right</a>
+<a href="P0103_S1(right+left_,3_combined_2.html">FIlE = P0103_S1(right+left_,3_combined. SHEET = P0103_Aug_21_S1_right</a>
 <p/>
-<a href="child/P0103_S1(right+left_,3_combined_3.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Sep_04_S3_right</a>
+<a href="P0103_S1(right+left_,3_combined_3.html">FIlE = P0103_S1(right+left_,3_combined. SHEET = P0103_Sep_04_S3_right</a>
 <p/>
-<a href="child/P0112_S1,3_combined_1.html"><a href="FIlE:P0112_S1,3_combined" class="uri">FIlE:P0112_S1,3_combined</a> SHEET:P0112_02_09_S1_meal_left</a>
+<a href="P0112_S1,3_combined_1.html">FIlE = P0112_S1,3_combined. SHEET = P0112_02_09_S1_meal_left</a>
 <p/>
-<a href="child/P0114_S1,2_combined_1.html"><a href="FIlE:P0114_S1,2_combined" class="uri">FIlE:P0114_S1,2_combined</a> SHEET:P0114_S1_snacks_left</a>
+<a href="P0114_S1,2_combined_1.html">FIlE = P0114_S1,2_combined. SHEET = P0114_S1_snacks_left</a>
 <p/>
-<a href="child/P0150_S1-3_combined_3.html"><a href="FIlE:P0150_S1-3_combined" class="uri">FIlE:P0150_S1-3_combined</a> SHEET:P0150_S2_30-08_meal_right</a>
+<a href="P0150_S1-3_combined_3.html">FIlE = P0150_S1-3_combined. SHEET = P0150_S2_30-08_meal_right</a>
 <p/>
-<a href="child/P0151_S1-3_combined_3.html"><a href="FIlE:P0151_S1-3_combined" class="uri">FIlE:P0151_S1-3_combined</a> SHEET:P0151_S2_11-09_snacks_left</a>
+<a href="P0151_S1-3_combined_3.html">FIlE = P0151_S1-3_combined. SHEET = P0151_S2_11-09_snacks_left</a>
 <p/>
-<a href="child/P0151_S1-3_combined_4.html"><a href="FIlE:P0151_S1-3_combined" class="uri">FIlE:P0151_S1-3_combined</a> SHEET:P0151_S3_12-09_meal_left</a>
+<a href="P0151_S1-3_combined_4.html">FIlE = P0151_S1-3_combined. SHEET = P0151_S3_12-09_meal_left</a>
 <p/>
-<a href="child/P0152_S1-3_combined_1.html"><a href="FIlE:P0152_S1-3_combined" class="uri">FIlE:P0152_S1-3_combined</a> SHEET:P0152_S1_11-09_snacks_left</a>
+<a href="P0152_S1-3_combined_1.html">FIlE = P0152_S1-3_combined. SHEET = P0152_S1_11-09_snacks_left</a>
 <p/>
-<a href="child/P0154_S1-3_combined_2.html"><a href="FIlE:P0154_S1-3_combined" class="uri">FIlE:P0154_S1-3_combined</a> SHEET:P0154_S2_12-09_meal</a>
+<a href="P0154_S1-3_combined_2.html">FIlE = P0154_S1-3_combined. SHEET = P0154_S2_12-09_meal</a>
 <p/>
-<a href="child/P0159_S1-3_combined_1.html"><a href="FIlE:P0159_S1-3_combined" class="uri">FIlE:P0159_S1-3_combined</a> SHEET:P0159_S1_11-09_snacks_right</a>
+<a href="P0159_S1-3_combined_1.html">FIlE = P0159_S1-3_combined. SHEET = P0159_S1_11-09_snacks_right</a>
 <p/>
+<p/>
+<p/>
+<p/>
+<p/>
+<p><a href=results_summary.csv>results_summary.csv</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+base_file
+</th>
+<th style="text-align:right;">
+sheet_n
+</th>
+<th style="text-align:right;">
+max_t
+</th>
+<th style="text-align:right;">
+min_t
+</th>
+<th style="text-align:right;">
+end_t
+</th>
+<th style="text-align:right;">
+full_auc
+</th>
+<th style="text-align:right;">
+upper_auc
+</th>
+<th style="text-align:right;">
+raw
+</th>
+<th style="text-align:right;">
+smoothed
+</th>
+<th style="text-align:right;">
+loess
+</th>
+<th style="text-align:right;">
+cleaned
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+P0049_S2,3_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+152304.27
+</td>
+<td style="text-align:right;">
+79600.709
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+<td style="text-align:right;">
+1798756.0
+</td>
+<td style="text-align:right;">
+556862.5
+</td>
+<td style="text-align:right;">
+1798756.0
+</td>
+<td style="text-align:right;">
+1801790.4
+</td>
+<td style="text-align:right;">
+1801708.7
+</td>
+<td style="text-align:right;">
+1801790.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0050_S1,2,3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+217718.38
+</td>
+<td style="text-align:right;">
+59524.518
+</td>
+<td style="text-align:right;">
+2.054072e+05
+</td>
+<td style="text-align:right;">
+1710164.0
+</td>
+<td style="text-align:right;">
+410482.5
+</td>
+<td style="text-align:right;">
+1710164.0
+</td>
+<td style="text-align:right;">
+1706897.4
+</td>
+<td style="text-align:right;">
+1706806.8
+</td>
+<td style="text-align:right;">
+1706897.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0050_S1,2,3_combined
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1240723.81
+</td>
+<td style="text-align:right;">
+119738.988
+</td>
+<td style="text-align:right;">
+7.961407e+05
+</td>
+<td style="text-align:right;">
+1581302.0
+</td>
+<td style="text-align:right;">
+105869.5
+</td>
+<td style="text-align:right;">
+1581302.0
+</td>
+<td style="text-align:right;">
+1574467.8
+</td>
+<td style="text-align:right;">
+1573477.4
+</td>
+<td style="text-align:right;">
+1574467.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0051_S1,2_COMBINED
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+353409.71
+</td>
+<td style="text-align:right;">
+96008.844
+</td>
+<td style="text-align:right;">
+5.891318e+03
+</td>
+<td style="text-align:right;">
+2179750.0
+</td>
+<td style="text-align:right;">
+322354.0
+</td>
+<td style="text-align:right;">
+2179750.0
+</td>
+<td style="text-align:right;">
+2174744.8
+</td>
+<td style="text-align:right;">
+2166891.5
+</td>
+<td style="text-align:right;">
+2174744.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0051_S1,2_COMBINED
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+292830.63
+</td>
+<td style="text-align:right;">
+249774.219
+</td>
+<td style="text-align:right;">
+8.723927e+03
+</td>
+<td style="text-align:right;">
+2849312.5
+</td>
+<td style="text-align:right;">
+678953.0
+</td>
+<td style="text-align:right;">
+2849312.5
+</td>
+<td style="text-align:right;">
+2849103.4
+</td>
+<td style="text-align:right;">
+2831215.7
+</td>
+<td style="text-align:right;">
+2849103.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0072_S2_3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+172838.25
+</td>
+<td style="text-align:right;">
+77443.973
+</td>
+<td style="text-align:right;">
+4.984860e+01
+</td>
+<td style="text-align:right;">
+1217876.0
+</td>
+<td style="text-align:right;">
+314273.5
+</td>
+<td style="text-align:right;">
+1217876.0
+</td>
+<td style="text-align:right;">
+1208894.9
+</td>
+<td style="text-align:right;">
+1209041.5
+</td>
+<td style="text-align:right;">
+1208894.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0081_MILOdata_modified
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+57350.76
+</td>
+<td style="text-align:right;">
+32064.722
+</td>
+<td style="text-align:right;">
+4.473920e+07
+</td>
+<td style="text-align:right;">
+15744941.0
+</td>
+<td style="text-align:right;">
+14596574.0
+</td>
+<td style="text-align:right;">
+15744941.0
+</td>
+<td style="text-align:right;">
+15690782.5
+</td>
+<td style="text-align:right;">
+15716696.5
+</td>
+<td style="text-align:right;">
+15690782.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0088_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+560600.40
+</td>
+<td style="text-align:right;">
+117372.830
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+<td style="text-align:right;">
+1399461.5
+</td>
+<td style="text-align:right;">
+187557.0
+</td>
+<td style="text-align:right;">
+1399461.5
+</td>
+<td style="text-align:right;">
+1398468.5
+</td>
+<td style="text-align:right;">
+1401928.8
+</td>
+<td style="text-align:right;">
+1398468.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0088_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+268492.82
+</td>
+<td style="text-align:right;">
+58954.470
+</td>
+<td style="text-align:right;">
+1.300518e+04
+</td>
+<td style="text-align:right;">
+1671825.5
+</td>
+<td style="text-align:right;">
+402510.0
+</td>
+<td style="text-align:right;">
+1671825.5
+</td>
+<td style="text-align:right;">
+1667222.2
+</td>
+<td style="text-align:right;">
+1669064.6
+</td>
+<td style="text-align:right;">
+1667222.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0093-S2,3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+144608.97
+</td>
+<td style="text-align:right;">
+71811.703
+</td>
+<td style="text-align:right;">
+1.761610e+03
+</td>
+<td style="text-align:right;">
+1887203.0
+</td>
+<td style="text-align:right;">
+548979.0
+</td>
+<td style="text-align:right;">
+1887203.0
+</td>
+<td style="text-align:right;">
+1883904.2
+</td>
+<td style="text-align:right;">
+1884234.6
+</td>
+<td style="text-align:right;">
+1883904.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0099_S2,3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+428405.93
+</td>
+<td style="text-align:right;">
+84160.727
+</td>
+<td style="text-align:right;">
+2.253723e+05
+</td>
+<td style="text-align:right;">
+1397317.0
+</td>
+<td style="text-align:right;">
+247111.0
+</td>
+<td style="text-align:right;">
+1397317.0
+</td>
+<td style="text-align:right;">
+1396429.5
+</td>
+<td style="text-align:right;">
+1396403.8
+</td>
+<td style="text-align:right;">
+1396429.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0103_S1(right+left_,3_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+137419.02
+</td>
+<td style="text-align:right;">
+58857.142
+</td>
+<td style="text-align:right;">
+1.285424e+05
+</td>
+<td style="text-align:right;">
+1679955.5
+</td>
+<td style="text-align:right;">
+639397.5
+</td>
+<td style="text-align:right;">
+1679955.5
+</td>
+<td style="text-align:right;">
+1682670.6
+</td>
+<td style="text-align:right;">
+1681011.1
+</td>
+<td style="text-align:right;">
+1682670.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0103_S1(right+left_,3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+108215.82
+</td>
+<td style="text-align:right;">
+77092.795
+</td>
+<td style="text-align:right;">
+9.521003e+04
+</td>
+<td style="text-align:right;">
+1419461.5
+</td>
+<td style="text-align:right;">
+555406.0
+</td>
+<td style="text-align:right;">
+1419461.5
+</td>
+<td style="text-align:right;">
+1419226.0
+</td>
+<td style="text-align:right;">
+1419641.4
+</td>
+<td style="text-align:right;">
+1419226.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0103_S1(right+left_,3_combined
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+111588.73
+</td>
+<td style="text-align:right;">
+87296.758
+</td>
+<td style="text-align:right;">
+4.949142e+05
+</td>
+<td style="text-align:right;">
+1498658.0
+</td>
+<td style="text-align:right;">
+496602.5
+</td>
+<td style="text-align:right;">
+1498658.0
+</td>
+<td style="text-align:right;">
+1458622.6
+</td>
+<td style="text-align:right;">
+1470793.0
+</td>
+<td style="text-align:right;">
+1458622.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0112_S1,3_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+308876.55
+</td>
+<td style="text-align:right;">
+118452.898
+</td>
+<td style="text-align:right;">
+2.777457e+08
+</td>
+<td style="text-align:right;">
+6609896.0
+</td>
+<td style="text-align:right;">
+3276536.4
+</td>
+<td style="text-align:right;">
+6609896.0
+</td>
+<td style="text-align:right;">
+5659299.6
+</td>
+<td style="text-align:right;">
+6272341.5
+</td>
+<td style="text-align:right;">
+5659299.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0114_S1,2_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+207575.70
+</td>
+<td style="text-align:right;">
+120590.719
+</td>
+<td style="text-align:right;">
+6.060158e+05
+</td>
+<td style="text-align:right;">
+1763645.0
+</td>
+<td style="text-align:right;">
+512128.0
+</td>
+<td style="text-align:right;">
+1763645.0
+</td>
+<td style="text-align:right;">
+1759706.5
+</td>
+<td style="text-align:right;">
+1761010.4
+</td>
+<td style="text-align:right;">
+1759706.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0150_S1-3_combined
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+326048.05
+</td>
+<td style="text-align:right;">
+113577.400
+</td>
+<td style="text-align:right;">
+4.558320e+04
+</td>
+<td style="text-align:right;">
+2046578.0
+</td>
+<td style="text-align:right;">
+475044.0
+</td>
+<td style="text-align:right;">
+2046578.0
+</td>
+<td style="text-align:right;">
+2041490.8
+</td>
+<td style="text-align:right;">
+2040760.0
+</td>
+<td style="text-align:right;">
+2041490.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0151_S1-3_combined
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+876811.08
+</td>
+<td style="text-align:right;">
+6113.674
+</td>
+<td style="text-align:right;">
+9.703747e+05
+</td>
+<td style="text-align:right;">
+192040.5
+</td>
+<td style="text-align:right;">
+2342.5
+</td>
+<td style="text-align:right;">
+192040.5
+</td>
+<td style="text-align:right;">
+187468.3
+</td>
+<td style="text-align:right;">
+194242.4
+</td>
+<td style="text-align:right;">
+187468.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0151_S1-3_combined
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+288790.73
+</td>
+<td style="text-align:right;">
+28604.238
+</td>
+<td style="text-align:right;">
+4.000020e+05
+</td>
+<td style="text-align:right;">
+401716.0
+</td>
+<td style="text-align:right;">
+58193.5
+</td>
+<td style="text-align:right;">
+401716.0
+</td>
+<td style="text-align:right;">
+403452.5
+</td>
+<td style="text-align:right;">
+405171.6
+</td>
+<td style="text-align:right;">
+403452.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0152_S1-3_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1350811.91
+</td>
+<td style="text-align:right;">
+4648801.750
+</td>
+<td style="text-align:right;">
+4.369407e+05
+</td>
+<td style="text-align:right;">
+292627.0
+</td>
+<td style="text-align:right;">
+3451.5
+</td>
+<td style="text-align:right;">
+292627.0
+</td>
+<td style="text-align:right;">
+287618.5
+</td>
+<td style="text-align:right;">
+287893.4
+</td>
+<td style="text-align:right;">
+287618.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0154_S1-3_combined
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+-73471.47
+</td>
+<td style="text-align:right;">
+31980415.500
+</td>
+<td style="text-align:right;">
+1.674440e+05
+</td>
+<td style="text-align:right;">
+-521667.5
+</td>
+<td style="text-align:right;">
+-256952.5
+</td>
+<td style="text-align:right;">
+-521667.5
+</td>
+<td style="text-align:right;">
+-490278.5
+</td>
+<td style="text-align:right;">
+-623491.5
+</td>
+<td style="text-align:right;">
+-490278.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P0159_S1-3_combined
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4635.43
+</td>
+<td style="text-align:right;">
+6020.840
+</td>
+<td style="text-align:right;">
+1.571628e+05
+</td>
+<td style="text-align:right;">
+2329363.5
+</td>
+<td style="text-align:right;">
+2134831.5
+</td>
+<td style="text-align:right;">
+2329363.5
+</td>
+<td style="text-align:right;">
+598856.9
+</td>
+<td style="text-align:right;">
+652932.9
+</td>
+<td style="text-align:right;">
+598856.9
+</td>
+</tr>
+</tbody>
+</table>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

@@ -12,7 +12,7 @@
 <meta name="author" content="Dennis Wollersheim" />
 
 
-<title>first pass</title>
+<title>Summary For Single Sheet</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -377,7 +377,7 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">first pass</h1>
+<h1 class="title toc-ignore">Summary For Single Sheet</h1>
 <h4 class="author">Dennis Wollersheim</h4>
 <h4 class="date">12.03.2020</h4>
 
@@ -386,7 +386,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -395,7 +395,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -404,10 +404,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-03-15
+<strong>Last updated:</strong> 2020-03-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -423,12 +423,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -495,20 +495,30 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreefbbadf4bbfaa2ccbc29f17fde421ce8301f98707targetblankfbbadf4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/fbbadf4bbfaa2ccbc29f17fde421ce8301f98707" target="_blank">fbbadf4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeffe98e029cc534239f0ee9908bafd56c845266betargetblankffe98e0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/ffe98e029cc534239f0ee9908bafd56c845266be" target="_blank">ffe98e0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreefbbadf4bbfaa2ccbc29f17fde421ce8301f98707targetblankfbbadf4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeffe98e029cc534239f0ee9908bafd56c845266betargetblankffe98e0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
+Ignored files:
+    Ignored:    analysis/figure/
+    Ignored:    data/P/
+    Ignored:    data/output/
+
 Untracked files:
-    Untracked:  explore/
+    Untracked:  analysis/a.Rmd
+    Untracked:  analysis/child/
+    Untracked:  figure/
 
 Unstaged changes:
-    Deleted:    analysis/explore.Rmd
+    Modified:   analysis/process_all_sheets.Rmd
+    Modified:   analysis/process_one_sheet.Rmd
+    Deleted:    data/README.md
+    Deleted:    explore/explore.Rmd
 
 </code></pre>
 <p>
@@ -549,6 +559,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/dc06120d23a3a9513b62d4bc76b029c384b18013/docs/process_one_sheet.html" target="_blank">dc06120</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -571,14 +598,15 @@ wflow_publish(“analysis/process_one_sheet.Rmd”)
 </div>
 </div>
 </div>
-
-<div id="replace-outliers-with-mean-of-neigbouring-points" class="section level1">
-<h1>replace outliers with mean of neigbouring points</h1>
+<div id="file-p0150_s1-3_combined-sheet-3-sheet_n-1" class="section level1">
+<h1>FILE: P0150_S1-3_combined SHEET: 3 SHEET_N: 1</h1>
+<div id="replace-outliers-with-mean-of-neigbouring-points" class="section level2">
+<h2>replace outliers with mean of neigbouring points</h2>
 <pre class="r"><code>smoothing_window_width = 500
-inflection_window_width = 10
+inflection_window_width = 50
 df_in %&gt;%
   mutate( row_n = row_number()) %&gt;%
-  mutate(raw_current = ifelse( row_n %in% 
+  mutate(raw_current = ifelse( row_n %in%
     findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
 ,
                               NA, raw_current)) %&gt;%
@@ -587,38 +615,38 @@ df_in %&gt;%
   mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;right&quot;, fill=NA))) %&gt;%
   mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;left&quot;, fill=NA))) %&gt;%
   mutate( is_max_pt =  replace_na( smoothed &gt; mean_left &amp; smoothed &gt; mean_right, FALSE)) %&gt;%
-  mutate( is_min_pt =  replace_na( smoothed &lt; mean_left &amp; smoothed &lt; mean_right, FALSE)) %&gt;% 
+  mutate( is_min_pt =  replace_na( smoothed &lt; mean_left &amp; smoothed &lt; mean_right, FALSE)) %&gt;%
   { . } -&gt; df_in_smoothed</code></pre>
 </div>
-<div id="raw-input-data" class="section level1">
-<h1>raw input data</h1>
+<div id="raw-input-data" class="section level2">
+<h2>raw input data</h2>
 <pre class="r"><code>df_in%&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1) </code></pre>
-<p><img src="figure/process_one_sheet.Rmd/graph_raw_data-1.png" width="672" style="display: block; margin: auto;" /></p>
+  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="smoothed-data" class="section level1">
-<h1>smoothed data</h1>
+<div id="smoothed-data" class="section level2">
+<h2>smoothed data</h2>
 <pre class="r"><code>df_in_smoothed %&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1) +
-  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;) </code></pre>
-<p><img src="figure/process_one_sheet.Rmd/graph_smoothed_data-1.png" width="672" style="display: block; margin: auto;" /></p>
+  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;)</code></pre>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="smoothed-data-with-additional-cleaning" class="section level1">
-<h1>smoothed data with additional cleaning</h1>
+<div id="smoothed-data-with-additional-cleaning" class="section level2">
+<h2>smoothed data with additional cleaning</h2>
 <p>TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values. Currently using the first, no cleaning whatsoever</p>
 <pre class="r"><code>df_in_smoothed %&gt;%
   mutate(raw_current = tsclean( raw_current)) %&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1) </code></pre>
-<p><img src="figure/process_one_sheet.Rmd/graph_smoothed_data_tscleaned-1.png" width="672" style="display: block; margin: auto;" /></p>
+  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="calculating-important-points" class="section level1">
-<h1>calculating important points</h1>
+<div id="calculating-important-points" class="section level2">
+<h2>calculating important points</h2>
 <ul>
 <li>first min,</li>
 <li>first max after first min,</li>
@@ -634,23 +662,24 @@ min_location = df_min_location$min_location
 min_raw_current = df_min_location$min_raw_current
 
 df_in_smoothed %&gt;%
+  filter( row_n &gt; min_location ) %&gt;%
   mutate( c = chunkify( is_max_pt )) %&gt;%
   filter( c==2) %&gt;%
   summarise( max_location = floor(mean( row_n))) %&gt;%
-  pluck(&#39;max_location&#39;) %&gt;% 
+  pluck(&#39;max_location&#39;) %&gt;%
   { . } -&gt; max_location
 
 df_in_smoothed %&gt;%
-  mutate( is_2nd_min = 
+  mutate( is_2nd_min =
          (row_n &gt; max_location ) &amp;
          (raw_current &lt; min_raw_current ) ) %&gt;%
   pluck(&#39;is_2nd_min&#39;) %&gt;%
   rle( ) %&gt;%
-  pluck(1,1) %&gt;% 
+  pluck(1,1) %&gt;%
   { . } -&gt; min_2nd_location</code></pre>
 </div>
-<div id="extract-out-some-subset-smoothed-chunks-for-fitting-prediction-lines" class="section level1">
-<h1>extract out some subset smoothed chunks for fitting prediction lines</h1>
+<div id="extract-out-some-subset-smoothed-chunks-for-fitting-prediction-lines" class="section level2">
+<h2>extract out some subset smoothed chunks for fitting prediction lines</h2>
 <pre class="r"><code>df_in_smoothed %&gt;%
   dplyr::filter( row_n &lt; min_location  ) %&gt;%
   mutate(raw_current = tsclean( raw_current)) %&gt;%
@@ -672,8 +701,8 @@ fit_min = lm( raw_current ~ unix_time, data=df_min)
 fit_max = lm( raw_current ~ unix_time, data=df_max)
 fit_end = lm( raw_current ~ unix_time, data=df_end)</code></pre>
 </div>
-<div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines" class="section level1">
-<h1>calculate overall graph parameters to use when generating the new lines</h1>
+<div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines" class="section level2">
+<h2>calculate overall graph parameters to use when generating the new lines</h2>
 <pre class="r"><code>df_in %&gt;%
   summarise( min_ts = min(unix_time),
             max_ts = max( unix_time ),
@@ -683,43 +712,44 @@ fit_end = lm( raw_current ~ unix_time, data=df_end)</code></pre>
             ) %&gt;%
   { . } -&gt; df_parm</code></pre>
 </div>
-<div id="generate-the-steps-along-the-unix_time-scale-to-generate-the-new-lines" class="section level1">
-<h1>generate the steps along the unix_time scale to generate the new lines</h1>
+<div id="generate-the-steps-along-the-unix_time-scale-to-generate-the-new-lines" class="section level2">
+<h2>generate the steps along the unix_time scale to generate the new lines</h2>
 <pre class="r"><code>steps_extra = 8000
 
 df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
-                row_n = 1- 1:steps_extra 
+                row_n = 1- 1:steps_extra
 )
 
 df_steps_after = tibble( unix_time = df_parm$max_ts + seq( 1:steps_extra ) * df_parm$step,
-                   row_n = df_parm$n+ 1:steps_extra 
+                   row_n = df_parm$n+ 1:steps_extra
 )
 
 df_in_smoothed %&gt;%
   select( unix_time, row_n) %&gt;%
   rbind( df_steps_before) %&gt;%
   rbind( df_steps_after) %&gt;%
-  arrange( row_n ) %&gt;% 
+  arrange( row_n ) %&gt;%
   { . } -&gt; df_steps</code></pre>
 </div>
-<div id="predict-in-the-3-predicted-sections-for-all-the-steps" class="section level1">
-<h1>predict in the 3 predicted sections, for all the steps</h1>
+<div id="predict-the-area-of-the-three-predicted-sections" class="section level2">
+<h2>predict the area of the three predicted sections</h2>
 <pre class="r"><code>df_steps %&gt;%
   mutate( predicted_min = predict( fit_min, .)) %&gt;%
   mutate( predicted_max = predict( fit_max, .)) %&gt;%
   mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  { . } -&gt; df_steps
-
-# pull out the AUC size of the triangles
+  { . } -&gt; df_steps</code></pre>
+<pre><code>Warning in predict.lm(fit_max, .): prediction from a rank-deficient fit may be
+misleading</code></pre>
+<pre class="r"><code># pull out the AUC size of the triangles
 
 df_steps %&gt;%
-  filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;% 
+  filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
   summarise( area = trapz( unix_time, predicted_min) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_min_triangle
 
 df_steps %&gt;%
-  filter( predicted_max &gt; 0 &amp; row_n &lt;= min_location  ) %&gt;% 
+  filter( predicted_max &gt; 0 &amp; row_n &lt;= min_location  ) %&gt;%
   summarise( area = trapz( unix_time, predicted_max) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_max_triangle
@@ -727,36 +757,37 @@ df_steps %&gt;%
 
 df_steps %&gt;%
   filter( predicted_end &gt; 0 ) %&gt;%
-  filter( unix_time &gt;= df_parm$max_ts  ) %&gt;% 
+  filter( unix_time &gt;= df_parm$max_ts  ) %&gt;%
   summarise( area = trapz( unix_time, predicted_end) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_end_triangle
-
-
-# the real, raw measurements.  TODO: should smooth this a bit
+  { . } -&gt; area_end_triangle</code></pre>
+</div>
+<div id="calculate-the-auc-for-the-raw-smoothed-data" class="section level2">
+<h2>calculate the AUC for the raw / smoothed data</h2>
+<pre class="r"><code># the real, raw measurements.  TODO: should smooth this a bit
 df_in %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;% 
+  filter( row_n &gt;= min_location  ) %&gt;%
   summarise( area = trapz( unix_time, raw_current) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_raw
 
-# AUC for smoothed data 
+# AUC for smoothed data
 df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;% 
+  filter( row_n &gt;= min_location  ) %&gt;%
   summarise( area = trapz( unix_time, raw_current) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_smoothed
 
 # AUC for smoothed data loess
 df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;% 
+  filter( row_n &gt;= min_location  ) %&gt;%
   summarise( area = trapz( unix_time, smoothed) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_loess
 
 # AUC for smoothed data cleaned
 df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;% 
+  filter( row_n &gt;= min_location  ) %&gt;%
   mutate( raw_current - tsclean( raw_current)) %&gt;%
   summarise( area = trapz( unix_time, raw_current) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
@@ -765,15 +796,19 @@ df_in_smoothed %&gt;%
 # the upper bit of the real raw measurement
 df_in %&gt;%
   mutate( row_n = row_number()) %&gt;%
-  filter( row_n &gt;= min_location  &amp; row_n &lt;= min_2nd_location ) %&gt;% 
+  filter( row_n &gt;= min_location  &amp; row_n &lt;= min_2nd_location ) %&gt;%
   summarise( area = trapz( unix_time, raw_current) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_upper
 
-rectangle_area = min_raw_current * 
-  (df_in[ min_2nd_location, &#39;unix_time&#39;] - df_in[ min_location, &#39;unix_time&#39;] )
+library(magrittr)
+df_in[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
+  subtract( df_in[ min_location, &#39;unix_time&#39;] ) %&gt;%
+  multiply_by(  min_raw_current  ) %&gt;%
+  unlist() %&gt;%
+  { . } -&gt; rectangle_area
 
-df_auc = tibble( 
+df_auc = tibble(
                 raw = area_uc_full_raw,
                 smoothed = area_uc_full_smoothed,
                 loess = area_uc_full_loess,
@@ -783,15 +818,15 @@ df_auc = tibble(
 
 
 df_rv = tibble(
-               max_t = area_max_triangle, 
-               min_t = area_min_triangle, 
-               end_t = area_end_triangle, 
+               max_t = area_max_triangle,
+               min_t = area_min_triangle,
+               end_t = area_end_triangle,
                full_auc = area_uc_full_raw,
                upper_auc = area_uc_upper - rectangle_area
                )</code></pre>
 </div>
-<div id="what-points-were-predicted-on" class="section level1">
-<h1>What points were predicted on</h1>
+<div id="what-points-were-predicted-on" class="section level2">
+<h2>What points were predicted on</h2>
 <pre class="r"><code>rbind( df_min, df_max ) %&gt;%
   rbind( df_end ) %&gt;%
   ggplot( aes( unix_time, raw_current)) +
@@ -802,10 +837,10 @@ df_rv = tibble(
   geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
   geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level1">
-<h1>Predicted Areas for the different parts of the graph</h1>
+<div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level2">
+<h2>Predicted Areas for the different parts of the graph</h2>
 <p>There are 5 calculated areas. Three are predicted triangular chunks (max, min, and end) and two are measured AUC’s: full and upper</p>
 <ul>
 <li>max - line from max point, through first minimum. Triangel area is from first minimum to xaxis</li>
@@ -824,7 +859,7 @@ df_rv = tibble(
 </ul>
 <pre class="r"><code>df_rv %&gt;%
   kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T) </code></pre>
+  kable_styling(full_width = T)</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -840,7 +875,7 @@ end_t
 <th style="text-align:right;">
 full_auc
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
 upper_auc
 </th>
 </tr>
@@ -848,30 +883,30 @@ upper_auc
 <tbody>
 <tr>
 <td style="text-align:right;">
-326,380.7
+1,350,812
 </td>
 <td style="text-align:right;">
-113,754.4
+4,648,802
 </td>
 <td style="text-align:right;">
-45,599.49
+436,940.7
 </td>
 <td style="text-align:right;">
-2,046,180
+292,627
 </td>
-<td style="text-align:left;">
-461374.5
+<td style="text-align:right;">
+3,451.5
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="comparision-of-auc-for-the-different-smoothing-methods" class="section level1">
-<h1>Comparision of AUC for the different smoothing methods</h1>
+<div id="comparision-of-auc-for-the-different-smoothing-methods" class="section level2">
+<h2>Comparision of AUC for the different smoothing methods</h2>
 <p>The numbers you want are:</p>
 <pre class="r"><code>df_auc %&gt;%
-   kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T) </code></pre>
+  kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
+  kable_styling(full_width = T)</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -892,20 +927,24 @@ cleaned
 <tbody>
 <tr>
 <td style="text-align:right;">
-2,046,180
+292,627
 </td>
 <td style="text-align:right;">
-2,041,081
+287,618.5
 </td>
 <td style="text-align:right;">
-2,040,339
+287,893.4
 </td>
 <td style="text-align:right;">
-2,041,081
+287,618.5
 </td>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>tibble( base_file=params$base_file, sheet_n=params$sheet_n) %&gt;%
+  bind_cols( df_rv ) %&gt;%
+  bind_cols( df_auc ) %&gt;%
+  write_csv( output_file )</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -934,38 +973,38 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.1.0  pracma_2.2.5      seismicRoll_1.1.3 forecast_8.11    
- [5] janitor_1.2.1     readxl_1.3.1      forcats_0.5.0     stringr_1.4.0    
- [9] dplyr_0.8.5       purrr_0.3.3       readr_1.3.1       tidyr_1.0.2      
-[13] tibble_2.1.3      ggplot2_3.2.1     tidyverse_1.3.0   zoo_1.8-7        
-[17] nvimcom_0.9-82   
+ [1] glue_1.3.2        magrittr_1.5      kableExtra_1.1.0  pracma_2.2.5     
+ [5] seismicRoll_1.1.3 forecast_8.11     janitor_1.2.1     readxl_1.3.1     
+ [9] forcats_0.5.0     stringr_1.4.0     dplyr_0.8.5       purrr_0.3.3      
+[13] readr_1.3.1       tidyr_1.0.2       tibble_2.1.3      ggplot2_3.2.1    
+[17] tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
  [1] tseries_0.10-47      httr_1.4.1           jsonlite_1.6.1      
  [4] viridisLite_0.3.0    modelr_0.1.6         assertthat_0.2.1    
  [7] TTR_0.23-6           highr_0.8            cellranger_1.1.0    
 [10] yaml_2.2.1           pillar_1.4.3         backports_1.1.5     
-[13] lattice_0.20-40      glue_1.3.1           quadprog_1.5-8      
-[16] digest_0.6.25        snakecase_0.11.0     rvest_0.3.5         
-[19] colorspace_1.4-1     htmltools_0.4.0      timeDate_3043.102   
-[22] pkgconfig_2.0.3      broom_0.5.5          haven_2.2.0         
-[25] scales_1.1.0         webshot_0.5.2        whisker_0.4         
-[28] git2r_0.26.1         farver_2.0.1         generics_0.0.2      
-[31] ellipsis_0.3.0       withr_2.1.2          urca_1.3-0          
-[34] nnet_7.3-13          lazyeval_0.2.2       cli_2.0.2           
-[37] quantmod_0.4-15      magrittr_1.5         crayon_1.3.4        
-[40] evaluate_0.14        fs_1.3.2             fansi_0.4.1         
-[43] nlme_3.1-142         xts_0.12-0           xml2_1.2.2          
-[46] tools_3.6.1          hms_0.5.3            lifecycle_0.2.0     
-[49] munsell_0.5.0        reprex_0.3.0         compiler_3.6.1      
-[52] rlang_0.4.5          grid_3.6.1           rstudioapi_0.11     
-[55] labeling_0.3         rmarkdown_2.1        gtable_0.3.0        
-[58] fracdiff_1.5-1       DBI_1.1.0            curl_4.3            
-[61] R6_2.4.1             lubridate_1.7.4      knitr_1.28          
-[64] workflowr_1.4.0.9001 rprojroot_1.3-2      stringi_1.4.6       
-[67] parallel_3.6.1       Rcpp_1.0.3           vctrs_0.2.3         
-[70] dbplyr_1.4.2         tidyselect_1.0.0     xfun_0.11           
-[73] lmtest_0.9-37       </code></pre>
+[13] lattice_0.20-40      quadprog_1.5-8       digest_0.6.25       
+[16] snakecase_0.11.0     rvest_0.3.5          colorspace_1.4-1    
+[19] htmltools_0.4.0      timeDate_3043.102    pkgconfig_2.0.3     
+[22] broom_0.5.5          haven_2.2.0          scales_1.1.0        
+[25] webshot_0.5.2        whisker_0.4          git2r_0.26.1        
+[28] farver_2.0.1         generics_0.0.2       ellipsis_0.3.0      
+[31] withr_2.1.2          urca_1.3-0           nnet_7.3-13         
+[34] lazyeval_0.2.2       cli_2.0.2            quantmod_0.4-16     
+[37] crayon_1.3.4         evaluate_0.14        fs_1.3.2            
+[40] fansi_0.4.1          nlme_3.1-142         xts_0.12-0          
+[43] xml2_1.2.5           tools_3.6.1          hms_0.5.3           
+[46] lifecycle_0.2.0      munsell_0.5.0        reprex_0.3.0        
+[49] compiler_3.6.1       rlang_0.4.5          grid_3.6.1          
+[52] rstudioapi_0.11      labeling_0.3         rmarkdown_2.1.1     
+[55] gtable_0.3.0         fracdiff_1.5-1       DBI_1.1.0           
+[58] curl_4.3             R6_2.4.1             lubridate_1.7.4     
+[61] knitr_1.28           workflowr_1.4.0.9001 rprojroot_1.3-2     
+[64] stringi_1.4.6        parallel_3.6.1       Rcpp_1.0.4          
+[67] vctrs_0.2.4          dbplyr_1.4.2         tidyselect_1.0.0    
+[70] xfun_0.12            lmtest_0.9-37       </code></pre>
+</div>
 </div>
 </div>
 
@@ -1031,7 +1070,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
