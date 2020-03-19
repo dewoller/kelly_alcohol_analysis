@@ -12,7 +12,7 @@
 <meta name="author" content="Dennis Wollersheim" />
 
 
-<title>first pass</title>
+<title>summary AUC</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,7 +26,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -377,7 +376,7 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">first pass</h1>
+<h1 class="title toc-ignore">summary AUC</h1>
 <h4 class="author">Dennis Wollersheim</h4>
 <h4 class="date">12.03.2020</h4>
 
@@ -495,25 +494,28 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree8251a82919c4ba78e2a70fdfaf195f6f112d89c8targetblank8251a82a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/8251a82919c4ba78e2a70fdfaf195f6f112d89c8" target="_blank">8251a82</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree4bf5e8235ae99516b10291bf79562562a8cd27b0targetblank4bf5e82a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/4bf5e8235ae99516b10291bf79562562a8cd27b0" target="_blank">4bf5e82</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree8251a82919c4ba78e2a70fdfaf195f6f112d89c8targetblank8251a82a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree4bf5e8235ae99516b10291bf79562562a8cd27b0targetblank4bf5e82a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    analysis/figure/
     Ignored:    data/P/
     Ignored:    data/output/
 
 Untracked files:
     Untracked:  analysis/a.Rmd
     Untracked:  analysis/child/
+    Untracked:  analysis/try.Rmd
     Untracked:  figure/
 
 Unstaged changes:
+    Modified:   analysis/process_one_sheet.Rmd
     Deleted:    data/README.md
     Deleted:    explore/explore.Rmd
 
@@ -554,6 +556,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/4bf5e8235ae99516b10291bf79562562a8cd27b0/analysis/process_all_sheets.Rmd" target="_blank">4bf5e82</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-18
+</td>
+<td>
+wflow_publish(“analysis/process_all_sheets.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/ffe98e029cc534239f0ee9908bafd56c845266be/docs/process_all_sheets.html" target="_blank">ffe98e0</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -681,801 +717,50 @@ wflow_publish(“analysis/process_all_sheets.Rmd”)
 </div>
 </div>
 
-<pre class="r"><code>library(zoo)</code></pre>
-<pre><code>Warning: package &#39;zoo&#39; was built under R version 3.6.2</code></pre>
-<pre><code>
-Attaching package: &#39;zoo&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:base&#39;:
-
-    as.Date, as.Date.numeric</code></pre>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>✔ ggplot2 3.2.1     ✔ purrr   0.3.3
-✔ tibble  2.1.3     ✔ dplyr   0.8.5
-✔ tidyr   1.0.2     ✔ stringr 1.4.0
-✔ readr   1.3.1     ✔ forcats 0.5.0</code></pre>
-<pre><code>Warning: package &#39;tidyr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>Warning: package &#39;dplyr&#39; was built under R version 3.6.3</code></pre>
-<pre><code>Warning: package &#39;forcats&#39; was built under R version 3.6.3</code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(readxl)
-library(janitor)</code></pre>
-<pre><code>Warning: package &#39;janitor&#39; was built under R version 3.6.2</code></pre>
-<pre><code>
-Attaching package: &#39;janitor&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:stats&#39;:
-
-    chisq.test, fisher.test</code></pre>
-<pre class="r"><code>library(forecast)</code></pre>
-<pre><code>Warning: package &#39;forecast&#39; was built under R version 3.6.2</code></pre>
-<pre><code>Registered S3 method overwritten by &#39;quantmod&#39;:
-  method            from
-  as.zoo.data.frame zoo </code></pre>
-<pre class="r"><code>library(seismicRoll)
-library(pracma)</code></pre>
-<pre><code>
-Attaching package: &#39;pracma&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:purrr&#39;:
-
-    cross</code></pre>
-<pre class="r"><code>library(kableExtra)</code></pre>
-<pre><code>
-Attaching package: &#39;kableExtra&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
-
-    group_rows</code></pre>
-<pre class="r"><code>library(knitr)</code></pre>
-<pre><code>Warning: package &#39;knitr&#39; was built under R version 3.6.2</code></pre>
-<pre class="r"><code>options(error=stop)
-read_excel(&#39;data/MILO_read_out_Dennis.xlsx&#39;) %&gt;%
-  clean_names() %&gt;%
-  rename_all( str_replace, &#39;time_&#39;,&#39;&#39;) %&gt;%
-  pivot_longer(-file, 
-               names_to=c(&#39;.value&#39;,&#39;sheet_n&#39;),
-               names_pattern=&#39;(.*)_(.)&#39; )  %&gt;%
-  filter( start &gt; 0) %&gt;% 
-  rename(excel_filename = file )%&gt;%
-  tail(12) %&gt;%
-  head(2) %&gt;%
-  { . } -&gt; df_sheets
-
-base_dir = &#39;data/P/&#39;
-
-
-src = &#39;&#39;
-for(i in 1:nrow(df_sheets)) {
-  base_file = df_sheets[ i, ]$excel_filename
-  print(base_file )
-  xls_input_file=paste0( base_dir, base_file, &#39;.xlsx&#39;)
-  sheet_n = df_sheets[i,]$sheet_n
-  if (!file.exists(xls_input_file)) print(xls_input_file)
-  rv = knit_expand( 
-    file = &#39;analysis/child/process_one_sheet.Rmd&#39;,
-    xls_input_file = xls_input_file,
-    base_file = base_file,
-    sheet_n = sheet_n,
-    sheet = df_sheets[i,]$sheet,
-    start_timestamp = df_sheets[i,]$start
-  )
-  print( xls_input_file )
-  print( sheet_n )
-  #knitr::knit( text = src)
-  src = paste(src, rv)
-}</code></pre>
-<pre><code>[1] &quot;P0099_S2,3_combined&quot;
-[1] &quot;data/P/P0099_S2,3_combined.xlsx&quot;
-[1] &quot;2&quot;
-[1] &quot;P0103_S1(right+left_,3_combined&quot;
-[1] &quot;data/P/P0103_S1(right+left_,3_combined.xlsx&quot;
-[1] &quot;1&quot;</code></pre>
-<p># FILE: data/P/P0099_S2,3_combined.xlsx SHEET: 26_Aug_P0099_S3 SHEET_N: 2</p>
-<div id="replace-outliers-with-mean-of-neigbouring-points" class="section level2">
-<h2>replace outliers with mean of neigbouring points</h2>
-<pre class="r"><code>smoothing_window_width = 500
-inflection_window_width = 10
-df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
-  mutate(raw_current = ifelse( row_n %in%
-    findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
-,
-                              NA, raw_current)) %&gt;%
-  mutate( raw_current = na.approx( raw_current)) %&gt;%
-  mutate( smoothed = loess( raw_current ~ unix_time, data=., span=.2 ) %&gt;% predict() )  %&gt;%
-  mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;right&quot;, fill=NA))) %&gt;%
-  mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;left&quot;, fill=NA))) %&gt;%
-  mutate( is_max_pt =  replace_na( smoothed &gt; mean_left &amp; smoothed &gt; mean_right, FALSE)) %&gt;%
-  mutate( is_min_pt =  replace_na( smoothed &lt; mean_left &amp; smoothed &lt; mean_right, FALSE)) %&gt;%
-  { . } -&gt; df_in_smoothed</code></pre>
-</div>
-<div id="raw-input-data" class="section level2">
-<h2>raw input data</h2>
-<pre class="r"><code>df_in%&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="smoothed-data" class="section level2">
-<h2>smoothed data</h2>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1) +
-  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="smoothed-data-with-additional-cleaning" class="section level2">
-<h2>smoothed data with additional cleaning</h2>
-<p>TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values. Currently using the first, no cleaning whatsoever</p>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="calculating-important-points" class="section level2">
-<h2>calculating important points</h2>
-<ul>
-<li>first min,</li>
-<li>first max after first min,</li>
-<li>location of first min after previous max</li>
-</ul>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  mutate( c=chunkify( is_min_pt )) %&gt;%
-  filter( c==2 ) %&gt;%
-  summarise( min_location = floor(mean( row_n)), min_raw_current = min(raw_current)) %&gt;%
-  { . } -&gt; df_min_location
-
-min_location = df_min_location$min_location
-min_raw_current = df_min_location$min_raw_current
-
-df_in_smoothed %&gt;%
-  mutate( c = chunkify( is_max_pt )) %&gt;%
-  filter( c==2) %&gt;%
-  summarise( max_location = floor(mean( row_n))) %&gt;%
-  pluck(&#39;max_location&#39;) %&gt;%
-  { . } -&gt; max_location
-
-df_in_smoothed %&gt;%
-  mutate( is_2nd_min =
-         (row_n &gt; max_location ) &amp;
-         (raw_current &lt; min_raw_current ) ) %&gt;%
-  pluck(&#39;is_2nd_min&#39;) %&gt;%
-  rle( ) %&gt;%
-  pluck(1,1) %&gt;%
-  { . } -&gt; min_2nd_location</code></pre>
-</div>
-<div id="extract-out-some-subset-smoothed-chunks-for-fitting-prediction-lines" class="section level2">
-<h2>extract out some subset smoothed chunks for fitting prediction lines</h2>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  dplyr::filter( row_n &lt; min_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_min
-
-df_in_smoothed %&gt;%
-  dplyr::filter( row_n  &gt;= min_location  ) %&gt;%
-  dplyr::filter( row_n  &lt;=max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_max
-
-df_in_smoothed %&gt;%
-  dplyr::filter( row_n  &gt;= max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_end
-
-
-fit_min = lm( raw_current ~ unix_time, data=df_min)
-fit_max = lm( raw_current ~ unix_time, data=df_max)
-fit_end = lm( raw_current ~ unix_time, data=df_end)</code></pre>
-</div>
-<div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines" class="section level2">
-<h2>calculate overall graph parameters to use when generating the new lines</h2>
-<pre class="r"><code>df_in %&gt;%
-  summarise( min_ts = min(unix_time),
-            max_ts = max( unix_time ),
-            n = n(),
-            range = max_ts - min_ts,
-            step = range / n,
-            ) %&gt;%
-  { . } -&gt; df_parm</code></pre>
-</div>
-<div id="generate-the-steps-along-the-unix_time-scale-to-generate-the-new-lines" class="section level2">
-<h2>generate the steps along the unix_time scale to generate the new lines</h2>
-<pre class="r"><code>steps_extra = 8000
-
-df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
-                row_n = 1- 1:steps_extra
-)
-
-df_steps_after = tibble( unix_time = df_parm$max_ts + seq( 1:steps_extra ) * df_parm$step,
-                   row_n = df_parm$n+ 1:steps_extra
-)
-
-df_in_smoothed %&gt;%
-  select( unix_time, row_n) %&gt;%
-  rbind( df_steps_before) %&gt;%
-  rbind( df_steps_after) %&gt;%
-  arrange( row_n ) %&gt;%
-  { . } -&gt; df_steps</code></pre>
-</div>
-<div id="predict-the-area-of-the-three-predicted-sections" class="section level2">
-<h2>predict the area of the three predicted sections</h2>
-<pre class="r"><code>df_steps %&gt;%
-  mutate( predicted_min = predict( fit_min, .)) %&gt;%
-  mutate( predicted_max = predict( fit_max, .)) %&gt;%
-  mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  { . } -&gt; df_steps</code></pre>
-<pre><code>Warning in predict.lm(fit_min, .): prediction from a rank-deficient fit may be
-misleading</code></pre>
-<pre class="r"><code># pull out the AUC size of the triangles
-
-df_steps %&gt;%
-  filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_min) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_min_triangle
-
-df_steps %&gt;%
-  filter( predicted_max &gt; 0 &amp; row_n &lt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_max) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_max_triangle
-
-
-df_steps %&gt;%
-  filter( predicted_end &gt; 0 ) %&gt;%
-  filter( unix_time &gt;= df_parm$max_ts  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_end) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_end_triangle</code></pre>
-</div>
-<div id="calculate-the-auc-for-the-raw-smoothed-data" class="section level2">
-<h2>calculate the AUC for the raw / smoothed data</h2>
-<pre class="r"><code># the real, raw measurements.  TODO: should smooth this a bit
-df_in %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_raw
-
-# AUC for smoothed data
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_smoothed
-
-# AUC for smoothed data loess
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, smoothed) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_loess
-
-# AUC for smoothed data cleaned
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  mutate( raw_current - tsclean( raw_current)) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_cleaned
-
-# the upper bit of the real raw measurement
-df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
-  filter( row_n &gt;= min_location  &amp; row_n &lt;= min_2nd_location ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_upper
-
-library(magrittr)</code></pre>
-<pre><code>
-Attaching package: &#39;magrittr&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:pracma&#39;:
-
-    and, mod, or</code></pre>
-<pre><code>The following object is masked from &#39;package:purrr&#39;:
-
-    set_names</code></pre>
-<pre><code>The following object is masked from &#39;package:tidyr&#39;:
-
-    extract</code></pre>
-<pre class="r"><code>df_in[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
-  subtract( df_in[ min_location, &#39;unix_time&#39;] ) %&gt;%
-  multiply_by(  min_raw_current  ) %&gt;%
-  unlist() %&gt;%
-  { . } -&gt; rectangle_area
-
-df_auc = tibble(
-                raw = area_uc_full_raw,
-                smoothed = area_uc_full_smoothed,
-                loess = area_uc_full_loess,
-                cleaned = area_uc_full_cleaned
-                  )
-
-
-
-df_rv = tibble(
-               max_t = area_max_triangle,
-               min_t = area_min_triangle,
-               end_t = area_end_triangle,
-               full_auc = area_uc_full_raw,
-               upper_auc = area_uc_upper - rectangle_area
-               )</code></pre>
-</div>
-<div id="what-points-were-predicted-on" class="section level2">
-<h2>What points were predicted on</h2>
-<pre class="r"><code>rbind( df_min, df_max ) %&gt;%
-  rbind( df_end ) %&gt;%
-  ggplot( aes( unix_time, raw_current)) +
-    geom_line( color=&#39;green&#39; ) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_min_pt), color=&#39;red&#39;) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_max_pt), color=&#39;orange&#39;) +
-  #  geom_line( aes( unix_time, mean_left ), color=&#39;red&#39;) +
-  geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
-  geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level2">
-<h2>Predicted Areas for the different parts of the graph</h2>
-<p>There are 5 calculated areas. Three are predicted triangular chunks (max, min, and end) and two are measured AUC’s: full and upper</p>
-<ul>
-<li>max - line from max point, through first minimum. Triangel area is from first minimum to xaxis</li>
-<li>min - line from start through first minimum. Triangle area is from first min to xaxis</li>
-<li>end - line from max through end. Triangle area is from end to xaxis.</li>
-<li>full - AUC from first min to end</li>
-<li>upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk</li>
-</ul>
-<p>The numbers you want are:</p>
-<ul>
-<li>full</li>
-<li>full - min (+end?)</li>
-<li>full+ max (+end?)</li>
-<li>full + end</li>
-<li>upper</li>
-</ul>
-<pre class="r"><code>df_rv %&gt;%
-  kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T)</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:right;">
-max_t
-</th>
-<th style="text-align:right;">
-min_t
-</th>
-<th style="text-align:right;">
-end_t
-</th>
-<th style="text-align:right;">
-full_auc
-</th>
-<th style="text-align:right;">
-upper_auc
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-43,400,325
-</td>
-<td style="text-align:right;">
-12,437,256
-</td>
-<td style="text-align:right;">
-2,660,483
-</td>
-<td style="text-align:right;">
-1,876,976
-</td>
-<td style="text-align:right;">
--73,328.5
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="comparision-of-auc-for-the-different-smoothing-methods" class="section level2">
-<h2>Comparision of AUC for the different smoothing methods</h2>
-<p>The numbers you want are:</p>
-<pre class="r"><code>browser()</code></pre>
-<pre><code>Called from: eval(expr, envir, enclos)</code></pre>
-<pre class="r"><code>df_auc %&gt;%
-  kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T)</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:right;">
-raw
-</th>
-<th style="text-align:right;">
-smoothed
-</th>
-<th style="text-align:right;">
-loess
-</th>
-<th style="text-align:right;">
-cleaned
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1,876,976
-</td>
-<td style="text-align:right;">
-1,873,696
-</td>
-<td style="text-align:right;">
-1,872,901
-</td>
-<td style="text-align:right;">
-1,873,696
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>tibble( base_file=base_file, sheet_n=sheet_n) %&gt;%
-  bind_cols( df_rv ) %&gt;%
-  bind_cols( df_auc ) %&gt;%
-  write_csv( output_file )</code></pre>
-</div>
-<div id="file-datapp0103_s1rightleft_3_combined.xlsx-sheet-p0103_aug_21_s1_left-sheet_n-1" class="section level1">
-<h1>FILE: data/P/P0103_S1(right+left_,3_combined.xlsx SHEET: P0103_Aug_21_S1_left SHEET_N: 1</h1>
-<div id="replace-outliers-with-mean-of-neigbouring-points-1" class="section level2">
-<h2>replace outliers with mean of neigbouring points</h2>
-<pre class="r"><code>smoothing_window_width = 500
-inflection_window_width = 10
-df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
-  mutate(raw_current = ifelse( row_n %in%
-    findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
-,
-                              NA, raw_current)) %&gt;%
-  mutate( raw_current = na.approx( raw_current)) %&gt;%
-  mutate( smoothed = loess( raw_current ~ unix_time, data=., span=.2 ) %&gt;% predict() )  %&gt;%
-  mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;right&quot;, fill=NA))) %&gt;%
-  mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;left&quot;, fill=NA))) %&gt;%
-  mutate( is_max_pt =  replace_na( smoothed &gt; mean_left &amp; smoothed &gt; mean_right, FALSE)) %&gt;%
-  mutate( is_min_pt =  replace_na( smoothed &lt; mean_left &amp; smoothed &lt; mean_right, FALSE)) %&gt;%
-  { . } -&gt; df_in_smoothed</code></pre>
-</div>
-<div id="raw-input-data-1" class="section level2">
-<h2>raw input data</h2>
-<pre class="r"><code>df_in%&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="smoothed-data-1" class="section level2">
-<h2>smoothed data</h2>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1) +
-  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="smoothed-data-with-additional-cleaning-1" class="section level2">
-<h2>smoothed data with additional cleaning</h2>
-<p>TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values. Currently using the first, no cleaning whatsoever</p>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
-  geom_line( color=&#39;orange&#39;) +
-  geom_point( color=&#39;black&#39;, size=.1)</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="calculating-important-points-1" class="section level2">
-<h2>calculating important points</h2>
-<ul>
-<li>first min,</li>
-<li>first max after first min,</li>
-<li>location of first min after previous max</li>
-</ul>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  mutate( c=chunkify( is_min_pt )) %&gt;%
-  filter( c==2 ) %&gt;%
-  summarise( min_location = floor(mean( row_n)), min_raw_current = min(raw_current)) %&gt;%
-  { . } -&gt; df_min_location
-
-min_location = df_min_location$min_location
-min_raw_current = df_min_location$min_raw_current
-
-df_in_smoothed %&gt;%
-  mutate( c = chunkify( is_max_pt )) %&gt;%
-  filter( c==2) %&gt;%
-  summarise( max_location = floor(mean( row_n))) %&gt;%
-  pluck(&#39;max_location&#39;) %&gt;%
-  { . } -&gt; max_location
-
-df_in_smoothed %&gt;%
-  mutate( is_2nd_min =
-         (row_n &gt; max_location ) &amp;
-         (raw_current &lt; min_raw_current ) ) %&gt;%
-  pluck(&#39;is_2nd_min&#39;) %&gt;%
-  rle( ) %&gt;%
-  pluck(1,1) %&gt;%
-  { . } -&gt; min_2nd_location</code></pre>
-</div>
-<div id="extract-out-some-subset-smoothed-chunks-for-fitting-prediction-lines-1" class="section level2">
-<h2>extract out some subset smoothed chunks for fitting prediction lines</h2>
-<pre class="r"><code>df_in_smoothed %&gt;%
-  dplyr::filter( row_n &lt; min_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_min
-
-df_in_smoothed %&gt;%
-  dplyr::filter( row_n  &gt;= min_location  ) %&gt;%
-  dplyr::filter( row_n  &lt;=max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_max
-
-df_in_smoothed %&gt;%
-  dplyr::filter( row_n  &gt;= max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  { . } -&gt; df_end
-
-
-fit_min = lm( raw_current ~ unix_time, data=df_min)
-fit_max = lm( raw_current ~ unix_time, data=df_max)
-fit_end = lm( raw_current ~ unix_time, data=df_end)</code></pre>
-</div>
-<div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines-1" class="section level2">
-<h2>calculate overall graph parameters to use when generating the new lines</h2>
-<pre class="r"><code>df_in %&gt;%
-  summarise( min_ts = min(unix_time),
-            max_ts = max( unix_time ),
-            n = n(),
-            range = max_ts - min_ts,
-            step = range / n,
-            ) %&gt;%
-  { . } -&gt; df_parm</code></pre>
-</div>
-<div id="generate-the-steps-along-the-unix_time-scale-to-generate-the-new-lines-1" class="section level2">
-<h2>generate the steps along the unix_time scale to generate the new lines</h2>
-<pre class="r"><code>steps_extra = 8000
-
-df_steps_before = tibble( unix_time = df_parm$min_ts - seq( 1:steps_extra ) * df_parm$step,
-                row_n = 1- 1:steps_extra
-)
-
-df_steps_after = tibble( unix_time = df_parm$max_ts + seq( 1:steps_extra ) * df_parm$step,
-                   row_n = df_parm$n+ 1:steps_extra
-)
-
-df_in_smoothed %&gt;%
-  select( unix_time, row_n) %&gt;%
-  rbind( df_steps_before) %&gt;%
-  rbind( df_steps_after) %&gt;%
-  arrange( row_n ) %&gt;%
-  { . } -&gt; df_steps</code></pre>
-</div>
-<div id="predict-the-area-of-the-three-predicted-sections-1" class="section level2">
-<h2>predict the area of the three predicted sections</h2>
-<pre class="r"><code>df_steps %&gt;%
-  mutate( predicted_min = predict( fit_min, .)) %&gt;%
-  mutate( predicted_max = predict( fit_max, .)) %&gt;%
-  mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  { . } -&gt; df_steps
-
-# pull out the AUC size of the triangles
-
-df_steps %&gt;%
-  filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_min) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_min_triangle
-
-df_steps %&gt;%
-  filter( predicted_max &gt; 0 &amp; row_n &lt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_max) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_max_triangle
-
-
-df_steps %&gt;%
-  filter( predicted_end &gt; 0 ) %&gt;%
-  filter( unix_time &gt;= df_parm$max_ts  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_end) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_end_triangle</code></pre>
-</div>
-<div id="calculate-the-auc-for-the-raw-smoothed-data-1" class="section level2">
-<h2>calculate the AUC for the raw / smoothed data</h2>
-<pre class="r"><code># the real, raw measurements.  TODO: should smooth this a bit
-df_in %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_raw
-
-# AUC for smoothed data
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_smoothed
-
-# AUC for smoothed data loess
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, smoothed) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_loess
-
-# AUC for smoothed data cleaned
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location  ) %&gt;%
-  mutate( raw_current - tsclean( raw_current)) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_full_cleaned
-
-# the upper bit of the real raw measurement
-df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
-  filter( row_n &gt;= min_location  &amp; row_n &lt;= min_2nd_location ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_upper
-
-library(magrittr)
-df_in[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
-  subtract( df_in[ min_location, &#39;unix_time&#39;] ) %&gt;%
-  multiply_by(  min_raw_current  ) %&gt;%
-  unlist() %&gt;%
-  { . } -&gt; rectangle_area
-
-df_auc = tibble(
-                raw = area_uc_full_raw,
-                smoothed = area_uc_full_smoothed,
-                loess = area_uc_full_loess,
-                cleaned = area_uc_full_cleaned
-                  )
-
-
-
-df_rv = tibble(
-               max_t = area_max_triangle,
-               min_t = area_min_triangle,
-               end_t = area_end_triangle,
-               full_auc = area_uc_full_raw,
-               upper_auc = area_uc_upper - rectangle_area
-               )</code></pre>
-</div>
-<div id="what-points-were-predicted-on-1" class="section level2">
-<h2>What points were predicted on</h2>
-<pre class="r"><code>rbind( df_min, df_max ) %&gt;%
-  rbind( df_end ) %&gt;%
-  ggplot( aes( unix_time, raw_current)) +
-    geom_line( color=&#39;green&#39; ) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_min_pt), color=&#39;red&#39;) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_max_pt), color=&#39;orange&#39;) +
-  #  geom_line( aes( unix_time, mean_left ), color=&#39;red&#39;) +
-  geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
-  geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
-<p><img src="figure/process_all_sheets.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="predicted-areas-for-the-different-parts-of-the-graph-1" class="section level2">
-<h2>Predicted Areas for the different parts of the graph</h2>
-<p>There are 5 calculated areas. Three are predicted triangular chunks (max, min, and end) and two are measured AUC’s: full and upper</p>
-<ul>
-<li>max - line from max point, through first minimum. Triangel area is from first minimum to xaxis</li>
-<li>min - line from start through first minimum. Triangle area is from first min to xaxis</li>
-<li>end - line from max through end. Triangle area is from end to xaxis.</li>
-<li>full - AUC from first min to end</li>
-<li>upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk</li>
-</ul>
-<p>The numbers you want are:</p>
-<ul>
-<li>full</li>
-<li>full - min (+end?)</li>
-<li>full+ max (+end?)</li>
-<li>full + end</li>
-<li>upper</li>
-</ul>
-<pre class="r"><code>df_rv %&gt;%
-  kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T)</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:right;">
-max_t
-</th>
-<th style="text-align:right;">
-min_t
-</th>
-<th style="text-align:right;">
-end_t
-</th>
-<th style="text-align:right;">
-full_auc
-</th>
-<th style="text-align:right;">
-upper_auc
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-137,634.8
-</td>
-<td style="text-align:right;">
-59,064.27
-</td>
-<td style="text-align:right;">
-128,545.6
-</td>
-<td style="text-align:right;">
-1,679,622
-</td>
-<td style="text-align:right;">
-605,640.5
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="comparision-of-auc-for-the-different-smoothing-methods-1" class="section level2">
-<h2>Comparision of AUC for the different smoothing methods</h2>
-<p>The numbers you want are:</p>
-<pre class="r"><code>browser()
-
-df_auc %&gt;%
-  kable(format.args = list(big.mark = &quot;,&quot;) ) %&gt;%
-  kable_styling(full_width = T)</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:right;">
-raw
-</th>
-<th style="text-align:right;">
-smoothed
-</th>
-<th style="text-align:right;">
-loess
-</th>
-<th style="text-align:right;">
-cleaned
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1,679,622
-</td>
-<td style="text-align:right;">
-1,682,338
-</td>
-<td style="text-align:right;">
-1,680,689
-</td>
-<td style="text-align:right;">
-1,682,338
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>tibble( base_file=base_file, sheet_n=sheet_n) %&gt;%
-  bind_cols( df_rv ) %&gt;%
-  bind_cols( df_auc ) %&gt;%
-  write_csv( output_file )</code></pre>
+<a href="child/P0049_S2,3_combined_1.html"><a href="FIlE:P0049_S2,3_combined" class="uri">FIlE:P0049_S2,3_combined</a> SHEET:P0049_S2_left</a>
+<p/>
+<a href="child/P0050_S1,2,3_combined_2.html"><a href="FIlE:P0050_S1,2,3_combined" class="uri">FIlE:P0050_S1,2,3_combined</a> SHEET:Aug-22-P0050_S2_left</a>
+<p/>
+<a href="child/P0050_S1,2,3_combined_3.html"><a href="FIlE:P0050_S1,2,3_combined" class="uri">FIlE:P0050_S1,2,3_combined</a> SHEET:P0050-S3-Aug-23_right</a>
+<p/>
+<a href="child/P0051_S1,2_COMBINED_1.html"><a href="FIlE:P0051_S1,2_COMBINED" class="uri">FIlE:P0051_S1,2_COMBINED</a> SHEET:P0051_Aug_26_S1_right</a>
+<p/>
+<a href="child/P0051_S1,2_COMBINED_2.html"><a href="FIlE:P0051_S1,2_COMBINED" class="uri">FIlE:P0051_S1,2_COMBINED</a> SHEET:P0051_Aug_29_S2_left</a>
+<p/>
+<a href="child/P0072_S2_3_combined_2.html"><a href="FIlE:P0072_S2_3_combined" class="uri">FIlE:P0072_S2_3_combined</a> SHEET:Aug-27-P0072_S3_left_snacks</a>
+<p/>
+<a href="child/P0081_MILOdata_modified_3.html"><a href="FIlE:P0081_MILOdata_modified" class="uri">FIlE:P0081_MILOdata_modified</a> SHEET:third session P0081_meal_l</a>
+<p/>
+<a href="child/P0088_combined_1.html"><a href="FIlE:P0088_combined" class="uri">FIlE:P0088_combined</a> SHEET:P0088_S1_meal</a>
+<p/>
+<a href="child/P0088_combined_2.html"><a href="FIlE:P0088_combined" class="uri">FIlE:P0088_combined</a> SHEET:P0088_S2_snacks</a>
+<p/>
+<a href="child/P0093-S2,3_combined_2.html"><a href="FIlE:P0093-S2,3_combined" class="uri">FIlE:P0093-S2,3_combined</a> SHEET:P0093_26_Aug_S3_left</a>
+<p/>
+<a href="child/P0099_S2,3_combined_2.html"><a href="FIlE:P0099_S2,3_combined" class="uri">FIlE:P0099_S2,3_combined</a> SHEET:26_Aug_P0099_S3</a>
+<p/>
+<a href="child/P0103_S1(right+left_,3_combined_1.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Aug_21_S1_left</a>
+<p/>
+<a href="child/P0103_S1(right+left_,3_combined_2.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Aug_21_S1_right</a>
+<p/>
+<a href="child/P0103_S1(right+left_,3_combined_3.html"><a href="FIlE:P0103_S1(right+left_,3_combined" class="uri">FIlE:P0103_S1(right+left_,3_combined</a> SHEET:P0103_Sep_04_S3_right</a>
+<p/>
+<a href="child/P0112_S1,3_combined_1.html"><a href="FIlE:P0112_S1,3_combined" class="uri">FIlE:P0112_S1,3_combined</a> SHEET:P0112_02_09_S1_meal_left</a>
+<p/>
+<a href="child/P0114_S1,2_combined_1.html"><a href="FIlE:P0114_S1,2_combined" class="uri">FIlE:P0114_S1,2_combined</a> SHEET:P0114_S1_snacks_left</a>
+<p/>
+<a href="child/P0150_S1-3_combined_3.html"><a href="FIlE:P0150_S1-3_combined" class="uri">FIlE:P0150_S1-3_combined</a> SHEET:P0150_S2_30-08_meal_right</a>
+<p/>
+<a href="child/P0151_S1-3_combined_3.html"><a href="FIlE:P0151_S1-3_combined" class="uri">FIlE:P0151_S1-3_combined</a> SHEET:P0151_S2_11-09_snacks_left</a>
+<p/>
+<a href="child/P0151_S1-3_combined_4.html"><a href="FIlE:P0151_S1-3_combined" class="uri">FIlE:P0151_S1-3_combined</a> SHEET:P0151_S3_12-09_meal_left</a>
+<p/>
+<a href="child/P0152_S1-3_combined_1.html"><a href="FIlE:P0152_S1-3_combined" class="uri">FIlE:P0152_S1-3_combined</a> SHEET:P0152_S1_11-09_snacks_left</a>
+<p/>
+<a href="child/P0154_S1-3_combined_2.html"><a href="FIlE:P0154_S1-3_combined" class="uri">FIlE:P0154_S1-3_combined</a> SHEET:P0154_S2_12-09_meal</a>
+<p/>
+<a href="child/P0159_S1-3_combined_1.html"><a href="FIlE:P0159_S1-3_combined" class="uri">FIlE:P0159_S1-3_combined</a> SHEET:P0159_S1_11-09_snacks_right</a>
+<p/>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1504,39 +789,36 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] magrittr_1.5      knitr_1.28        kableExtra_1.1.0  pracma_2.2.5     
- [5] seismicRoll_1.1.3 forecast_8.11     janitor_1.2.1     readxl_1.3.1     
- [9] forcats_0.5.0     stringr_1.4.0     dplyr_0.8.5       purrr_0.3.3      
-[13] readr_1.3.1       tidyr_1.0.2       tibble_2.1.3      ggplot2_3.2.1    
-[17] tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
+ [1] knitr_1.28        kableExtra_1.1.0  pracma_2.2.5      seismicRoll_1.1.3
+ [5] forecast_8.11     janitor_1.2.1     readxl_1.3.1      forcats_0.5.0    
+ [9] stringr_1.4.0     dplyr_0.8.5       purrr_0.3.3       readr_1.3.1      
+[13] tidyr_1.0.2       tibble_2.1.3      ggplot2_3.2.1     tidyverse_1.3.0  
+[17] zoo_1.8-7         nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
  [1] tseries_0.10-47      httr_1.4.1           jsonlite_1.6.1      
  [4] viridisLite_0.3.0    modelr_0.1.6         assertthat_0.2.1    
- [7] TTR_0.23-6           highr_0.8            cellranger_1.1.0    
-[10] yaml_2.2.1           pillar_1.4.3         backports_1.1.5     
-[13] lattice_0.20-40      glue_1.3.2           quadprog_1.5-8      
-[16] digest_0.6.25        snakecase_0.11.0     rvest_0.3.5         
-[19] colorspace_1.4-1     htmltools_0.4.0      timeDate_3043.102   
-[22] pkgconfig_2.0.3      broom_0.5.5          haven_2.2.0         
-[25] scales_1.1.0         webshot_0.5.2        whisker_0.4         
-[28] git2r_0.26.1         farver_2.0.1         generics_0.0.2      
-[31] ellipsis_0.3.0       withr_2.1.2          urca_1.3-0          
-[34] nnet_7.3-13          lazyeval_0.2.2       cli_2.0.2           
-[37] quantmod_0.4-16      crayon_1.3.4         evaluate_0.14       
-[40] fs_1.3.2             fansi_0.4.1          nlme_3.1-142        
-[43] xts_0.12-0           xml2_1.2.5           tools_3.6.1         
-[46] hms_0.5.3            lifecycle_0.2.0      munsell_0.5.0       
-[49] reprex_0.3.0         compiler_3.6.1       rlang_0.4.5         
-[52] grid_3.6.1           rstudioapi_0.11      labeling_0.3        
-[55] rmarkdown_2.1        gtable_0.3.0         fracdiff_1.5-1      
-[58] DBI_1.1.0            curl_4.3             R6_2.4.1            
-[61] lubridate_1.7.4      workflowr_1.4.0.9001 rprojroot_1.3-2     
-[64] stringi_1.4.6        parallel_3.6.1       Rcpp_1.0.3          
-[67] vctrs_0.2.4          dbplyr_1.4.2         tidyselect_1.0.0    
-[70] xfun_0.11            lmtest_0.9-37       </code></pre>
-</div>
-</div>
+ [7] TTR_0.23-6           cellranger_1.1.0     yaml_2.2.1          
+[10] pillar_1.4.3         backports_1.1.5      lattice_0.20-40     
+[13] glue_1.3.2           quadprog_1.5-8       digest_0.6.25       
+[16] snakecase_0.11.0     rvest_0.3.5          colorspace_1.4-1    
+[19] htmltools_0.4.0      timeDate_3043.102    pkgconfig_2.0.3     
+[22] broom_0.5.5          haven_2.2.0          scales_1.1.0        
+[25] webshot_0.5.2        whisker_0.4          git2r_0.26.1        
+[28] generics_0.0.2       withr_2.1.2          urca_1.3-0          
+[31] nnet_7.3-13          lazyeval_0.2.2       cli_2.0.2           
+[34] quantmod_0.4-16      magrittr_1.5         crayon_1.3.4        
+[37] evaluate_0.14        fs_1.3.2             fansi_0.4.1         
+[40] nlme_3.1-142         xts_0.12-0           xml2_1.2.5          
+[43] tools_3.6.1          hms_0.5.3            lifecycle_0.2.0     
+[46] munsell_0.5.0        reprex_0.3.0         compiler_3.6.1      
+[49] rlang_0.4.5          grid_3.6.1           rstudioapi_0.11     
+[52] rmarkdown_2.1.1      gtable_0.3.0         fracdiff_1.5-1      
+[55] DBI_1.1.0            curl_4.3             R6_2.4.1            
+[58] lubridate_1.7.4      workflowr_1.4.0.9001 rprojroot_1.3-2     
+[61] stringi_1.4.6        parallel_3.6.1       Rcpp_1.0.4          
+[64] vctrs_0.2.4          dbplyr_1.4.2         tidyselect_1.0.0    
+[67] xfun_0.12            lmtest_0.9-37       </code></pre>
 </div>
 
 
@@ -1601,7 +883,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
