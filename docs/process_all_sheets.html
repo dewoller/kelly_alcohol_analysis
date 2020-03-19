@@ -495,10 +495,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree45c1dbb964fe428c99a5c5157233be7a3e1b86fetargetblank45c1dbba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/45c1dbb964fe428c99a5c5157233be7a3e1b86fe" target="_blank">45c1dbb</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree8251a82919c4ba78e2a70fdfaf195f6f112d89c8targetblank8251a82a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/8251a82919c4ba78e2a70fdfaf195f6f112d89c8" target="_blank">8251a82</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree45c1dbb964fe428c99a5c5157233be7a3e1b86fetargetblank45c1dbba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree8251a82919c4ba78e2a70fdfaf195f6f112d89c8targetblank8251a82a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -554,6 +554,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/8251a82919c4ba78e2a70fdfaf195f6f112d89c8/analysis/process_all_sheets.Rmd" target="_blank">8251a82</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-18
+</td>
+<td>
+wflow_publish(“analysis/process_all_sheets.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/754c2de923504c782c624163bb7a3701f7aba8e8/docs/process_all_sheets.html" target="_blank">754c2de</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -703,7 +737,7 @@ read_excel(&#39;data/MILO_read_out_Dennis.xlsx&#39;) %&gt;%
                names_pattern=&#39;(.*)_(.)&#39; )  %&gt;%
   filter( start &gt; 0) %&gt;% 
   rename(excel_filename = file )%&gt;%
-  tail(11) %&gt;%
+  tail(12) %&gt;%
   head(2) %&gt;%
   { . } -&gt; df_sheets
 
@@ -730,13 +764,13 @@ for(i in 1:nrow(df_sheets)) {
   #knitr::knit( text = src)
   src = paste(src, rv)
 }</code></pre>
-<pre><code>[1] &quot;P0103_S1(right+left_,3_combined&quot;
-[1] &quot;data/P/P0103_S1(right+left_,3_combined.xlsx&quot;
-[1] &quot;1&quot;
+<pre><code>[1] &quot;P0099_S2,3_combined&quot;
+[1] &quot;data/P/P0099_S2,3_combined.xlsx&quot;
+[1] &quot;2&quot;
 [1] &quot;P0103_S1(right+left_,3_combined&quot;
 [1] &quot;data/P/P0103_S1(right+left_,3_combined.xlsx&quot;
-[1] &quot;2&quot;</code></pre>
-<p># FILE: data/P/P0103_S1(right+left_,3_combined.xlsx SHEET: P0103_Aug_21_S1_left SHEET_N: 1</p>
+[1] &quot;1&quot;</code></pre>
+<p># FILE: data/P/P0099_S2,3_combined.xlsx SHEET: 26_Aug_P0099_S3 SHEET_N: 2</p>
 <div id="replace-outliers-with-mean-of-neigbouring-points" class="section level2">
 <h2>replace outliers with mean of neigbouring points</h2>
 <pre class="r"><code>smoothing_window_width = 500
@@ -873,9 +907,10 @@ df_in_smoothed %&gt;%
   mutate( predicted_min = predict( fit_min, .)) %&gt;%
   mutate( predicted_max = predict( fit_max, .)) %&gt;%
   mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  { . } -&gt; df_steps
-
-# pull out the AUC size of the triangles
+  { . } -&gt; df_steps</code></pre>
+<pre><code>Warning in predict.lm(fit_min, .): prediction from a rank-deficient fit may be
+misleading</code></pre>
+<pre class="r"><code># pull out the AUC size of the triangles
 
 df_steps %&gt;%
   filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
@@ -1029,19 +1064,19 @@ upper_auc
 <tbody>
 <tr>
 <td style="text-align:right;">
-137,634.8
+43,400,325
 </td>
 <td style="text-align:right;">
-59,064.27
+12,437,256
 </td>
 <td style="text-align:right;">
-128,545.6
+2,660,483
 </td>
 <td style="text-align:right;">
-1,679,622
+1,876,976
 </td>
 <td style="text-align:right;">
-605,640.5
+-73,328.5
 </td>
 </tr>
 </tbody>
@@ -1075,16 +1110,16 @@ cleaned
 <tbody>
 <tr>
 <td style="text-align:right;">
-1,679,622
+1,876,976
 </td>
 <td style="text-align:right;">
-1,682,338
+1,873,696
 </td>
 <td style="text-align:right;">
-1,680,689
+1,872,901
 </td>
 <td style="text-align:right;">
-1,682,338
+1,873,696
 </td>
 </tr>
 </tbody>
@@ -1094,8 +1129,8 @@ cleaned
   bind_cols( df_auc ) %&gt;%
   write_csv( output_file )</code></pre>
 </div>
-<div id="file-datapp0103_s1rightleft_3_combined.xlsx-sheet-p0103_aug_21_s1_right-sheet_n-2" class="section level1">
-<h1>FILE: data/P/P0103_S1(right+left_,3_combined.xlsx SHEET: P0103_Aug_21_S1_right SHEET_N: 2</h1>
+<div id="file-datapp0103_s1rightleft_3_combined.xlsx-sheet-p0103_aug_21_s1_left-sheet_n-1" class="section level1">
+<h1>FILE: data/P/P0103_S1(right+left_,3_combined.xlsx SHEET: P0103_Aug_21_S1_left SHEET_N: 1</h1>
 <div id="replace-outliers-with-mean-of-neigbouring-points-1" class="section level2">
 <h2>replace outliers with mean of neigbouring points</h2>
 <pre class="r"><code>smoothing_window_width = 500
@@ -1377,19 +1412,19 @@ upper_auc
 <tbody>
 <tr>
 <td style="text-align:right;">
-108,087.5
+137,634.8
 </td>
 <td style="text-align:right;">
-77,092.79
+59,064.27
 </td>
 <td style="text-align:right;">
-95,268.13
+128,545.6
 </td>
 <td style="text-align:right;">
-1,419,462
+1,679,622
 </td>
 <td style="text-align:right;">
-528,260.6
+605,640.5
 </td>
 </tr>
 </tbody>
@@ -1423,16 +1458,16 @@ cleaned
 <tbody>
 <tr>
 <td style="text-align:right;">
-1,419,462
+1,679,622
 </td>
 <td style="text-align:right;">
-1,419,226
+1,682,338
 </td>
 <td style="text-align:right;">
-1,419,641
+1,680,689
 </td>
 <td style="text-align:right;">
-1,419,226
+1,682,338
 </td>
 </tr>
 </tbody>
