@@ -346,16 +346,16 @@ df_in_smoothed %>%
   { . } -> area_uc_full_cleaned
 
 # the upper bit of the real raw measurement
-df_in %>%
+df_in_smoothed %>%
   filter( row_n >= min_location  & row_n <= min_2nd_location ) %>%
-  summarise( area = trapz( unix_time, raw_current) ) %>%
+  summarise( area = trapz( unix_time, rc_pruned) ) %>%
   pluck('area') %>%
   { . } -> area_uc_upper
 
 # to get upper bit, need to subtract the rectangle below
 # calculate rectangle height by width
 library(magrittr)
-df_in[ min_2nd_location, 'unix_time'] %>%
+df_in_smoothed[ min_2nd_location, 'unix_time'] %>%
   subtract( df_in[ min_location, 'unix_time'] ) %>%
   multiply_by(  min_raw_current  ) %>%
   unlist() %>%
@@ -363,9 +363,9 @@ df_in[ min_2nd_location, 'unix_time'] %>%
 
 
 # the upper bit above the parabola base
-df_in %>%
+df_in_smoothed %>%
   filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
-  summarise( area = trapz( unix_time, raw_current) ) %>%
+  summarise( area = trapz( unix_time, rc_pruned) ) %>%
   pluck('area') %>%
   { . } -> area_uc_parabola
 
