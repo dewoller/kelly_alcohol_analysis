@@ -210,6 +210,7 @@ df_in_smoothed %>%
   mutate(rc_pruned = tsclean( rc_pruned)) %>%
   { . } -> df_parabola
 
+# parabola endpoints are the minimum at the left and the first minimum on the right
 df_parabola %>%
   filter( row_n > max_location  ) %>%
   filter( rc_pruned == min( rc_pruned)) %>%
@@ -222,6 +223,8 @@ df_parabola %>%
 fit_min = lm( rc_pruned ~ unix_time, data=df_min)
 fit_max = lm( rc_pruned ~ unix_time, data=df_max)
 fit_end = lm( rc_pruned ~ unix_time, data=df_end)
+
+# straight line between the parabola endpoints
 fit_parabola_base = lm( rc_pruned ~ unix_time, data=df_parabola_endpoints)
 
 ```
@@ -264,7 +267,7 @@ df_in_smoothed %>%
 
 
 ```
-## predict the area of the three predicted sections
+## Predict the lines
 
 ```{r}
 
@@ -276,7 +279,11 @@ df_steps %>%
   { . } -> df_steps
 
 
-# need to figure out where parabola_base stops (minimum of end, or where it intersects actual)
+```
+## Adjust where parabola_base actually stops (minimum of end, or where it intersects actual raw_current)
+
+```{r}
+
 
 df_in_smoothed %>%
   inner_join( df_steps, by=c('unix_time', 'row_n')) %>%
@@ -285,6 +292,11 @@ df_in_smoothed %>%
   filter( row_n == min( row_n )) %>%
   pluck( 'row_n' ) %>% 
   { . } -> predicted_parabola_base_end
+
+```
+## predict the area under the three predicted base lines (from left to right: min, max and end)
+
+```{r}
 
 
 # pull out the AUC size of the triangles
@@ -312,7 +324,7 @@ df_steps %>%
 
 
 ```
-## calculate the AUC for the raw / smoothed data
+## calculate the main parabola AUC for raw, pruned, loess smoothed and time series cleaned 
 
 ```{r}
 
@@ -362,13 +374,14 @@ df_in_smoothed[ min_2nd_location, 'unix_time'] %>%
   { . } -> rectangle_area
 
 
-# the upper bit above the parabola base
+# the upper bit above the parabola base, down to x axis
 df_in_smoothed %>%
   filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
   summarise( area = trapz( unix_time, rc_pruned) ) %>%
   pluck('area') %>%
   { . } -> area_uc_parabola
 
+# below parabola base, down to x axis
 df_steps %>%
   filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
   summarise( area = trapz( unix_time, predicted_parabola_base) ) %>%

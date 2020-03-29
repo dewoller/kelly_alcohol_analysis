@@ -404,7 +404,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-03-19
+<strong>Last updated:</strong> 2020-03-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -495,10 +495,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreebe688d9bb509d7da573039a61e701aed66b6c751targetblankbe688d9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/be688d9bb509d7da573039a61e701aed66b6c751" target="_blank">be688d9</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef518a158db4174b5b47b06d08626fa8300728576targetblankf518a15a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/f518a158db4174b5b47b06d08626fa8300728576" target="_blank">f518a15</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreebe688d9bb509d7da573039a61e701aed66b6c751targetblankbe688d9a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef518a158db4174b5b47b06d08626fa8300728576targetblankf518a15a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -545,6 +545,74 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/f518a158db4174b5b47b06d08626fa8300728576/analysis/process_one_sheet.Rmd" target="_blank">f518a15</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+<td>
+Calculate area under parabola based on loess
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/25c57aefc3458430ed7ac5c99c7cdebf84e984d8/analysis/process_one_sheet.Rmd" target="_blank">25c57ae</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+<td>
+Clarified variables, rebased parabola
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/ead13f7e14e4537e322d804d4457fa24b02a3d3a/analysis/process_one_sheet.Rmd" target="_blank">ead13f7</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+<td>
+1000 moh limit, print numbers
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/process_one_sheet.html" target="_blank">426eed6</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -620,41 +688,77 @@ wflow_publish(“analysis/process_one_sheet.Rmd”)
 </div>
 </div>
 </div>
-<div id="file-p0150_s1-3_combined-sheet-3-sheet_n-1" class="section level1">
-<h1>FILE: P0150_S1-3_combined SHEET: 3 SHEET_N: 1</h1>
+<div id="file-test-sheet-p0049_s2_left-sheet_n-1" class="section level1">
+<h1>FILE: test SHEET: P0049_S2_left SHEET_N: 1</h1>
 <div id="replace-outliers-with-mean-of-neigbouring-points" class="section level2">
 <h2>replace outliers with mean of neigbouring points</h2>
 <pre class="r"><code>smoothing_window_width = 500
 inflection_window_width = 50
 df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
-  mutate(raw_current = ifelse( row_n %in%
+  mutate(rc_pruned = ifelse( row_n %in%
     findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
 ,
                               NA, raw_current)) %&gt;%
-  mutate( raw_current = na.approx( raw_current)) %&gt;%
-  mutate( smoothed = loess( raw_current ~ unix_time, data=., span=.2 ) %&gt;% predict() )  %&gt;%
-  mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;right&quot;, fill=NA))) %&gt;%
-  mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = &quot;left&quot;, fill=NA))) %&gt;%
-  mutate( is_max_pt =  replace_na( smoothed &gt; mean_left &amp; smoothed &gt; mean_right, FALSE)) %&gt;%
-  mutate( is_min_pt =  replace_na( smoothed &lt; mean_left &amp; smoothed &lt; mean_right, FALSE)) %&gt;%
+  mutate( rc_pruned = na.approx( rc_pruned)) %&gt;%
+  mutate( rc_loess = loess( rc_pruned ~ unix_time, data=., span=.2 ) %&gt;% predict() )  %&gt;%
+  mutate( mean_left  = lag(rollapply(rc_loess, inflection_window_width, mean, align = &quot;right&quot;, fill=NA))) %&gt;%
+  mutate( mean_right  = lag(rollapply(rc_loess, inflection_window_width, mean, align = &quot;left&quot;, fill=NA))) %&gt;%
+  mutate( is_max_pt =  replace_na( rc_loess &gt; mean_left &amp; rc_loess &gt; mean_right, FALSE)) %&gt;%
+  mutate( is_min_pt =  replace_na( rc_loess &lt; mean_left &amp; rc_loess &lt; mean_right, FALSE)) %&gt;%
   { . } -&gt; df_in_smoothed</code></pre>
 </div>
 <div id="raw-input-data" class="section level2">
 <h2>raw input data</h2>
-<pre class="r"><code>df_in%&gt;%
+<pre class="r"><code>df_in %&gt;%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1)</code></pre>
 <p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-2-1.png" target="_blank">426eed6</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="smoothed-data" class="section level2">
 <h2>smoothed data</h2>
 <pre class="r"><code>df_in_smoothed %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
+  ggplot(aes( unix_time, rc_pruned  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1) +
-  geom_line( aes( unix_time, smoothed ), color=&#39;green&#39;)</code></pre>
+  geom_line( aes( unix_time, rc_loess ), color=&#39;green&#39;)</code></pre>
 <p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
@@ -680,6 +784,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" target="_blank">426eed6</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/be688d9bb509d7da573039a61e701aed66b6c751/docs/figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" target="_blank">be688d9</a>
 </td>
 <td>
@@ -698,8 +813,8 @@ Dennis Wollersheim
 <h2>smoothed data with additional cleaning</h2>
 <p>TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values. Currently using the first, no cleaning whatsoever</p>
 <pre class="r"><code>df_in_smoothed %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
-  ggplot(aes( unix_time, raw_current  )) +
+  mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
+  ggplot(aes( unix_time, rc_pruned  )) +
   geom_line( color=&#39;orange&#39;) +
   geom_point( color=&#39;black&#39;, size=.1)</code></pre>
 <p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -727,6 +842,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" target="_blank">426eed6</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/be688d9bb509d7da573039a61e701aed66b6c751/docs/figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" target="_blank">be688d9</a>
 </td>
 <td>
@@ -751,11 +877,18 @@ Dennis Wollersheim
 <pre class="r"><code>df_in_smoothed %&gt;%
   mutate( c=chunkify( is_min_pt )) %&gt;%
   filter( c==2 ) %&gt;%
-  summarise( min_location = floor(mean( row_n)), min_raw_current = min(raw_current)) %&gt;%
-  { . } -&gt; df_min_location
+  summarise( min_location = floor(mean( row_n)), min_raw_current = min(rc_pruned)) %&gt;%
+  { . } -&gt; tuple_min_location
 
-min_location = df_min_location$min_location
-min_raw_current = df_min_location$min_raw_current
+min_location = tuple_min_location$min_location
+min_raw_current = tuple_min_location$min_raw_current
+
+# caculate the last location, and the last raw_current
+last_location = length( df_in_smoothed)
+last_raw_current = df_in_smoothed %&gt;% pluck(&#39;rc_pruned&#39;, last_location )
+
+
+
 
 df_in_smoothed %&gt;%
   filter( row_n &gt; min_location ) %&gt;%
@@ -768,7 +901,7 @@ df_in_smoothed %&gt;%
 df_in_smoothed %&gt;%
   mutate( is_2nd_min =
          (row_n &gt; max_location ) &amp;
-         (raw_current &lt; min_raw_current ) ) %&gt;%
+         (rc_pruned &lt; min_raw_current ) ) %&gt;%
   pluck(&#39;is_2nd_min&#39;) %&gt;%
   rle( ) %&gt;%
   pluck(1,1) %&gt;%
@@ -778,24 +911,38 @@ df_in_smoothed %&gt;%
 <h2>extract out some subset smoothed chunks for fitting prediction lines</h2>
 <pre class="r"><code>df_in_smoothed %&gt;%
   dplyr::filter( row_n &lt; min_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
+  mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
   { . } -&gt; df_min
 
 df_in_smoothed %&gt;%
   dplyr::filter( row_n  &gt;= min_location  ) %&gt;%
   dplyr::filter( row_n  &lt;=max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
+  mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
   { . } -&gt; df_max
 
 df_in_smoothed %&gt;%
   dplyr::filter( row_n  &gt;= max_location  ) %&gt;%
-  mutate(raw_current = tsclean( raw_current)) %&gt;%
+  mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
   { . } -&gt; df_end
 
+df_in_smoothed %&gt;%
+  dplyr::filter( row_n  &gt;= min_location  ) %&gt;%
+  mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
+  { . } -&gt; df_parabola
 
-fit_min = lm( raw_current ~ unix_time, data=df_min)
-fit_max = lm( raw_current ~ unix_time, data=df_max)
-fit_end = lm( raw_current ~ unix_time, data=df_end)</code></pre>
+df_parabola %&gt;%
+  filter( row_n &gt; max_location  ) %&gt;%
+  filter( rc_pruned == min( rc_pruned)) %&gt;%
+  filter( row_n == min( row_n)) %&gt;%
+  bind_rows( df_parabola %&gt;% filter( row_n == min( row_n)) ) %&gt;%
+  arrange(row_n ) %&gt;%
+  { . } -&gt; df_parabola_endpoints
+
+
+fit_min = lm( rc_pruned ~ unix_time, data=df_min)
+fit_max = lm( rc_pruned ~ unix_time, data=df_max)
+fit_end = lm( rc_pruned ~ unix_time, data=df_end)
+fit_parabola_base = lm( rc_pruned ~ unix_time, data=df_parabola_endpoints)</code></pre>
 </div>
 <div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines" class="section level2">
 <h2>calculate overall graph parameters to use when generating the new lines</h2>
@@ -833,10 +980,22 @@ df_in_smoothed %&gt;%
   mutate( predicted_min = predict( fit_min, .)) %&gt;%
   mutate( predicted_max = predict( fit_max, .)) %&gt;%
   mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  { . } -&gt; df_steps</code></pre>
-<pre><code>Warning in predict.lm(fit_max, .): prediction from a rank-deficient fit may be
-misleading</code></pre>
-<pre class="r"><code># pull out the AUC size of the triangles
+  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %&gt;%
+  { . } -&gt; df_steps
+
+
+# need to figure out where parabola_base stops (minimum of end, or where it intersects actual)
+
+df_in_smoothed %&gt;%
+  inner_join( df_steps, by=c(&#39;unix_time&#39;, &#39;row_n&#39;)) %&gt;%
+  arrange( row_n ) %&gt;%
+  filter( row_n &gt; max_location &amp; predicted_parabola_base &gt;= rc_pruned ) %&gt;%
+  filter( row_n == min( row_n )) %&gt;%
+  pluck( &#39;row_n&#39; ) %&gt;% 
+  { . } -&gt; predicted_parabola_base_end
+
+
+# pull out the AUC size of the triangles
 
 df_steps %&gt;%
   filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
@@ -870,45 +1029,60 @@ df_in %&gt;%
 # AUC for smoothed data
 df_in_smoothed %&gt;%
   filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
+  summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_smoothed
 
 # AUC for smoothed data loess
 df_in_smoothed %&gt;%
   filter( row_n &gt;= min_location  ) %&gt;%
-  summarise( area = trapz( unix_time, smoothed) ) %&gt;%
+  summarise( area = trapz( unix_time, rc_loess) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_loess
 
 # AUC for smoothed data cleaned
 df_in_smoothed %&gt;%
   filter( row_n &gt;= min_location  ) %&gt;%
-  mutate( raw_current - tsclean( raw_current)) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
+  mutate( rc_pruned = tsclean( rc_pruned)) %&gt;%
+  summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_full_cleaned
 
 # the upper bit of the real raw measurement
-df_in %&gt;%
-  mutate( row_n = row_number()) %&gt;%
+df_in_smoothed %&gt;%
   filter( row_n &gt;= min_location  &amp; row_n &lt;= min_2nd_location ) %&gt;%
-  summarise( area = trapz( unix_time, raw_current) ) %&gt;%
+  summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_uc_upper
 
+# to get upper bit, need to subtract the rectangle below
+# calculate rectangle height by width
 library(magrittr)
-df_in[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
+df_in_smoothed[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
   subtract( df_in[ min_location, &#39;unix_time&#39;] ) %&gt;%
   multiply_by(  min_raw_current  ) %&gt;%
   unlist() %&gt;%
   { . } -&gt; rectangle_area
 
+
+# the upper bit above the parabola base
+df_in_smoothed %&gt;%
+  filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
+  summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
+  pluck(&#39;area&#39;) %&gt;%
+  { . } -&gt; area_uc_parabola
+
+df_steps %&gt;%
+  filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
+  summarise( area = trapz( unix_time, predicted_parabola_base) ) %&gt;%
+  pluck(&#39;area&#39;) %&gt;%
+  { . } -&gt; area_uc_parabola_base
+
 df_auc = tibble(
                 raw = area_uc_full_raw,
                 smoothed = area_uc_full_smoothed,
                 loess = area_uc_full_loess,
-                cleaned = area_uc_full_cleaned
+                smoothed_and_cleaned = area_uc_full_cleaned
                   )
 
 
@@ -918,22 +1092,61 @@ df_rv = tibble(
                min_t = area_min_triangle,
                end_t = area_end_triangle,
                full_auc = area_uc_full_raw,
-               upper_auc = area_uc_upper - rectangle_area
+               upper_auc = area_uc_upper - rectangle_area,
+               parabola_auc = area_uc_parabola- area_uc_parabola_base
                )</code></pre>
 </div>
 <div id="what-points-were-predicted-on" class="section level2">
 <h2>What points were predicted on</h2>
 <pre class="r"><code>rbind( df_min, df_max ) %&gt;%
   rbind( df_end ) %&gt;%
-  ggplot( aes( unix_time, raw_current)) +
+  ggplot( aes( unix_time, rc_pruned)) +
     geom_line( color=&#39;green&#39; ) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_min_pt), color=&#39;red&#39;) +
-    geom_point( aes( unix_time, raw_current), data= . %&gt;% filter( is_max_pt), color=&#39;orange&#39;) +
+    geom_point( aes( unix_time, rc_pruned), data= . %&gt;% filter( is_min_pt), color=&#39;red&#39;) +
+    geom_point( aes( unix_time, rc_pruned), data= . %&gt;% filter( is_max_pt), color=&#39;orange&#39;) +
   #  geom_line( aes( unix_time, mean_left ), color=&#39;red&#39;) +
   geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))</code></pre>
+  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) )) +
+  geom_line( aes( unix_time, predicted_parabola_base), data=(df_steps %&gt;% filter( row_n &gt; min_location &amp; row_n &lt; predicted_parabola_base_end ) ))</code></pre>
 <p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-11-1.png" target="_blank">426eed6</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level2">
 <h2>Predicted Areas for the different parts of the graph</h2>
@@ -974,24 +1187,30 @@ full_auc
 <th style="text-align:right;">
 upper_auc
 </th>
+<th style="text-align:right;">
+parabola_auc
+</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:right;">
-1,350,812
+152,304.3
 </td>
 <td style="text-align:right;">
-4,648,802
+79,600.71
 </td>
 <td style="text-align:right;">
-436,940.7
+0
 </td>
 <td style="text-align:right;">
-292,627
+1,798,756
 </td>
 <td style="text-align:right;">
-3,451.5
+559,854
+</td>
+<td style="text-align:right;">
+896,461.9
 </td>
 </tr>
 </tbody>
@@ -1016,23 +1235,23 @@ smoothed
 loess
 </th>
 <th style="text-align:right;">
-cleaned
+smoothed_and_cleaned
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:right;">
-292,627
+1,798,756
 </td>
 <td style="text-align:right;">
-287,618.5
+1,801,790
 </td>
 <td style="text-align:right;">
-287,893.4
+1,801,709
 </td>
 <td style="text-align:right;">
-287,618.5
+1,801,770
 </td>
 </tr>
 </tbody>
