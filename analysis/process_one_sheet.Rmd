@@ -30,16 +30,30 @@ library(kableExtra)
 library(magrittr)
 library(glue)
 
+try( rm( params ))
+
+# if( !exists( 'params' )) {
+  # try({
+    # params = tibble(
+    # xls_input_file= 'data/P/P0152_S1-3_combined.xlsx',
+    # sheet= 'test',
+    # sheet_n= 1,
+    # base_file= 'test',
+    # start_timestamp= 1568161865)
+  # }, silent=TRUE )
+# }
 if( !exists( 'params' )) {
   try({
     params = tibble(
-    xls_input_file= 'data/P/P0152_S1-3_combined.xlsx',
-    sheet= 'test',
-    sheet_n= 1,
-    base_file= 'test',
-    start_timestamp= 1568161865)
+                    xls_input_file= 'data/P/P0049_S2,3_combined.xlsx',
+                    sheet= 'P0049_S2_left',
+                    sheet_n= 1,
+                    base_file= 'test',
+                    start_timestamp= 1566433500)
   }, silent=TRUE )
 }
+
+
 
 header = glue::glue( '# FILE: {params$base_file} SHEET: {params$sheet}  SHEET_N: {params$sheet_n}')
 
@@ -75,17 +89,16 @@ chunkify = function( condition ) {
 smoothing_window_width = 500
 inflection_window_width = 50
 df_in %>%
-  mutate( row_n = row_number()) %>%
-  mutate(raw_current = ifelse( row_n %in%
+  mutate(rc_pruned = ifelse( row_n %in%
     findOutliers(df_in$raw_current, n = smoothing_window_width, selectivity = NA, thresholdMin=1, fixedThreshold = TRUE)
 ,
                               NA, raw_current)) %>%
-  mutate( raw_current = na.approx( raw_current)) %>%
-  mutate( smoothed = loess( raw_current ~ unix_time, data=., span=.2 ) %>% predict() )  %>%
-  mutate( mean_left  = lag(rollapply(smoothed, inflection_window_width, mean, align = "right", fill=NA))) %>%
-  mutate( mean_right  = lag(rollapply(smoothed, inflection_window_width, mean, align = "left", fill=NA))) %>%
-  mutate( is_max_pt =  replace_na( smoothed > mean_left & smoothed > mean_right, FALSE)) %>%
-  mutate( is_min_pt =  replace_na( smoothed < mean_left & smoothed < mean_right, FALSE)) %>%
+  mutate( rc_pruned = na.approx( rc_pruned)) %>%
+  mutate( rc_loess = loess( rc_pruned ~ unix_time, data=., span=.2 ) %>% predict() )  %>%
+  mutate( mean_left  = lag(rollapply(rc_loess, inflection_window_width, mean, align = "right", fill=NA))) %>%
+  mutate( mean_right  = lag(rollapply(rc_loess, inflection_window_width, mean, align = "left", fill=NA))) %>%
+  mutate( is_max_pt =  replace_na( rc_loess > mean_left & rc_loess > mean_right, FALSE)) %>%
+  mutate( is_min_pt =  replace_na( rc_loess < mean_left & rc_loess < mean_right, FALSE)) %>%
   { . } -> df_in_smoothed
 
 ```
@@ -93,7 +106,7 @@ df_in %>%
 
 ```{r }
 
-df_in%>%
+df_in %>%
   ggplot(aes( unix_time, raw_current  )) +
   geom_line( color='orange') +
   geom_point( color='black', size=.1)
@@ -105,10 +118,10 @@ df_in%>%
 ```{r}
 
 df_in_smoothed %>%
-  ggplot(aes( unix_time, raw_current  )) +
+  ggplot(aes( unix_time, rc_pruned  )) +
   geom_line( color='orange') +
   geom_point( color='black', size=.1) +
-  geom_line( aes( unix_time, smoothed ), color='green')
+  geom_line( aes( unix_time, rc_loess ), color='green')
 
 
 ```
@@ -120,8 +133,8 @@ TODO: Kelly, choose one of these 4 cleaning methods to calculate your AUC values
 ```{r}
 
 df_in_smoothed %>%
-  mutate(raw_current = tsclean( raw_current)) %>%
-  ggplot(aes( unix_time, raw_current  )) +
+  mutate(rc_pruned = tsclean( rc_pruned)) %>%
+  ggplot(aes( unix_time, rc_pruned  )) +
   geom_line( color='orange') +
   geom_point( color='black', size=.1)
 
@@ -138,11 +151,18 @@ df_in_smoothed %>%
 df_in_smoothed %>%
   mutate( c=chunkify( is_min_pt )) %>%
   filter( c==2 ) %>%
-  summarise( min_location = floor(mean( row_n)), min_raw_current = min(raw_current)) %>%
-  { . } -> df_min_location
+  summarise( min_location = floor(mean( row_n)), min_raw_current = min(rc_pruned)) %>%
+  { . } -> tuple_min_location
 
-min_location = df_min_location$min_location
-min_raw_current = df_min_location$min_raw_current
+min_location = tuple_min_location$min_location
+min_raw_current = tuple_min_location$min_raw_current
+
+# caculate the last location, and the last raw_current
+last_location = length( df_in_smoothed)
+last_raw_current = df_in_smoothed %>% pluck('rc_pruned', last_location )
+
+
+
 
 df_in_smoothed %>%
   filter( row_n > min_location ) %>%
@@ -155,11 +175,13 @@ df_in_smoothed %>%
 df_in_smoothed %>%
   mutate( is_2nd_min =
          (row_n > max_location ) &
-         (raw_current < min_raw_current ) ) %>%
+         (rc_pruned < min_raw_current ) ) %>%
   pluck('is_2nd_min') %>%
   rle( ) %>%
   pluck(1,1) %>%
   { . } -> min_2nd_location
+
+
 ```
 
 
@@ -169,24 +191,38 @@ df_in_smoothed %>%
 
 df_in_smoothed %>%
   dplyr::filter( row_n < min_location  ) %>%
-  mutate(raw_current = tsclean( raw_current)) %>%
+  mutate(rc_pruned = tsclean( rc_pruned)) %>%
   { . } -> df_min
 
 df_in_smoothed %>%
   dplyr::filter( row_n  >= min_location  ) %>%
   dplyr::filter( row_n  <=max_location  ) %>%
-  mutate(raw_current = tsclean( raw_current)) %>%
+  mutate(rc_pruned = tsclean( rc_pruned)) %>%
   { . } -> df_max
 
 df_in_smoothed %>%
   dplyr::filter( row_n  >= max_location  ) %>%
-  mutate(raw_current = tsclean( raw_current)) %>%
+  mutate(rc_pruned = tsclean( rc_pruned)) %>%
   { . } -> df_end
 
+df_in_smoothed %>%
+  dplyr::filter( row_n  >= min_location  ) %>%
+  mutate(rc_pruned = tsclean( rc_pruned)) %>%
+  { . } -> df_parabola
 
-fit_min = lm( raw_current ~ unix_time, data=df_min)
-fit_max = lm( raw_current ~ unix_time, data=df_max)
-fit_end = lm( raw_current ~ unix_time, data=df_end)
+df_parabola %>%
+  filter( row_n > max_location  ) %>%
+  filter( rc_pruned == min( rc_pruned)) %>%
+  filter( row_n == min( row_n)) %>%
+  bind_rows( df_parabola %>% filter( row_n == min( row_n)) ) %>%
+  arrange(row_n ) %>%
+  { . } -> df_parabola_endpoints
+
+
+fit_min = lm( rc_pruned ~ unix_time, data=df_min)
+fit_max = lm( rc_pruned ~ unix_time, data=df_max)
+fit_end = lm( rc_pruned ~ unix_time, data=df_end)
+fit_parabola_base = lm( rc_pruned ~ unix_time, data=df_parabola_endpoints)
 
 ```
 ## calculate overall graph parameters to use when generating the new lines
@@ -236,7 +272,20 @@ df_steps %>%
   mutate( predicted_min = predict( fit_min, .)) %>%
   mutate( predicted_max = predict( fit_max, .)) %>%
   mutate( predicted_end = predict( fit_end, .)) %>%
+  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %>%
   { . } -> df_steps
+
+
+# need to figure out where parabola_base stops (minimum of end, or where it intersects actual)
+
+df_in_smoothed %>%
+  inner_join( df_steps, by=c('unix_time', 'row_n')) %>%
+  arrange( row_n ) %>%
+  filter( row_n > max_location & predicted_parabola_base >= rc_pruned ) %>%
+  filter( row_n == min( row_n )) %>%
+  pluck( 'row_n' ) %>% 
+  { . } -> predicted_parabola_base_end
+
 
 # pull out the AUC size of the triangles
 
@@ -277,33 +326,34 @@ df_in %>%
 # AUC for smoothed data
 df_in_smoothed %>%
   filter( row_n >= min_location  ) %>%
-  summarise( area = trapz( unix_time, raw_current) ) %>%
+  summarise( area = trapz( unix_time, rc_pruned) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_smoothed
 
 # AUC for smoothed data loess
 df_in_smoothed %>%
   filter( row_n >= min_location  ) %>%
-  summarise( area = trapz( unix_time, smoothed) ) %>%
+  summarise( area = trapz( unix_time, rc_loess) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_loess
 
 # AUC for smoothed data cleaned
 df_in_smoothed %>%
   filter( row_n >= min_location  ) %>%
-  mutate( raw_current - tsclean( raw_current)) %>%
-  summarise( area = trapz( unix_time, raw_current) ) %>%
+  mutate( rc_pruned = tsclean( rc_pruned)) %>%
+  summarise( area = trapz( unix_time, rc_pruned) ) %>%
   pluck('area') %>%
   { . } -> area_uc_full_cleaned
 
 # the upper bit of the real raw measurement
 df_in %>%
-  mutate( row_n = row_number()) %>%
   filter( row_n >= min_location  & row_n <= min_2nd_location ) %>%
   summarise( area = trapz( unix_time, raw_current) ) %>%
   pluck('area') %>%
   { . } -> area_uc_upper
 
+# to get upper bit, need to subtract the rectangle below
+# calculate rectangle height by width
 library(magrittr)
 df_in[ min_2nd_location, 'unix_time'] %>%
   subtract( df_in[ min_location, 'unix_time'] ) %>%
@@ -311,11 +361,25 @@ df_in[ min_2nd_location, 'unix_time'] %>%
   unlist() %>%
   { . } -> rectangle_area
 
+
+# the upper bit above the parabola base
+df_in %>%
+  filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
+  summarise( area = trapz( unix_time, raw_current) ) %>%
+  pluck('area') %>%
+  { . } -> area_uc_parabola
+
+df_steps %>%
+  filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
+  summarise( area = trapz( unix_time, predicted_parabola_base) ) %>%
+  pluck('area') %>%
+  { . } -> area_uc_parabola_base
+
 df_auc = tibble(
                 raw = area_uc_full_raw,
                 smoothed = area_uc_full_smoothed,
                 loess = area_uc_full_loess,
-                cleaned = area_uc_full_cleaned
+                smoothed_and_cleaned = area_uc_full_cleaned
                   )
 
 
@@ -325,7 +389,8 @@ df_rv = tibble(
                min_t = area_min_triangle,
                end_t = area_end_triangle,
                full_auc = area_uc_full_raw,
-               upper_auc = area_uc_upper - rectangle_area
+               upper_auc = area_uc_upper - rectangle_area,
+               parabola_auc = area_uc_parabola- area_uc_parabola_base
                )
 
 
@@ -338,14 +403,15 @@ df_rv = tibble(
 
 rbind( df_min, df_max ) %>%
   rbind( df_end ) %>%
-  ggplot( aes( unix_time, raw_current)) +
+  ggplot( aes( unix_time, rc_pruned)) +
     geom_line( color='green' ) +
-    geom_point( aes( unix_time, raw_current), data= . %>% filter( is_min_pt), color='red') +
-    geom_point( aes( unix_time, raw_current), data= . %>% filter( is_max_pt), color='orange') +
+    geom_point( aes( unix_time, rc_pruned), data= . %>% filter( is_min_pt), color='red') +
+    geom_point( aes( unix_time, rc_pruned), data= . %>% filter( is_max_pt), color='orange') +
   #  geom_line( aes( unix_time, mean_left ), color='red') +
   geom_line( aes( unix_time, predicted_min), data=(df_steps %>% filter( predicted_min > 0 & row_n > 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %>% filter( predicted_max > 0 & row_n < max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))
+  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) )) +
+  geom_line( aes( unix_time, predicted_parabola_base), data=(df_steps %>% filter( row_n > min_location & row_n < predicted_parabola_base_end ) ))
 
 ```
 
