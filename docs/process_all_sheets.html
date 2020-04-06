@@ -385,7 +385,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -394,7 +394,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -403,10 +403,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-03-30
+<strong>Last updated:</strong> 2020-04-06
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -422,12 +422,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -494,10 +494,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeac9c1db5995c65d4c70b8b1a75eff276767ea60atargetblankac9c1dba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/ac9c1db5995c65d4c70b8b1a75eff276767ea60a" target="_blank">ac9c1db</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree14b580528f1d464e86518a3e5c0ffdecfa9a87d2targetblank14b5805a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/14b580528f1d464e86518a3e5c0ffdecfa9a87d2" target="_blank">14b5805</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreeac9c1db5995c65d4c70b8b1a75eff276767ea60atargetblankac9c1dba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree14b580528f1d464e86518a3e5c0ffdecfa9a87d2targetblank14b5805a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -508,6 +508,8 @@ Ignored files:
     Ignored:    explore/
 
 Unstaged changes:
+    Modified:   analysis/process_all_sheets.Rmd
+    Modified:   analysis/process_one_sheet.Rmd
     Modified:   docs/results_summary.csv
 
 </code></pre>
@@ -547,6 +549,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/c1ab740360f9f778d95f460b56c1aa8bf150968d/docs/process_all_sheets.html" target="_blank">c1ab740</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -878,6 +897,8 @@ wflow_publish(“analysis/process_all_sheets.Rmd”)
 </div>
 </div>
 
+<div id="output-files" class="section level1">
+<h1>Output files</h1>
 <a href="P0049_S2,3_combined_1.html"> Row # = 1. ### FIlE = P0049_S2,3_combined. ### SHEET = P0049_S2_left. ### SHEET # = 1</a>
 <p/>
 <a href="P0050_S1,2,3_combined_2.html"> Row # = 2. ### FIlE = P0050_S1,2,3_combined. ### SHEET = Aug-22-P0050_S2_left. ### SHEET # = 2</a>
@@ -922,12 +943,17 @@ wflow_publish(“analysis/process_all_sheets.Rmd”)
 <p/>
 <a href="P0159_S1-3_combined_1.html"> Row # = 22. ### FIlE = P0159_S1-3_combined. ### SHEET = P0159_S1_11-09_snacks_right. ### SHEET # = 1</a>
 <p/>
+</div>
+<div id="csv-link-to-output-data-file" class="section level1">
+<h1>CSV link to output data File</h1>
 <p/>
 <p/>
 <p/>
 <p/>
 <p><a href=results_summary.csv>results_summary.csv</a></p>
-<pre><code>Warning: The following named parsers don&#39;t match the column names: cleaned</code></pre>
+</div>
+<div id="data-file-numbers" class="section level1">
+<h1>data file numbers</h1>
 <table>
 <thead>
 <tr>
@@ -953,6 +979,9 @@ full_auc
 upper_auc
 </th>
 <th style="text-align:right;">
+parabola_auc
+</th>
+<th style="text-align:right;">
 raw
 </th>
 <th style="text-align:right;">
@@ -960,12 +989,6 @@ smoothed
 </th>
 <th style="text-align:right;">
 loess
-</th>
-<th style="text-align:right;">
-cleaned
-</th>
-<th style="text-align:right;">
-parabola_auc
 </th>
 <th style="text-align:right;">
 smoothed_and_cleaned
@@ -981,37 +1004,34 @@ P0049_S2,3_combined
 1
 </td>
 <td style="text-align:right;">
-152304.270
+152.0
 </td>
 <td style="text-align:right;">
-79600.709
+80.00
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000
 </td>
 <td style="text-align:right;">
-1798756.0
+1799
 </td>
 <td style="text-align:right;">
-556862.5
+560.000
 </td>
 <td style="text-align:right;">
-1798756.0
+896.0000
 </td>
 <td style="text-align:right;">
-1801790.4
+1799
 </td>
 <td style="text-align:right;">
-1801708.7
+1802.0
 </td>
 <td style="text-align:right;">
-1801790.4
+1802.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1802.0
 </td>
 </tr>
 <tr>
@@ -1022,37 +1042,34 @@ P0050_S1,2,3_combined
 2
 </td>
 <td style="text-align:right;">
-217718.383
+218.0
 </td>
 <td style="text-align:right;">
-59524.518
+60.00
 </td>
 <td style="text-align:right;">
-2.054072e+05
+205.000
 </td>
 <td style="text-align:right;">
-1710164.0
+1710
 </td>
 <td style="text-align:right;">
-410482.5
+421.000
 </td>
 <td style="text-align:right;">
-1710164.0
+652.0000
 </td>
 <td style="text-align:right;">
-1706897.4
+1710
 </td>
 <td style="text-align:right;">
-1706806.8
+1707.0
 </td>
 <td style="text-align:right;">
-1706897.4
+1707.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1707.0
 </td>
 </tr>
 <tr>
@@ -1063,37 +1080,34 @@ P0050_S1,2,3_combined
 3
 </td>
 <td style="text-align:right;">
-1240723.812
+1241.0
 </td>
 <td style="text-align:right;">
-119738.988
+120.00
 </td>
 <td style="text-align:right;">
-7.961407e+05
+796.000
 </td>
 <td style="text-align:right;">
-1581302.0
+1581
 </td>
 <td style="text-align:right;">
-105869.5
+99.000
 </td>
 <td style="text-align:right;">
-1581302.0
+201.0000
 </td>
 <td style="text-align:right;">
-1574467.8
+1581
 </td>
 <td style="text-align:right;">
-1573477.4
+1574.0
 </td>
 <td style="text-align:right;">
-1574467.8
+1573.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1573.0
 </td>
 </tr>
 <tr>
@@ -1104,37 +1118,34 @@ P0051_S1,2_COMBINED
 1
 </td>
 <td style="text-align:right;">
-353409.711
+353.0
 </td>
 <td style="text-align:right;">
-96008.844
+96.00
 </td>
 <td style="text-align:right;">
-5.891318e+03
+6.000
 </td>
 <td style="text-align:right;">
-2179750.0
+2180
 </td>
 <td style="text-align:right;">
-322354.0
+323.000
 </td>
 <td style="text-align:right;">
-2179750.0
+836.0000
 </td>
 <td style="text-align:right;">
-2174744.8
+2180
 </td>
 <td style="text-align:right;">
-2166891.5
+2175.0
 </td>
 <td style="text-align:right;">
-2174744.8
+2167.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+2175.0
 </td>
 </tr>
 <tr>
@@ -1145,37 +1156,34 @@ P0051_S1,2_COMBINED
 2
 </td>
 <td style="text-align:right;">
-292830.633
+293.0
 </td>
 <td style="text-align:right;">
-249774.219
+250.00
 </td>
 <td style="text-align:right;">
-8.723927e+03
+9.000
 </td>
 <td style="text-align:right;">
-2849312.5
+2849
 </td>
 <td style="text-align:right;">
-678953.0
+679.000
 </td>
 <td style="text-align:right;">
-2849312.5
+1212.0000
 </td>
 <td style="text-align:right;">
-2849103.4
+2849
 </td>
 <td style="text-align:right;">
-2831215.7
+2849.0
 </td>
 <td style="text-align:right;">
-2849103.4
+2831.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+2803.0
 </td>
 </tr>
 <tr>
@@ -1186,37 +1194,34 @@ P0072_S2_3_combined
 2
 </td>
 <td style="text-align:right;">
-172838.254
+173.0
 </td>
 <td style="text-align:right;">
-77443.973
+77.00
 </td>
 <td style="text-align:right;">
-4.984860e+01
+0.000
 </td>
 <td style="text-align:right;">
-1217876.0
+1218
 </td>
 <td style="text-align:right;">
-314273.5
+306.000
 </td>
 <td style="text-align:right;">
-1217876.0
+519.0000
 </td>
 <td style="text-align:right;">
-1208894.9
+1218
 </td>
 <td style="text-align:right;">
-1209041.5
+1209.0
 </td>
 <td style="text-align:right;">
-1208894.9
+1209.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1209.0
 </td>
 </tr>
 <tr>
@@ -1227,37 +1232,34 @@ P0081_MILOdata_modified
 3
 </td>
 <td style="text-align:right;">
-42026.811
+42.0
 </td>
 <td style="text-align:right;">
-32936.607
+33.00
 </td>
 <td style="text-align:right;">
-1.652531e+08
+165253.000
 </td>
 <td style="text-align:right;">
-6065947.5
+6066
 </td>
 <td style="text-align:right;">
-5276263.5
+5278.000
 </td>
 <td style="text-align:right;">
-6065947.5
+187.0000
 </td>
 <td style="text-align:right;">
-6067290.7
+6066
 </td>
 <td style="text-align:right;">
-6007658.9
+6067.0
 </td>
 <td style="text-align:right;">
-6067290.7
+6008.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+4620.0
 </td>
 </tr>
 <tr>
@@ -1268,37 +1270,34 @@ P0088_combined
 1
 </td>
 <td style="text-align:right;">
-560600.398
+561.0
 </td>
 <td style="text-align:right;">
-117372.830
+117.00
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000
 </td>
 <td style="text-align:right;">
-1399461.5
+1399
 </td>
 <td style="text-align:right;">
-187557.0
+186.000
 </td>
 <td style="text-align:right;">
-1399461.5
+434.0000
 </td>
 <td style="text-align:right;">
-1398468.5
+1399
 </td>
 <td style="text-align:right;">
-1401928.8
+1398.0
 </td>
 <td style="text-align:right;">
-1398468.5
+1402.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1394.0
 </td>
 </tr>
 <tr>
@@ -1309,37 +1308,34 @@ P0088_combined
 2
 </td>
 <td style="text-align:right;">
-268492.820
+268.0
 </td>
 <td style="text-align:right;">
-58954.470
+59.00
 </td>
 <td style="text-align:right;">
-1.300518e+04
+13.000
 </td>
 <td style="text-align:right;">
-1671825.5
+1672
 </td>
 <td style="text-align:right;">
-402510.0
+399.000
 </td>
 <td style="text-align:right;">
-1671825.5
+760.0000
 </td>
 <td style="text-align:right;">
-1667222.2
+1672
 </td>
 <td style="text-align:right;">
-1669064.6
+1667.0
 </td>
 <td style="text-align:right;">
-1667222.2
+1669.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1667.0
 </td>
 </tr>
 <tr>
@@ -1350,37 +1346,34 @@ P0093-S2,3_combined
 2
 </td>
 <td style="text-align:right;">
-144608.973
+145.0
 </td>
 <td style="text-align:right;">
-71811.703
+72.00
 </td>
 <td style="text-align:right;">
-1.761610e+03
+2.000
 </td>
 <td style="text-align:right;">
-1887203.0
+1887
 </td>
 <td style="text-align:right;">
-548979.0
+544.000
 </td>
 <td style="text-align:right;">
-1887203.0
+886.0000
 </td>
 <td style="text-align:right;">
-1883904.2
+1887
 </td>
 <td style="text-align:right;">
-1884234.6
+1884.0
 </td>
 <td style="text-align:right;">
-1883904.2
+1884.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1884.0
 </td>
 </tr>
 <tr>
@@ -1391,37 +1384,34 @@ P0099_S2,3_combined
 2
 </td>
 <td style="text-align:right;">
-428405.930
+428.0
 </td>
 <td style="text-align:right;">
-84160.727
+84.00
 </td>
 <td style="text-align:right;">
-2.253723e+05
+225.000
 </td>
 <td style="text-align:right;">
-1397317.0
+1397
 </td>
 <td style="text-align:right;">
-247111.0
+246.000
 </td>
 <td style="text-align:right;">
-1397317.0
+429.0000
 </td>
 <td style="text-align:right;">
-1396429.5
+1397
 </td>
 <td style="text-align:right;">
-1396403.8
+1396.0
 </td>
 <td style="text-align:right;">
-1396429.5
+1396.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1396.0
 </td>
 </tr>
 <tr>
@@ -1432,37 +1422,34 @@ P0103_S1(right+left_,3_combined
 1
 </td>
 <td style="text-align:right;">
-137419.020
+137.0
 </td>
 <td style="text-align:right;">
-58857.142
+59.00
 </td>
 <td style="text-align:right;">
-1.285424e+05
+129.000
 </td>
 <td style="text-align:right;">
-1679955.5
+1680
 </td>
 <td style="text-align:right;">
-639397.5
+640.000
 </td>
 <td style="text-align:right;">
-1679955.5
+794.0000
 </td>
 <td style="text-align:right;">
-1682670.6
+1680
 </td>
 <td style="text-align:right;">
-1681011.1
+1683.0
 </td>
 <td style="text-align:right;">
-1682670.6
+1681.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1683.0
 </td>
 </tr>
 <tr>
@@ -1473,37 +1460,34 @@ P0103_S1(right+left_,3_combined
 2
 </td>
 <td style="text-align:right;">
-108215.818
+108.0
 </td>
 <td style="text-align:right;">
-77092.795
+77.00
 </td>
 <td style="text-align:right;">
-9.521003e+04
+95.000
 </td>
 <td style="text-align:right;">
-1419461.5
+1419
 </td>
 <td style="text-align:right;">
-555406.0
+554.000
 </td>
 <td style="text-align:right;">
-1419461.5
+802.0000
 </td>
 <td style="text-align:right;">
-1419226.0
+1419
 </td>
 <td style="text-align:right;">
-1419641.4
+1419.0
 </td>
 <td style="text-align:right;">
-1419226.0
+1420.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1419.0
 </td>
 </tr>
 <tr>
@@ -1514,37 +1498,34 @@ P0103_S1(right+left_,3_combined
 3
 </td>
 <td style="text-align:right;">
-111588.730
+112.0
 </td>
 <td style="text-align:right;">
-87296.758
+87.00
 </td>
 <td style="text-align:right;">
-4.949142e+05
+495.000
 </td>
 <td style="text-align:right;">
-1498658.0
+1499
 </td>
 <td style="text-align:right;">
-496602.5
+456.000
 </td>
 <td style="text-align:right;">
-1498658.0
+589.0000
 </td>
 <td style="text-align:right;">
-1458622.6
+1499
 </td>
 <td style="text-align:right;">
-1470793.0
+1459.0
 </td>
 <td style="text-align:right;">
-1458622.6
+1471.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1459.0
 </td>
 </tr>
 <tr>
@@ -1555,37 +1536,34 @@ P0112_S1,3_combined
 1
 </td>
 <td style="text-align:right;">
-319251.992
+319.0
 </td>
 <td style="text-align:right;">
-117536.531
+118.00
 </td>
 <td style="text-align:right;">
-8.695500e+06
+8696.000
 </td>
 <td style="text-align:right;">
-4570188.0
+4570
 </td>
 <td style="text-align:right;">
-2277289.7
+2277.000
 </td>
 <td style="text-align:right;">
-4570188.0
+79.0000
 </td>
 <td style="text-align:right;">
-4569717.1
+4570
 </td>
 <td style="text-align:right;">
-2782129.4
+4570.0
 </td>
 <td style="text-align:right;">
-4569717.1
+2782.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1353.0
 </td>
 </tr>
 <tr>
@@ -1596,37 +1574,34 @@ P0114_S1,2_combined
 1
 </td>
 <td style="text-align:right;">
-207575.703
+208.0
 </td>
 <td style="text-align:right;">
-120590.719
+121.00
 </td>
 <td style="text-align:right;">
-6.060158e+05
+606.000
 </td>
 <td style="text-align:right;">
-1763645.0
+1764
 </td>
 <td style="text-align:right;">
-512128.0
+508.000
 </td>
 <td style="text-align:right;">
-1763645.0
+727.0000
 </td>
 <td style="text-align:right;">
-1759706.5
+1764
 </td>
 <td style="text-align:right;">
-1761010.4
+1760.0
 </td>
 <td style="text-align:right;">
-1759706.5
+1761.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+1760.0
 </td>
 </tr>
 <tr>
@@ -1637,22 +1612,25 @@ P0150_S1-3_combined
 1
 </td>
 <td style="text-align:right;">
-1350811.906
+1350811.9
 </td>
 <td style="text-align:right;">
-4648801.750
+4648801.75
 </td>
 <td style="text-align:right;">
-4.369407e+05
+436940.734
 </td>
 <td style="text-align:right;">
-292627.0
+292627
 </td>
 <td style="text-align:right;">
-3451.5
+2471.782
 </td>
 <td style="text-align:right;">
-292627.0
+-773.6711
+</td>
+<td style="text-align:right;">
+292627
 </td>
 <td style="text-align:right;">
 287618.5
@@ -1661,13 +1639,7 @@ P0150_S1-3_combined
 287893.4
 </td>
 <td style="text-align:right;">
-287618.5
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+287512.5
 </td>
 </tr>
 <tr>
@@ -1678,37 +1650,34 @@ P0150_S1-3_combined
 3
 </td>
 <td style="text-align:right;">
-326048.047
+326.0
 </td>
 <td style="text-align:right;">
-113577.400
+114.00
 </td>
 <td style="text-align:right;">
-4.558320e+04
+46.000
 </td>
 <td style="text-align:right;">
-2046578.0
+2047
 </td>
 <td style="text-align:right;">
-475044.0
+477.000
 </td>
 <td style="text-align:right;">
-2046578.0
+857.0000
 </td>
 <td style="text-align:right;">
-2041490.8
+2047
 </td>
 <td style="text-align:right;">
-2040760.0
+2041.0
 </td>
 <td style="text-align:right;">
-2041490.8
+2041.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+2041.0
 </td>
 </tr>
 <tr>
@@ -1719,37 +1688,34 @@ P0151_S1-3_combined
 3
 </td>
 <td style="text-align:right;">
-876811.078
+877.0
 </td>
 <td style="text-align:right;">
-6113.674
+6.00
 </td>
 <td style="text-align:right;">
-9.703747e+05
+970.000
 </td>
 <td style="text-align:right;">
-192040.5
+192
 </td>
 <td style="text-align:right;">
-2342.5
+2.000
 </td>
 <td style="text-align:right;">
-192040.5
+98.0000
 </td>
 <td style="text-align:right;">
-187468.3
+192
 </td>
 <td style="text-align:right;">
-194242.4
+187.0
 </td>
 <td style="text-align:right;">
-187468.3
+194.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+187.0
 </td>
 </tr>
 <tr>
@@ -1760,37 +1726,34 @@ P0151_S1-3_combined
 4
 </td>
 <td style="text-align:right;">
-288790.727
+289.0
 </td>
 <td style="text-align:right;">
-28604.238
+29.00
 </td>
 <td style="text-align:right;">
-4.000020e+05
+400.000
 </td>
 <td style="text-align:right;">
-401716.0
+402
 </td>
 <td style="text-align:right;">
-58193.5
+62.000
 </td>
 <td style="text-align:right;">
-401716.0
+-2.0000
 </td>
 <td style="text-align:right;">
-403452.5
+402
 </td>
 <td style="text-align:right;">
-405171.6
+403.0
 </td>
 <td style="text-align:right;">
-403452.5
+405.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+403.0
 </td>
 </tr>
 <tr>
@@ -1801,37 +1764,34 @@ P0152_S1-3_combined
 1
 </td>
 <td style="text-align:right;">
-1350811.906
+1351.0
 </td>
 <td style="text-align:right;">
-4648801.750
+4649.00
 </td>
 <td style="text-align:right;">
-4.369407e+05
+437.000
 </td>
 <td style="text-align:right;">
-292627.0
+293
 </td>
 <td style="text-align:right;">
-3451.5
+2.000
 </td>
 <td style="text-align:right;">
-292627.0
+-1.0000
 </td>
 <td style="text-align:right;">
-287618.5
+293
 </td>
 <td style="text-align:right;">
-287893.4
+288.0
 </td>
 <td style="text-align:right;">
-287618.5
+288.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+288.0
 </td>
 </tr>
 <tr>
@@ -1842,37 +1802,34 @@ P0154_S1-3_combined
 2
 </td>
 <td style="text-align:right;">
--73471.465
+-73.0
 </td>
 <td style="text-align:right;">
-31980415.500
+31980.00
 </td>
 <td style="text-align:right;">
-1.674440e+05
+167.000
 </td>
 <td style="text-align:right;">
--521667.5
+-522
 </td>
 <td style="text-align:right;">
--256952.5
+-226.000
 </td>
 <td style="text-align:right;">
--521667.5
+27.0000
 </td>
 <td style="text-align:right;">
--490278.5
+-522
 </td>
 <td style="text-align:right;">
--623491.5
+-490.0
 </td>
 <td style="text-align:right;">
--490278.5
+-623.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+-580.0
 </td>
 </tr>
 <tr>
@@ -1883,37 +1840,34 @@ P0159_S1-3_combined
 1
 </td>
 <td style="text-align:right;">
-4908.079
+5.0
 </td>
 <td style="text-align:right;">
-6034.392
+6.00
 </td>
 <td style="text-align:right;">
-1.515811e+05
+152.000
 </td>
 <td style="text-align:right;">
-2027306.5
+2027
 </td>
 <td style="text-align:right;">
-1832714.5
+404.000
 </td>
 <td style="text-align:right;">
-2027306.5
+254.0000
 </td>
 <td style="text-align:right;">
-598404.3
+2027
 </td>
 <td style="text-align:right;">
-654763.4
+598.0
 </td>
 <td style="text-align:right;">
-598404.3
+655.0
 </td>
 <td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
+598.0
 </td>
 </tr>
 <tr>
@@ -1924,22 +1878,25 @@ test
 1
 </td>
 <td style="text-align:right;">
-152304.270
+152304.3
 </td>
 <td style="text-align:right;">
-79600.709
+79600.71
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000
 </td>
 <td style="text-align:right;">
-1798756.0
+1798756
 </td>
 <td style="text-align:right;">
-559854.0
+559854.000
 </td>
 <td style="text-align:right;">
-1798756.0
+896461.8906
+</td>
+<td style="text-align:right;">
+1798756
 </td>
 <td style="text-align:right;">
 1801790.4
@@ -1948,13 +1905,45 @@ test
 1801708.7
 </td>
 <td style="text-align:right;">
-NA
+1801770.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+test
 </td>
 <td style="text-align:right;">
-896461.9
+1
 </td>
 <td style="text-align:right;">
-1801770
+353409.7
+</td>
+<td style="text-align:right;">
+96008.84
+</td>
+<td style="text-align:right;">
+5891.318
+</td>
+<td style="text-align:right;">
+2179750
+</td>
+<td style="text-align:right;">
+323108.031
+</td>
+<td style="text-align:right;">
+836287.4688
+</td>
+<td style="text-align:right;">
+2179750
+</td>
+<td style="text-align:right;">
+2174744.8
+</td>
+<td style="text-align:right;">
+2166891.5
+</td>
+<td style="text-align:right;">
+2174744.8
 </td>
 </tr>
 </tbody>
@@ -1987,37 +1976,37 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] glue_1.3.2        magrittr_1.5      knitr_1.28        kableExtra_1.1.0 
- [5] pracma_2.2.5      seismicRoll_1.1.3 forecast_8.11     janitor_1.2.1    
+ [1] glue_1.4.0        magrittr_1.5      knitr_1.28        kableExtra_1.1.0 
+ [5] pracma_2.2.5      seismicRoll_1.1.3 forecast_8.12     janitor_1.2.1    
  [9] readxl_1.3.1      forcats_0.5.0     stringr_1.4.0     dplyr_0.8.5      
-[13] purrr_0.3.3       readr_1.3.1       tidyr_1.0.2       tibble_2.1.3     
-[17] ggplot2_3.2.1     tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
+[13] purrr_0.3.3       readr_1.3.1       tidyr_1.0.2       tibble_3.0.0     
+[17] ggplot2_3.3.0     tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
- [1] tseries_0.10-47      httr_1.4.1           jsonlite_1.6.1      
- [4] viridisLite_0.3.0    modelr_0.1.6         assertthat_0.2.1    
+ [1] tseries_0.10-47      httr_1.4.1           viridisLite_0.3.0   
+ [4] jsonlite_1.6.1       modelr_0.1.6         assertthat_0.2.1    
  [7] TTR_0.23-6           highr_0.8            cellranger_1.1.0    
 [10] yaml_2.2.1           pillar_1.4.3         backports_1.1.5     
-[13] lattice_0.20-40      quadprog_1.5-8       digest_0.6.25       
+[13] lattice_0.20-41      quadprog_1.5-8       digest_0.6.25       
 [16] snakecase_0.11.0     rvest_0.3.5          colorspace_1.4-1    
 [19] htmltools_0.4.0      timeDate_3043.102    pkgconfig_2.0.3     
-[22] broom_0.5.5          haven_2.2.0          scales_1.1.0        
-[25] webshot_0.5.2        whisker_0.4          git2r_0.26.1        
-[28] farver_2.0.1         generics_0.0.2       ellipsis_0.3.0      
+[22] broom_0.5.5          haven_2.2.0          webshot_0.5.2       
+[25] scales_1.1.0         whisker_0.4          git2r_0.26.1        
+[28] farver_2.0.3         generics_0.0.2       ellipsis_0.3.0      
 [31] withr_2.1.2          urca_1.3-0           nnet_7.3-13         
-[34] lazyeval_0.2.2       cli_2.0.2            quantmod_0.4-16     
-[37] crayon_1.3.4         evaluate_0.14        fs_1.3.2            
-[40] fansi_0.4.1          nlme_3.1-142         xts_0.12-0          
-[43] xml2_1.2.5           tools_3.6.1          hms_0.5.3           
-[46] lifecycle_0.2.0      munsell_0.5.0        reprex_0.3.0        
-[49] compiler_3.6.1       rlang_0.4.5          grid_3.6.1          
-[52] rstudioapi_0.11      labeling_0.3         rmarkdown_2.1.1     
-[55] gtable_0.3.0         fracdiff_1.5-1       DBI_1.1.0           
-[58] curl_4.3             R6_2.4.1             lubridate_1.7.4     
-[61] workflowr_1.4.0.9001 rprojroot_1.3-2      stringi_1.4.6       
-[64] parallel_3.6.1       Rcpp_1.0.4           vctrs_0.2.4         
-[67] dbplyr_1.4.2         tidyselect_1.0.0     xfun_0.12           
-[70] lmtest_0.9-37       </code></pre>
+[34] cli_2.0.2            quantmod_0.4.17      crayon_1.3.4        
+[37] evaluate_0.14        fs_1.4.1             fansi_0.4.1         
+[40] nlme_3.1-142         xts_0.12-0           xml2_1.3.0          
+[43] tools_3.6.1          hms_0.5.3            lifecycle_0.2.0     
+[46] munsell_0.5.0        reprex_0.3.0         compiler_3.6.1      
+[49] rlang_0.4.5          grid_3.6.1           rstudioapi_0.11     
+[52] labeling_0.3         rmarkdown_2.1.1      gtable_0.3.0        
+[55] fracdiff_1.5-1       DBI_1.1.0            curl_4.3            
+[58] R6_2.4.1             lubridate_1.7.4      workflowr_1.4.0.9001
+[61] rprojroot_1.3-2      stringi_1.4.6        parallel_3.6.1      
+[64] Rcpp_1.0.4           vctrs_0.2.4          dbplyr_1.4.2        
+[67] tidyselect_1.0.0     xfun_0.12            lmtest_0.9-37       </code></pre>
+</div>
 </div>
 
 

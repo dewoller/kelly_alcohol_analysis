@@ -386,7 +386,7 @@ div.section {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -395,7 +395,7 @@ div.section {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -404,10 +404,10 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-03-30
+<strong>Last updated:</strong> 2020-04-06
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -423,12 +423,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -495,18 +495,24 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef518a158db4174b5b47b06d08626fa8300728576targetblankf518a15a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/f518a158db4174b5b47b06d08626fa8300728576" target="_blank">f518a15</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree14b580528f1d464e86518a3e5c0ffdecfa9a87d2targetblank14b5805a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/kelly_alcohol_analysis/tree/14b580528f1d464e86518a3e5c0ffdecfa9a87d2" target="_blank">14b5805</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistreef518a158db4174b5b47b06d08626fa8300728576targetblankf518a15a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollerkellyalcoholanalysistree14b580528f1d464e86518a3e5c0ffdecfa9a87d2targetblank14b5805a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    analysis/figure/
     Ignored:    data/
     Ignored:    explore/
+
+Unstaged changes:
+    Modified:   analysis/process_all_sheets.Rmd
+    Modified:   analysis/process_one_sheet.Rmd
+    Modified:   docs/results_summary.csv
 
 </code></pre>
 <p>
@@ -545,6 +551,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/ac9c1db5995c65d4c70b8b1a75eff276767ea60a/analysis/process_one_sheet.Rmd" target="_blank">ac9c1db</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+<td>
+documentation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/kelly_alcohol_analysis/ac9c1db5995c65d4c70b8b1a75eff276767ea60a/docs/process_one_sheet.html" target="_blank">ac9c1db</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+<td>
+documentation
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -688,8 +728,8 @@ wflow_publish(“analysis/process_one_sheet.Rmd”)
 </div>
 </div>
 </div>
-<div id="file-test-sheet-p0049_s2_left-sheet_n-1" class="section level1">
-<h1>FILE: test SHEET: P0049_S2_left SHEET_N: 1</h1>
+<div id="file-test-sheet-p0051_aug_26_s1_right-sheet_n-1" class="section level1">
+<h1>FILE: test SHEET: P0051_Aug_26_S1_right SHEET_N: 1</h1>
 <div id="replace-outliers-with-mean-of-neigbouring-points" class="section level2">
 <h2>replace outliers with mean of neigbouring points</h2>
 <pre class="r"><code>smoothing_window_width = 500
@@ -738,6 +778,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/ac9c1db5995c65d4c70b8b1a75eff276767ea60a/docs/figure/process_one_sheet.Rmd/unnamed-chunk-2-1.png" target="_blank">ac9c1db</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-2-1.png" target="_blank">426eed6</a>
 </td>
 <td>
@@ -782,6 +833,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/ac9c1db5995c65d4c70b8b1a75eff276767ea60a/docs/figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" target="_blank">ac9c1db</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-3-1.png" target="_blank">426eed6</a>
@@ -842,6 +904,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/ac9c1db5995c65d4c70b8b1a75eff276767ea60a/docs/figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" target="_blank">ac9c1db</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-03-29
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-4-1.png" target="_blank">426eed6</a>
 </td>
 <td>
@@ -889,7 +962,7 @@ last_raw_current = df_in_smoothed %&gt;% pluck(&#39;rc_pruned&#39;, last_locatio
 
 
 
-
+# max_location - the row at the top of the parabola
 df_in_smoothed %&gt;%
   filter( row_n &gt; min_location ) %&gt;%
   mutate( c = chunkify( is_max_pt )) %&gt;%
@@ -930,18 +1003,22 @@ df_in_smoothed %&gt;%
   mutate(rc_pruned = tsclean( rc_pruned)) %&gt;%
   { . } -&gt; df_parabola
 
+# parabola endpoints are the minimum at the left and the first minimum on the right
 df_parabola %&gt;%
   filter( row_n &gt; max_location  ) %&gt;%
   filter( rc_pruned == min( rc_pruned)) %&gt;%
   filter( row_n == min( row_n)) %&gt;%
   bind_rows( df_parabola %&gt;% filter( row_n == min( row_n)) ) %&gt;%
   arrange(row_n ) %&gt;%
+  select( rc_pruned, unix_time) %&gt;%
   { . } -&gt; df_parabola_endpoints
 
 
 fit_min = lm( rc_pruned ~ unix_time, data=df_min)
 fit_max = lm( rc_pruned ~ unix_time, data=df_max)
 fit_end = lm( rc_pruned ~ unix_time, data=df_end)
+
+# straight line between the parabola endpoints
 fit_parabola_base = lm( rc_pruned ~ unix_time, data=df_parabola_endpoints)</code></pre>
 </div>
 <div id="calculate-overall-graph-parameters-to-use-when-generating-the-new-lines" class="section level2">
@@ -974,28 +1051,54 @@ df_in_smoothed %&gt;%
   arrange( row_n ) %&gt;%
   { . } -&gt; df_steps</code></pre>
 </div>
-<div id="predict-the-area-of-the-three-predicted-sections" class="section level2">
-<h2>predict the area of the three predicted sections</h2>
+<div id="predict-the-lines" class="section level2">
+<h2>Predict the lines</h2>
 <pre class="r"><code>df_steps %&gt;%
+  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %&gt;%
   mutate( predicted_min = predict( fit_min, .)) %&gt;%
   mutate( predicted_max = predict( fit_max, .)) %&gt;%
   mutate( predicted_end = predict( fit_end, .)) %&gt;%
-  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %&gt;%
   { . } -&gt; df_steps
 
-
-# need to figure out where parabola_base stops (minimum of end, or where it intersects actual)
+#df_steps %&gt;% View
+df_steps %&gt;% summary()</code></pre>
+<pre><code>   unix_time             row_n       predicted_parabola_base predicted_min    
+ Min.   :1.567e+09   Min.   :-7999   Min.   :-204.66         Min.   :-2742.6  
+ 1st Qu.:1.567e+09   1st Qu.:-2922   1st Qu.: -69.78         1st Qu.:-1536.3  
+ Median :1.567e+09   Median : 2156   Median :  69.08         Median : -294.4  
+ Mean   :1.567e+09   Mean   : 2156   Mean   :  65.83         Mean   : -323.5  
+ 3rd Qu.:1.567e+09   3rd Qu.: 7233   3rd Qu.: 200.01         3rd Qu.:  876.6  
+ Max.   :1.567e+09   Max.   :12310   Max.   : 334.88         Max.   : 2082.9  
+ predicted_max    predicted_end   
+ Min.   :-595.8   Min.   :-385.9  
+ 1st Qu.:-173.8   1st Qu.:-134.6  
+ Median : 235.8   Median : 124.2  
+ Mean   : 246.0   Mean   : 118.1  
+ 3rd Qu.: 670.3   3rd Qu.: 368.2  
+ Max.   :1092.2   Max.   : 619.5  </code></pre>
+</div>
+<div id="adjust-where-parabola_base-actually-stops-minimum-of-end-or-where-it-intersects-actual-raw_current" class="section level2">
+<h2>Adjust where parabola_base actually stops (minimum of end, or where it intersects actual raw_current)</h2>
+<pre class="r"><code># df_in_smoothed %&gt;%
+#   inner_join( df_steps, by=c(&#39;unix_time&#39;, &#39;row_n&#39;)) %&gt;%
+#   arrange( row_n ) %&gt;%
+#   filter( row_n &gt; min_location ) %&gt;%
+#   ggplot(  ) +
+#   geom_point(aes( row_n, rc_pruned)) +
+#   geom_line( aes( row_n, predicted_parabola_base))
 
 df_in_smoothed %&gt;%
   inner_join( df_steps, by=c(&#39;unix_time&#39;, &#39;row_n&#39;)) %&gt;%
   arrange( row_n ) %&gt;%
-  filter( row_n &gt; max_location &amp; predicted_parabola_base &gt;= rc_pruned ) %&gt;%
+  filter( (row_n &gt; max_location &amp; predicted_parabola_base &gt;= rc_pruned) |
+         row_n == max( row_n)) %&gt;%
   filter( row_n == min( row_n )) %&gt;%
   pluck( &#39;row_n&#39; ) %&gt;% 
-  { . } -&gt; predicted_parabola_base_end
-
-
-# pull out the AUC size of the triangles
+  { . } -&gt; predicted_parabola_base_end</code></pre>
+</div>
+<div id="predict-the-area-under-the-three-predicted-base-lines-from-left-to-right-min-max-and-end" class="section level2">
+<h2>predict the area under the three predicted base lines (from left to right: min, max and end)</h2>
+<pre class="r"><code># pull out the AUC size of the triangles
 
 df_steps %&gt;%
   filter( predicted_min &gt; 0 &amp; row_n &gt;= min_location  ) %&gt;%
@@ -1017,8 +1120,8 @@ df_steps %&gt;%
   pluck(&#39;area&#39;) %&gt;%
   { . } -&gt; area_end_triangle</code></pre>
 </div>
-<div id="calculate-the-auc-for-the-raw-smoothed-data" class="section level2">
-<h2>calculate the AUC for the raw / smoothed data</h2>
+<div id="calculate-the-main-parabola-auc-for-raw-pruned-loess-smoothed-and-time-series-cleaned" class="section level2">
+<h2>calculate the main parabola AUC for raw, pruned, loess smoothed and time series cleaned</h2>
 <pre class="r"><code># the real, raw measurements.  TODO: should smooth this a bit
 df_in %&gt;%
   filter( row_n &gt;= min_location  ) %&gt;%
@@ -1065,18 +1168,27 @@ df_in_smoothed[ min_2nd_location, &#39;unix_time&#39;] %&gt;%
   { . } -&gt; rectangle_area
 
 
-# the upper bit above the parabola base
-df_in_smoothed %&gt;%
-  filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
-  summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_parabola
+area_uc_parabola_base = -1
+area_uc_parabola = -1
+try( {
 
-df_steps %&gt;%
-  filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
-  summarise( area = trapz( unix_time, predicted_parabola_base) ) %&gt;%
-  pluck(&#39;area&#39;) %&gt;%
-  { . } -&gt; area_uc_parabola_base
+  # the upper bit above the parabola base, down to x axis
+  df_in_smoothed %&gt;%
+    # filter start and end locations along xaxis
+    filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
+    summarise( area = trapz( unix_time, rc_pruned) ) %&gt;%
+    pluck(&#39;area&#39;) %&gt;%
+    { . } -&gt; area_uc_parabola
+
+  # below parabola base, down to x axis
+    df_steps %&gt;%
+      # filter start and end locations along xaxis
+      filter( row_n &gt;= min_location &amp; row_n &lt;= predicted_parabola_base_end  ) %&gt;%
+      summarise( area = trapz( unix_time, predicted_parabola_base) ) %&gt;%
+      pluck(&#39;area&#39;) %&gt;%
+      { . } -&gt; area_uc_parabola_base
+
+  }, silent=TRUE)
 
 df_auc = tibble(
                 raw = area_uc_full_raw,
@@ -1107,46 +1219,16 @@ df_rv = tibble(
   #  geom_line( aes( unix_time, mean_left ), color=&#39;red&#39;) +
   geom_line( aes( unix_time, predicted_min), data=(df_steps %&gt;% filter( predicted_min &gt; 0 &amp; row_n &gt; 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %&gt;% filter( predicted_max &gt; 0 &amp; row_n &lt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) )) +
-  geom_line( aes( unix_time, predicted_parabola_base), data=(df_steps %&gt;% filter( row_n &gt; min_location &amp; row_n &lt; predicted_parabola_base_end ) ))</code></pre>
-<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/dewoller/kelly_alcohol_analysis/blob/426eed680ab0e4fa5e8d0f0b95edacfa108d3448/docs/figure/process_one_sheet.Rmd/unnamed-chunk-11-1.png" target="_blank">426eed6</a>
-</td>
-<td>
-Dennis Wollersheim
-</td>
-<td>
-2020-03-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+  geom_line( aes( unix_time, predicted_end), data=(df_steps %&gt;% filter( predicted_end &gt; 0 &amp; row_n &gt; max_location ) ))  %&gt;% 
+  { . } -&gt; gg_out
+
+try ({
+  gg_out = gg_out +
+  geom_line( aes( unix_time, predicted_parabola_base), data=(df_steps %&gt;% filter( row_n &gt; min_location &amp; row_n &lt; predicted_parabola_base_end ) ))
+}, silent=TRUE)
+
+print(gg_out)</code></pre>
+<p><img src="figure/process_one_sheet.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="predicted-areas-for-the-different-parts-of-the-graph" class="section level2">
 <h2>Predicted Areas for the different parts of the graph</h2>
@@ -1195,22 +1277,22 @@ parabola_auc
 <tbody>
 <tr>
 <td style="text-align:right;">
-152,304.3
+353,409.7
 </td>
 <td style="text-align:right;">
-79,600.71
+96,008.84
 </td>
 <td style="text-align:right;">
-0
+5,891.318
 </td>
 <td style="text-align:right;">
-1,798,756
+2,179,750
 </td>
 <td style="text-align:right;">
-559,854
+323,108
 </td>
 <td style="text-align:right;">
-896,461.9
+836,287.5
 </td>
 </tr>
 </tbody>
@@ -1242,16 +1324,16 @@ smoothed_and_cleaned
 <tbody>
 <tr>
 <td style="text-align:right;">
-1,798,756
+2,179,750
 </td>
 <td style="text-align:right;">
-1,801,790
+2,174,745
 </td>
 <td style="text-align:right;">
-1,801,709
+2,166,892
 </td>
 <td style="text-align:right;">
-1,801,770
+2,174,745
 </td>
 </tr>
 </tbody>
@@ -1288,37 +1370,37 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] glue_1.3.2        magrittr_1.5      kableExtra_1.1.0  pracma_2.2.5     
- [5] seismicRoll_1.1.3 forecast_8.11     janitor_1.2.1     readxl_1.3.1     
+ [1] glue_1.4.0        magrittr_1.5      kableExtra_1.1.0  pracma_2.2.5     
+ [5] seismicRoll_1.1.3 forecast_8.12     janitor_1.2.1     readxl_1.3.1     
  [9] forcats_0.5.0     stringr_1.4.0     dplyr_0.8.5       purrr_0.3.3      
-[13] readr_1.3.1       tidyr_1.0.2       tibble_2.1.3      ggplot2_3.2.1    
+[13] readr_1.3.1       tidyr_1.0.2       tibble_3.0.0      ggplot2_3.3.0    
 [17] tidyverse_1.3.0   zoo_1.8-7         nvimcom_0.9-82   
 
 loaded via a namespace (and not attached):
- [1] tseries_0.10-47      httr_1.4.1           jsonlite_1.6.1      
- [4] viridisLite_0.3.0    modelr_0.1.6         assertthat_0.2.1    
+ [1] tseries_0.10-47      httr_1.4.1           viridisLite_0.3.0   
+ [4] jsonlite_1.6.1       modelr_0.1.6         assertthat_0.2.1    
  [7] TTR_0.23-6           highr_0.8            cellranger_1.1.0    
 [10] yaml_2.2.1           pillar_1.4.3         backports_1.1.5     
-[13] lattice_0.20-40      quadprog_1.5-8       digest_0.6.25       
+[13] lattice_0.20-41      quadprog_1.5-8       digest_0.6.25       
 [16] snakecase_0.11.0     rvest_0.3.5          colorspace_1.4-1    
 [19] htmltools_0.4.0      timeDate_3043.102    pkgconfig_2.0.3     
-[22] broom_0.5.5          haven_2.2.0          scales_1.1.0        
-[25] webshot_0.5.2        whisker_0.4          git2r_0.26.1        
-[28] farver_2.0.1         generics_0.0.2       ellipsis_0.3.0      
+[22] broom_0.5.5          haven_2.2.0          webshot_0.5.2       
+[25] scales_1.1.0         whisker_0.4          git2r_0.26.1        
+[28] farver_2.0.3         generics_0.0.2       ellipsis_0.3.0      
 [31] withr_2.1.2          urca_1.3-0           nnet_7.3-13         
-[34] lazyeval_0.2.2       cli_2.0.2            quantmod_0.4-16     
-[37] crayon_1.3.4         evaluate_0.14        fs_1.3.2            
-[40] fansi_0.4.1          nlme_3.1-142         xts_0.12-0          
-[43] xml2_1.2.5           tools_3.6.1          hms_0.5.3           
-[46] lifecycle_0.2.0      munsell_0.5.0        reprex_0.3.0        
-[49] compiler_3.6.1       rlang_0.4.5          grid_3.6.1          
-[52] rstudioapi_0.11      labeling_0.3         rmarkdown_2.1.1     
-[55] gtable_0.3.0         fracdiff_1.5-1       DBI_1.1.0           
-[58] curl_4.3             R6_2.4.1             lubridate_1.7.4     
-[61] knitr_1.28           workflowr_1.4.0.9001 rprojroot_1.3-2     
-[64] stringi_1.4.6        parallel_3.6.1       Rcpp_1.0.4          
-[67] vctrs_0.2.4          dbplyr_1.4.2         tidyselect_1.0.0    
-[70] xfun_0.12            lmtest_0.9-37       </code></pre>
+[34] cli_2.0.2            quantmod_0.4.17      crayon_1.3.4        
+[37] evaluate_0.14        fs_1.4.1             fansi_0.4.1         
+[40] nlme_3.1-142         xts_0.12-0           xml2_1.3.0          
+[43] tools_3.6.1          hms_0.5.3            lifecycle_0.2.0     
+[46] munsell_0.5.0        reprex_0.3.0         compiler_3.6.1      
+[49] rlang_0.4.5          grid_3.6.1           rstudioapi_0.11     
+[52] labeling_0.3         rmarkdown_2.1.1      gtable_0.3.0        
+[55] fracdiff_1.5-1       DBI_1.1.0            curl_4.3            
+[58] R6_2.4.1             lubridate_1.7.4      knitr_1.28          
+[61] workflowr_1.4.0.9001 rprojroot_1.3-2      stringi_1.4.6       
+[64] parallel_3.6.1       Rcpp_1.0.4           vctrs_0.2.4         
+[67] dbplyr_1.4.2         tidyselect_1.0.0     xfun_0.12           
+[70] lmtest_0.9-37       </code></pre>
 </div>
 </div>
 </div>

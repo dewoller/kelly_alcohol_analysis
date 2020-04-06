@@ -30,7 +30,7 @@ library(kableExtra)
 library(magrittr)
 library(glue)
 
-try( rm( params ))
+#try( rm( params ))
 
 # if( !exists( 'params' )) {
   # try({
@@ -45,14 +45,13 @@ try( rm( params ))
 if( !exists( 'params' )) {
   try({
     params = tibble(
-                    xls_input_file= 'data/P/P0049_S2,3_combined.xlsx',
-                    sheet= 'P0049_S2_left',
+                    xls_input_file= 'data/P/P0051_S1,2_COMBINED.xlsx',
+                    sheet= 'P0051_Aug_26_S1_right',
                     sheet_n= 1,
                     base_file= 'test',
-                    start_timestamp= 1566433500)
+                    start_timestamp= 1566780001)
   }, silent=TRUE )
 }
-
 
 
 header = glue::glue( '# FILE: {params$base_file} SHEET: {params$sheet}  SHEET_N: {params$sheet_n}')
@@ -163,7 +162,7 @@ last_raw_current = df_in_smoothed %>% pluck('rc_pruned', last_location )
 
 
 
-
+# max_location - the row at the top of the parabola
 df_in_smoothed %>%
   filter( row_n > min_location ) %>%
   mutate( c = chunkify( is_max_pt )) %>%
@@ -217,6 +216,7 @@ df_parabola %>%
   filter( row_n == min( row_n)) %>%
   bind_rows( df_parabola %>% filter( row_n == min( row_n)) ) %>%
   arrange(row_n ) %>%
+  select( rc_pruned, unix_time) %>%
   { . } -> df_parabola_endpoints
 
 
@@ -272,12 +272,14 @@ df_in_smoothed %>%
 ```{r}
 
 df_steps %>%
+  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %>%
   mutate( predicted_min = predict( fit_min, .)) %>%
   mutate( predicted_max = predict( fit_max, .)) %>%
   mutate( predicted_end = predict( fit_end, .)) %>%
-  mutate( predicted_parabola_base = predict( fit_parabola_base, .)) %>%
   { . } -> df_steps
 
+#df_steps %>% View
+df_steps %>% summary()
 
 ```
 ## Adjust where parabola_base actually stops (minimum of end, or where it intersects actual raw_current)
@@ -285,10 +287,19 @@ df_steps %>%
 ```{r}
 
 
+# df_in_smoothed %>%
+#   inner_join( df_steps, by=c('unix_time', 'row_n')) %>%
+#   arrange( row_n ) %>%
+#   filter( row_n > min_location ) %>%
+#   ggplot(  ) +
+#   geom_point(aes( row_n, rc_pruned)) +
+#   geom_line( aes( row_n, predicted_parabola_base))
+
 df_in_smoothed %>%
   inner_join( df_steps, by=c('unix_time', 'row_n')) %>%
   arrange( row_n ) %>%
-  filter( row_n > max_location & predicted_parabola_base >= rc_pruned ) %>%
+  filter( (row_n > max_location & predicted_parabola_base >= rc_pruned) |
+         row_n == max( row_n)) %>%
   filter( row_n == min( row_n )) %>%
   pluck( 'row_n' ) %>% 
   { . } -> predicted_parabola_base_end
@@ -374,26 +385,37 @@ df_in_smoothed[ min_2nd_location, 'unix_time'] %>%
   { . } -> rectangle_area
 
 
-# the upper bit above the parabola base, down to x axis
-df_in_smoothed %>%
-  filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
-  summarise( area = trapz( unix_time, rc_pruned) ) %>%
-  pluck('area') %>%
-  { . } -> area_uc_parabola
+area_uc_parabola_base = -1
+area_uc_parabola = -1
+# try( {
 
-# below parabola base, down to x axis
-df_steps %>%
-  filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
-  summarise( area = trapz( unix_time, predicted_parabola_base) ) %>%
-  pluck('area') %>%
-  { . } -> area_uc_parabola_base
+  # the upper bit above the parabola base, down to x axis
+  df_in_smoothed %>%
+    # filter start and end locations along xaxis
+    filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
+    summarise( area = trapz( unix_time, rc_pruned) ) %>%
+    pluck('area') %>%
+    { . } -> area_uc_parabola
+
+  # below parabola base, down to x axis
+    df_steps %>%
+      # filter start and end locations along xaxis
+      filter( row_n >= min_location & row_n <= predicted_parabola_base_end  ) %>%
+      summarise( area = trapz( unix_time, predicted_parabola_base) ) %>%
+      pluck('area') %>%
+      { . } -> area_uc_parabola_base
+
+  # }, silent=TRUE)
 
 df_auc = tibble(
                 raw = area_uc_full_raw,
                 smoothed = area_uc_full_smoothed,
                 loess = area_uc_full_loess,
                 smoothed_and_cleaned = area_uc_full_cleaned
-                  )
+                ) %>%
+mutate_all( function(x) { round( x/1000, 0)})
+
+
 
 
 
@@ -404,8 +426,8 @@ df_rv = tibble(
                full_auc = area_uc_full_raw,
                upper_auc = area_uc_upper - rectangle_area,
                parabola_auc = area_uc_parabola- area_uc_parabola_base
-               )
-
+               ) %>%
+mutate_all( function(x) { round( x/1000, 0)})
 
 
 ```
@@ -423,8 +445,15 @@ rbind( df_min, df_max ) %>%
   #  geom_line( aes( unix_time, mean_left ), color='red') +
   geom_line( aes( unix_time, predicted_min), data=(df_steps %>% filter( predicted_min > 0 & row_n > 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %>% filter( predicted_max > 0 & row_n < max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) )) +
+  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))  %>% 
+  { . } -> gg_out
+
+# try ({
+  gg_out = gg_out +
   geom_line( aes( unix_time, predicted_parabola_base), data=(df_steps %>% filter( row_n > min_location & row_n < predicted_parabola_base_end ) ))
+# }, silent=TRUE)
+
+print(gg_out)
 
 ```
 
@@ -432,11 +461,12 @@ rbind( df_min, df_max ) %>%
 
 There are 5 calculated areas.  Three are predicted triangular chunks  (max, min, and end) and two are measured AUC's: full and upper
 
- - max - line from max point, through first minimum.  Triangel area is from first minimum to xaxis
- - min - line from start through first minimum.  Triangle area is from first min to xaxis
- - end - line from max through end.  Triangle area is from end to xaxis.
- - full - AUC from first min to end
- - upper - AUC from first min, to the place where that min appears after the maximum, subtracting the rectangle under that chunk
+ - max_t - line from parabola max point, through first minimum.  Triangel area is from first minimum to xaxis
+ - min_t - line from start through first minimum.  Triangle area is from first min to xaxis
+ - end_t - line from parabola max through end.  Triangle area is from end to xaxis.
+ - full_auc - AUC from first min to end
+ - upper_auc - AUC from first min BAC, to the first timestamp where the min BAC appears after the maximum, subtracting the rectangle under that chunk
+ - parabola_auc - AUC of the parabola above the diagonal line that runs from first min to the first of either the end, or where that line intersects the BAC measure
 
 
 The numbers you want are:
@@ -446,6 +476,7 @@ The numbers you want are:
  - full+ max (+end?)
  - full + end
  - upper
+ - upper_auc
 
 ```{r}
 
