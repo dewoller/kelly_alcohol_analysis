@@ -30,7 +30,7 @@ library(kableExtra)
 library(magrittr)
 library(glue)
 
-#try( rm( params ))
+try( rm( params ))
 
 # if( !exists( 'params' )) {
   # try({
@@ -45,11 +45,11 @@ library(glue)
 if( !exists( 'params' )) {
   try({
     params = tibble(
-                    xls_input_file= 'data/P/P0051_S1,2_COMBINED.xlsx',
-                    sheet= 'P0051_Aug_26_S1_right',
+                    xls_input_file= 'data/P/P0152_S1-3_combined.xlsx',
+                    sheet= '',
                     sheet_n= 1,
                     base_file= 'test',
-                    start_timestamp= 1566780001)
+                  start_timestamp= 0)
   }, silent=TRUE )
 }
 
@@ -62,7 +62,7 @@ read_excel(params$xls_input_file, sheet=params$sheet_n) %>%
   clean_names() %>%
   select(-starts_with('x')) %>%
   dplyr::rename( raw_current = raw_current_n_a) %>%
-  filter( unix_time > params$start_timestamp  & raw_current > 10 & raw_current <1000 ) %>%
+  filter( unix_time > params$start_timestamp  & raw_current > 0 & raw_current <1000 ) %>%
   mutate( row_n = row_number()) %>%
   { . } -> df_in
 
@@ -301,7 +301,7 @@ df_in_smoothed %>%
   filter( (row_n > max_location & predicted_parabola_base >= rc_pruned) |
          row_n == max( row_n)) %>%
   filter( row_n == min( row_n )) %>%
-  pluck( 'row_n' ) %>% 
+  pluck( 'row_n' ) %>%
   { . } -> predicted_parabola_base_end
 
 ```
@@ -335,7 +335,7 @@ df_steps %>%
 
 
 ```
-## calculate the main parabola AUC for raw, pruned, loess smoothed and time series cleaned 
+## calculate the main parabola AUC for raw, pruned, loess smoothed and time series cleaned
 
 ```{r}
 
@@ -445,7 +445,7 @@ rbind( df_min, df_max ) %>%
   #  geom_line( aes( unix_time, mean_left ), color='red') +
   geom_line( aes( unix_time, predicted_min), data=(df_steps %>% filter( predicted_min > 0 & row_n > 0  ) )) +
   geom_line( aes( unix_time, predicted_max), data=(df_steps %>% filter( predicted_max > 0 & row_n < max_location ) )) +
-  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))  %>% 
+  geom_line( aes( unix_time, predicted_end), data=(df_steps %>% filter( predicted_end > 0 & row_n > max_location ) ))  %>%
   { . } -> gg_out
 
 # try ({
